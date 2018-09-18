@@ -1,2 +1,3 @@
 18 y.o.
-From Novorossiysk
+Student of Eltech University
+C++
