@@ -41,3 +41,5 @@ int main()
 	cout << first << " " << sign << " " << second << " = " << result;
 	_getch();
 	return 0;
+
+}
