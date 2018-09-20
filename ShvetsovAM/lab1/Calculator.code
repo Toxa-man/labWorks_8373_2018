@@ -27,12 +27,10 @@ int main()
 		{
 			cout << "Ошибка: на ноль делить нельзя";
 			_getch();
-			return 0;
 		}
 		break;
 	default: cout << "Ошибка: неизвестный знак";
 		_getch();
-		return 0;
 	}
 	cout << first << " " << sign << " " << second << " = " << result;
 	_getch();
