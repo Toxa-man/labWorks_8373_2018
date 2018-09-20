@@ -6,11 +6,11 @@ int main()
 	setlocale(0, "");
 	float first, second, result;
 	char sign;
-	cout << "Ââåäèòå ïåðâîå ÷èñëî";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¯Ã¥Ã°Ã¢Ã®Ã¥ Ã·Ã¨Ã±Ã«Ã®";
 	cin >> first;
-	cout << "Ââåäèòå âòîðîå ÷èñëî";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¢Ã²Ã®Ã°Ã®Ã¥ Ã·Ã¨Ã±Ã«Ã®";
 	cin >> second;
-	cout << "Ââåäèòå çíàê";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã§Ã­Ã Ãª";
 	cin >> sign;
 
 	switch (sign)
@@ -25,14 +25,12 @@ int main()
 
 		if (second == 0)
 		{
-			cout << "Îøèáêà: íà íîëü äåëèòü íåëüçÿ";
+			cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ : Ã­Ã  Ã­Ã®Ã«Ã¼ Ã¤Ã¥Ã«Ã¨Ã²Ã¼ Ã­Ã¥Ã«Ã¼Ã§Ã¿";
 			_getch();
-			return 0;
 		}
 		break;
-	default: cout << "Îøèáêà: íåèçâåñòíûé çíàê";
+	default: cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ : Ã­Ã¥Ã¨Ã§Ã¢Ã¥Ã±Ã²Ã­Ã»Ã© Ã§Ã­Ã Ãª";
 		_getch();
-		return 0;
 	}
 	cout << first << " " << sign << " " << second << " = " << result;
 	_getch();
