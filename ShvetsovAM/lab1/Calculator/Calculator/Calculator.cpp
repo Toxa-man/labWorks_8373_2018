@@ -1,16 +1,17 @@
 #include <iostream>
 #include <conio.h>
+
 using namespace std;
 int main()
 {
 	setlocale(0, "");
 	float first, second, result;
 	char sign;
-	cout << "Ââåäèòå ïåðâîå ÷èñëî";
+	cout << "Введите первое число  ";
 	cin >> first;
-	cout << "Ââåäèòå âòîðîå ÷èñëî";
+	cout << "Введите второе число  ";
 	cin >> second;
-	cout << "Ââåäèòå çíàê";
+	cout << "Введите знак  ";
 	cin >> sign;
 
 	switch (sign)
@@ -23,16 +24,20 @@ int main()
 		break;
 	case '/': result = first / second;
 
-		if (second == 0)
+		if (second == 0 && sign == '/')
 		{
-			cout << "Îøèáêà: íà íîëü äåëèòü íåëüçÿ";
-			_getch();
+			cout << "Ошибка: на ноль делить нельзя, введите другой знаменатель ";
+			cin >> second;
 		}
+		result = first / second;
 		break;
-	default: cout << "Îøèáêà: íåèçâåñòíûé çíàê";
 		_getch();
+		
+
+	default: cout << "Ошибка: неправильный знак ";
+		_getch();
+		return 0;
 	}
 	cout << first << " " << sign << " " << second << " = " << result;
 	_getch();
 	return 0;
-}
