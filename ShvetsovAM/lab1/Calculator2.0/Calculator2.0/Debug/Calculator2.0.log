@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\shvec\documents\visual studio 2015\projects\calculator2.0\calculator2.0\source.cpp(9): warning C4101: 'result': unreferenced local variable
+  Calculator2.0.vcxproj -> C:\Users\shvec\Documents\Visual Studio 2015\Projects\Calculator2.0\Debug\Calculator2.0.exe
+  Calculator2.0.vcxproj -> C:\Users\shvec\Documents\Visual Studio 2015\Projects\Calculator2.0\Debug\Calculator2.0.pdb (Partial PDB)
