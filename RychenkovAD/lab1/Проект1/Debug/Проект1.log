@@ -1,0 +1,4 @@
+﻿  Source.cpp
+d:\visual studio\projects\проект1\проект1\source.cpp(7): warning C4101: esc: неиспользованная локальная переменная
+  Проект1.vcxproj -> D:\Visual Studio\projects\Проект1\Debug\Проект1.exe
+  Проект1.vcxproj -> D:\Visual Studio\projects\Проект1\Debug\Проект1.pdb (Partial PDB)
