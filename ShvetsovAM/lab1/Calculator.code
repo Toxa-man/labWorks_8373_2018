@@ -14,13 +14,11 @@ int main()
 	cin >> second;
 	cout << "Введите знак ";
 	cin >> sign;
-	if (!(sign == '+' || sign == '-' || sign == '*' || sign == '/'))
+	while (!(sign == '+' || sign == '-' || sign == '*' || sign == '/'))
 	{
-		while (!(sign == '+' || sign == '-' || sign == '*' || sign == '/'))
-		{
-			cout << "Введен неверный знак, введите правильный знак ";
-			cin >> sign;
-		}
+		cout << "Введен неверный знак, введите правильный знак ";
+		cin >> sign;
+	}
 		switch (sign)
 		{
 		case '+': result = first + second;
@@ -37,11 +35,10 @@ int main()
 					cout << "На ноль делить нельзя, введите другой знаменатель ";
 					cin >> second;
 				}
-				result = first / second;
 			}
+			result = first / second;
 			break;
 		}
-	}
 	cout << first << " " << sign << " " << second << " = " << result;
 	_getch();
     return 0;	
