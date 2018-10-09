@@ -7,6 +7,7 @@ int main()
 {
     float left, right, result;
     char sign;
+    cout << "Enter expression, e.g. 2+2" << endl;
     cin >> left >> sign >> right;
 
     switch (sign)
@@ -28,7 +29,8 @@ int main()
         result = left / right;
         break;
     default:
-        cout << "wrong sign" << endl;
+        cout << "Wrong sign" << endl;
+        return 1;
         break;
     }
     cout << result << endl;
