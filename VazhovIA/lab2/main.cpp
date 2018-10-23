@@ -4,16 +4,28 @@
 #include <iostream>
 using namespace std;
 const int arrSize = 10;
-const int maxRand = 10;
+const int maxRand = 30;
 int main()
 {
-    int arr1[arrSize];
-    int arr2[arrSize]={0};
-    cout << "unsorted array" << endl;
+    int arrRnd[arrSize];
+    int arrSrt[arrSize]={0};
+    int min=maxRand, max=0;
+    int sum=0;
+    cout << "unsorted random array" << endl;
     for (int i=0;i<arrSize;i++)
     {
-        arr1[i] = rand() % maxRand;
-        cout << arr1[i] << endl;
+        arrRnd[i] = rand() % maxRand;
+        cout << arrRnd[i] << endl;
+
+        sum += arrRnd[i];
+        if (arrRnd[i] < min)
+        {
+            min = arrRnd[i];
+        }
+        if (arrRnd[i] > max)
+        {
+            max = arrRnd[i];
+        }
     }
 
     bool sorted;
@@ -23,11 +35,11 @@ int main()
         sorted = true;
         for (int i=0;i<arrSize-1;i++)
         {
-            if (arr1[i] < arr1[i+1])
+            if (arrRnd[i] < arrRnd[i+1])
             {
-                sortable = arr1[i];
-                arr1[i] = arr1[i+1];
-                arr1[i+1] = sortable;
+                sortable = arrRnd[i];
+                arrRnd[i] = arrRnd[i+1];
+                arrRnd[i+1] = sortable;
                 sorted = false;
             }
         }
@@ -36,16 +48,17 @@ int main()
     int k=0;
     for (int i=0; i<arrSize;i++)
     {
-        if (arr1[i] % 2 != 0)
+        if (arrRnd[i] % 2 != 0)
         {
-            arr2[k] = arr1[i];
+            arrSrt[k] = arrRnd[i];
             k++;
         }
     }
 
     cout << endl << "sorted\todds" << endl;
     for (int i=0;i<arrSize;i++) {
-        cout << arr1[i] << "\t" << arr2[i] << endl;
+        cout << arrRnd[i] << "\t" << arrSrt[i] << endl;
     }
+    cout << "Average: " << sum/arrSize << " Min: " << min << " Maximum: " << max << endl;
     return 0;
 }
