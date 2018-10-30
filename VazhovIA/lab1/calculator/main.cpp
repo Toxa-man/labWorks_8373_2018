@@ -23,7 +23,11 @@ int main()
     case '/':
         if (right == 0) {
             cout << "Division by zero is forbidden" << endl;
+            #ifdef __linux__
             system("read -p 'press any key' ");
+            #elif _WIN32
+            system("pause");
+            #endif
             exit;
         }
         result = left / right;
@@ -34,6 +38,10 @@ int main()
         break;
     }
     cout << result << endl;
-    system("read -p 'press any key' ");//i'm using linux, so i have no getch and system("pause")
+    #ifdef __linux__ //im using linux so i have no getch or system("pause")
+    system("read -p 'press any key' ");
+    #elif _WIN32
+    system("pause");
+    #endif
     return 0;
 }
