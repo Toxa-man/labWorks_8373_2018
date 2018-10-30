@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-
 using namespace std;
 
 int main()
@@ -24,7 +23,8 @@ int main()
     case '/':
         if (right == 0) {
             cout << "Division by zero is forbidden" << endl;
-            return 8;
+            system("read -p 'press any key' ");
+            exit;
         }
         result = left / right;
         break;
@@ -34,5 +34,6 @@ int main()
         break;
     }
     cout << result << endl;
+    system("read -p 'press any key' ");//i'm using linux, so i have no getch and system("pause")
     return 0;
 }
