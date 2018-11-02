@@ -5,7 +5,7 @@ using namespace std;
 
 const int size_str = 100;
 
-void word_sort(char str[], int sums[], int words_pos[], int size_sum) {
+void word_sort(char* str, int* sums, int* words_pos, int size_sum) {
 	
 	char temp_str1[size_str], temp_str2[size_str], word_str[size_str];
 	while (size_sum > 1) {
@@ -46,6 +46,9 @@ void word_sort(char str[], int sums[], int words_pos[], int size_sum) {
 		sums += 1;
 		words_pos += 1;
 		size_sum--;
+	}
+	while (str[strlen(str) - 1] == ' ') {
+		str[strlen(str) - 1] = '\0';
 	}
 }
 
