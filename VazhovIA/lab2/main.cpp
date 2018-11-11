@@ -28,21 +28,20 @@ int main()
         }
     }
 
-    bool sorted;
-    int sortable = 0;
-    while (! sorted) //bubble sort
+    int i = 0;
+    while (i < arrSize) //bubble sort
     {
-        sorted = true;
-        for (int i=0;i<arrSize-1;i++)
+        if (arrRnd[i] < arrRnd[i+1])
         {
-            if (arrRnd[i] < arrRnd[i+1])
-            {
-                sortable = arrRnd[i];
-                arrRnd[i] = arrRnd[i+1];
-                arrRnd[i+1] = sortable;
-                sorted = false;
-            }
+            int tmp = arrRnd[i+1];
+            arrRnd[i+1] = arrRnd[i];
+            arrRnd[i] = tmp;
+            i = 0;
+        } else
+        {
+            i++;
         }
+
     }
 
     int k=0;
