@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include <conio.h>
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
 const int M = 50, N = 50;
