@@ -4,32 +4,23 @@
 #include <iostream>
 using namespace std;
 const int arrSize = 10;
-const int maxRand = 30;
+const int maxRand = 50;
 int main()
 {
-    int arrRnd[arrSize];
+    int arrRnd[arrSize]={0};
     int arrSrt[arrSize]={0};
     int min=maxRand, max=0;
     int sum=0;
     cout << "unsorted random array" << endl;
+    //generated
     for (int i=0;i<arrSize;i++)
     {
         arrRnd[i] = rand() % maxRand;
         cout << arrRnd[i] << endl;
-
-        sum += arrRnd[i];
-        if (arrRnd[i] < min)
-        {
-            min = arrRnd[i];
-        }
-        if (arrRnd[i] > max)
-        {
-            max = arrRnd[i];
-        }
     }
-
+    //sorted
     int i = 0;
-    while (i < arrSize) //bubble sort
+    while (i < arrSize)
     {
         if (arrRnd[i] < arrRnd[i+1])
         {
@@ -43,13 +34,22 @@ int main()
         }
 
     }
-
+    //odds
     int k=0;
     for (int i=0; i<arrSize;i++)
     {
         if (arrRnd[i] % 2 != 0)
         {
             arrSrt[k] = arrRnd[i];
+            if (arrSrt[k] < min)
+            {
+                min = arrSrt[k];
+            }
+            if (arrSrt[k] > max)
+            {
+                max = arrSrt[k];
+            }
+            sum += arrSrt[k];
             k++;
         }
     }
@@ -58,6 +58,6 @@ int main()
     for (int i=0;i<arrSize;i++) {
         cout << arrRnd[i] << "\t" << arrSrt[i] << endl;
     }
-    cout << "Average: " << sum/arrSize << " Min: " << min << " Maximum: " << max << endl;
+    cout << "Average: " << sum/k << " Min: " << min << " Maximum: " << max << endl;
     return 0;
 }
