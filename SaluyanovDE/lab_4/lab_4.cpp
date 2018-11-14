@@ -2,10 +2,10 @@
 #include <iostream>
 using namespace std;
 
-double MyPower(int number, int grade)
+double MyPower(double number, int grade)
 {
-	int Out = 1;
-	int N = number;
+	double Out = 1.0;
+	double N = number;
 	if (grade > 0)
 	{
 		for (int i = 1; i <= grade; ++i)
@@ -18,26 +18,48 @@ double MyPower(int number, int grade)
 	{
 		for (int i = 1; i <= -grade; ++i)
 		{
-			Out *=N;
+			Out *= N;
 		}
-		return 1.0/Out;
+		return 1.0 / Out;
 	}
 	return Out;
 }
-double MySqrt(int number)
+double MySqrt(int number, bool answer)
 {
 	if (number == 0)
 	{
 		return 0;
 	}
-	double x;
-	double SqrtN = number / 2;
-	do
+	if (number > 0)
 	{
-		x = SqrtN;
-		SqrtN = (x + (number / x)) / 2;
-	} while ((x - SqrtN) != 0);
-	return SqrtN;
+		double x;
+		double SqrtN = number / 2;
+		do
+		{
+			x = SqrtN;
+			SqrtN = (x + (number / x)) / 2;
+		} while ((x - SqrtN) != 0);
+		if (answer)
+		{
+			cout << "Square root of " << number << " is: " << SqrtN << endl;
+		}
+		return SqrtN;
+	}
+	else if (number < 0)
+	{
+		double x;
+		double SqrtN = -number / 2;
+		do
+		{
+			x = SqrtN;
+			SqrtN = (x + (-number / x)) / 2;
+		} while ((x - SqrtN) != 0);
+		if (answer)
+		{
+			cout << "Square root of " << number << " is: i * " << SqrtN << endl;
+		}
+		return SqrtN;
+	}
 }
 
 int F(int number)
@@ -62,8 +84,9 @@ void PrimeOrNot(int number)
 	int step1=0, step2=0;
 	bool PrimeExclusive = false;
 	bool PrimeCheck = true;
+	bool answer = false;
 	int n = 1;
-	int check = MySqrt(number);
+	int check = MySqrt(number, answer);
 	if (number == 2 || number == 3)
 	{
 		cout << number << " - PRIME";
@@ -97,20 +120,21 @@ void PrimeOrNot(int number)
 }
 int main()
 {
+	bool answer = true;
 	cout << "Factorial 4 is: " << F(4) << endl;
 	cout << "Factorial 0 is: " << F(0) << endl;
 	cout << "4^-1 equal to " << MyPower(4, -1) << endl;
 	cout << "4^0 equal to " << MyPower(4, 0) << endl;
 	cout << "0^4 equal to " << MyPower(0, 4) << endl;
 	cout << "4^3 equal to " << MyPower(4, 3) << endl;
-	cout << "Square root of 4 is: " << MySqrt(4) << endl;
-	cout << "Square root of 2 is: " << MySqrt(2) << endl;
-	cout << "Square root of 0 is: " << MySqrt(0) << endl;
+	MySqrt(4, answer);
+	MySqrt(2, answer);
+	MySqrt(0, answer);
+	MySqrt(-2, answer);
 	PrimeOrNot(2);
 	PrimeOrNot(4);
 	PrimeOrNot(13);
 	PrimeOrNot(412421);
-
 	system("pause");
     return 0;
 }
