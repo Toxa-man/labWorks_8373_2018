@@ -12,6 +12,7 @@ double MyPower(double number, int grade)
 		{
 			Out *= N;
 		}
+		cout << number << "^" << grade << " equal to " << Out << endl;
 		return Out;
 	}
 	if (grade < 0)
@@ -20,8 +21,10 @@ double MyPower(double number, int grade)
 		{
 			Out *= N;
 		}
+		cout << number << "^" << grade << " equal to " << 1.0/Out << endl;
 		return 1.0 / Out;
 	}
+	cout << number << "^" << grade << " equal to " << Out << endl;
 	return Out;
 }
 double MySqrt(int number, bool answer)
@@ -66,18 +69,28 @@ int F(int number)
 {
 	if (number == 0)
 	{
+		cout << "Factorial of " << number << " is: " << 1 << endl;
 		return 1;
 	}
-	int step = number;
-	int Out = 1;
-	if (step != 0)
+	if (number < 0)
 	{
-		for (int i = 2; i <= step; ++i)
-		{
-			Out *= i;
-		}
+		cout << "error: imposible to calculate." << endl;
+		return 727;
 	}
-	return Out;
+	int Out = 1;
+	if (number > 0)
+	{
+		int step = number;
+		if (step != 0)
+		{
+			for (int i = 2; i <= step; ++i)
+			{
+				Out *= i;
+			}
+		}
+		cout << "Factorial of "<<number<<" is: "<< Out << endl;
+		return Out;
+	}
 }
 void PrimeOrNot(int number)
 {
@@ -121,12 +134,13 @@ void PrimeOrNot(int number)
 int main()
 {
 	bool answer = true;
-	cout << "Factorial 4 is: " << F(4) << endl;
-	cout << "Factorial 0 is: " << F(0) << endl;
-	cout << "4^-1 equal to " << MyPower(4, -1) << endl;
-	cout << "4^0 equal to " << MyPower(4, 0) << endl;
-	cout << "0^4 equal to " << MyPower(0, 4) << endl;
-	cout << "4^3 equal to " << MyPower(4, 3) << endl;
+	F(-4);
+	F(4);
+	F(0);
+	MyPower(4, -1);
+	MyPower(4, 0);
+	MyPower(0, 4);
+	MyPower(4, 3);
 	MySqrt(4, answer);
 	MySqrt(2, answer);
 	MySqrt(0, answer);
