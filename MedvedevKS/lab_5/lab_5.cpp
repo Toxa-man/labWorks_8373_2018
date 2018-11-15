@@ -149,11 +149,11 @@ int main()
 				{
 					if (m1 == n2 || m2 == n1)
 					{
+						result = true;
 						if (n1 == m2)
 						{
 							n3 = n2;
 							m3 = m1;
-							result = true;
 							cout << "1) A*B\nThere is only one possible operation so A*B result:\n\n";
 							MatrixProduct(p1, m1, n1, p2, m2, n2, p3);
 						}
@@ -161,7 +161,6 @@ int main()
 						{
 							n3 = n1;
 							m3 = m2;
-							result = true;
 							cout << "1)B*A\nThere is only one possible operation so B*A result:\n\n";
 							MatrixProduct(p2, m2, n2, p1, m1, n1, p3);
 						}
