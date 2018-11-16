@@ -16,7 +16,7 @@ int main(){
 	while(c<size_base){
 		n_sim=0;
 		znach[kolvo]=0;
-		while(((int)(str_base[c])>=65 and (int)str_base[c]<=90) or (int)((str_base[c])>=97 and (int)(str_base[c])<=122)){
+		while(((int)(str_base[c])>=65 && (int)str_base[c]<=90) || (int)((str_base[c])>=97 && (int)(str_base[c])<=122)){
 			array[kolvo][n_sim]=array[kolvo][n_sim]+str_base[c];
 			znach[kolvo]=znach[kolvo]+(int)(str_base[c]);
 			c++;
