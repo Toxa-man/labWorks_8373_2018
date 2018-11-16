@@ -21,7 +21,7 @@ double MyPower(double number, int grade)
 		{
 			Out *= N;
 		}
-		cout << number << "^" << grade << " equal to " << 1.0/Out << endl;
+		cout << number << "^" << grade << " equal to " << 1.0 / Out << endl;
 		return 1.0 / Out;
 	}
 	cout << number << "^" << grade << " equal to " << Out << endl;
@@ -33,7 +33,11 @@ double MySqrt(int number, bool answer)
 	{
 		return 0;
 	}
-	if (number > 0)
+	if (number == 1)
+	{
+		return 1;
+	}
+	if (number > 1)
 	{
 		double x;
 		double SqrtN = number / 2;
@@ -74,7 +78,7 @@ int F(int number)
 	}
 	if (number < 0)
 	{
-		cout << "error: imposible to calculate." << endl;
+		cout << "error: imposible to calculate factorial of " << number << endl;
 		return 727;
 	}
 	int Out = 1;
@@ -88,24 +92,29 @@ int F(int number)
 				Out *= i;
 			}
 		}
-		cout << "Factorial of "<<number<<" is: "<< Out << endl;
+		cout << "Factorial of " << number << " is: " << Out << endl;
 		return Out;
 	}
 }
 void PrimeOrNot(int number)
 {
-	int step1=0, step2=0;
+	int step1 = 0, step2 = 0;
 	bool PrimeExclusive = false;
 	bool PrimeCheck = true;
 	bool answer = false;
 	int n = 1;
 	int check = MySqrt(number, answer);
+	if (number == 1)
+	{
+		cout << number << " - NOT PRIME & NOT COMPOUND";
+		PrimeExclusive = true;
+	}
 	if (number == 2 || number == 3)
 	{
 		cout << number << " - PRIME";
 		PrimeExclusive = true;
 	}
-	if (number % 2 != 0 && number % 3 != 0&&PrimeExclusive == false)
+	if (number % 2 != 0 && number % 3 != 0 && PrimeExclusive == false)
 	{
 		while (step1 <= check && step2 <= check)
 		{
@@ -120,14 +129,14 @@ void PrimeOrNot(int number)
 			}
 		}
 	}
-	else if(!PrimeExclusive)
+	else if (!PrimeExclusive)
 	{
 		cout << number << " - NOT PRIME.";
 		PrimeCheck = false;
 	}
-	if (PrimeCheck&&!PrimeExclusive)
+	if (PrimeCheck && !PrimeExclusive)
 	{
-		cout << number<<" - PRIME.";
+		cout << number << " - PRIME.";
 	}
 	cout << endl;
 }
@@ -145,10 +154,11 @@ int main()
 	MySqrt(2, answer);
 	MySqrt(0, answer);
 	MySqrt(-2, answer);
+	PrimeOrNot(1);
 	PrimeOrNot(2);
 	PrimeOrNot(4);
 	PrimeOrNot(13);
 	PrimeOrNot(412421);
 	system("pause");
-    return 0;
+	return 0;
 }
