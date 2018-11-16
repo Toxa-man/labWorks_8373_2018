@@ -2,40 +2,56 @@
 
 using namespace std;
 
-int step(int ch, int pok){
-	int x=1;
-	for(int h=0; h<pok; h++){
-		x*=ch;
+double step(int ch, int pok){
+	if (pok>=0) {
+		double x=1;
+		for(int h=0; h<pok; h++){
+			x*=ch;
+		}
+		return(x);
+	} else{
+		double x=1;
+		for(int h=0; h>pok; h--){
+			x=x/ch;
+		}
+		return(x);
 	}
-	return(x);
 }
 
 int fackt(int arg){
-	int otv=1;
-	for(int f=2; f<=arg; f++){
-		otv*=f;
+	int otv=0;
+	if (arg>=0){
+		otv=1;
+		for(int f=2; f<=arg; f++){
+			otv*=f;
+		}
 	}
 	return otv;
 }
 
 double kvadr_kor(double arg){
 	const double EPS=1E-15;
-	double x=1;
-	for(;;){
-		double xp=(x+arg/x)/2;
-		if (x-xp>=0){
-		 	if(x-xp<EPS){
-				break;
+	double x;
+	if(arg==0){
+		return 0;
+	} else{
+		x=1;
+		for(;;){
+			double xp=(x+arg/x)/2;
+			if (x-xp>=0){
+		 		if(x-xp<EPS){
+					break;
+				}
 			}
-		}
-		if (x-xp<0){
-			if(x-xp>-EPS){
-				break;
+			if (x-xp<0){
+				if(x-xp>-EPS){
+					break;
+				}
 			}
+			x=xp;
 		}
-		x=xp;
-	}
 	return x;
+	}
 }
 
 bool my_prime(int arg){
@@ -48,7 +64,8 @@ bool my_prime(int arg){
 }
 
 int main(){
-	int ch, pok, facktor, kor, pri;
+	int ch, pok, facktor, pri;
+	double kor;
 	cout<<"First we calculate the power of number. Enter a number: ";
 	cin>>ch;
 	cout<<"Enter the power of number: ";
