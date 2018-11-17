@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
-using namespace std;
+
+enum class result {ERROR, PRIME, NOT_PRIME};
 
 double MyPower(double number, int grade)
 {
@@ -12,7 +13,6 @@ double MyPower(double number, int grade)
 		{
 			Out *= N;
 		}
-		cout << number << "^" << grade << " equal to " << Out << endl;
 		return Out;
 	}
 	if (grade < 0)
@@ -21,13 +21,11 @@ double MyPower(double number, int grade)
 		{
 			Out *= N;
 		}
-		cout << number << "^" << grade << " equal to " << 1.0 / Out << endl;
 		return 1.0 / Out;
 	}
-	cout << number << "^" << grade << " equal to " << Out << endl;
 	return Out;
 }
-double MySqrt(int number, bool answer)
+double MySqrt(int number)
 {
 	if (number == 0)
 	{
@@ -46,25 +44,6 @@ double MySqrt(int number, bool answer)
 			x = SqrtN;
 			SqrtN = (x + (number / x)) / 2;
 		} while ((x - SqrtN) != 0);
-		if (answer)
-		{
-			cout << "Square root of " << number << " is: " << SqrtN << endl;
-		}
-		return SqrtN;
-	}
-	else if (number < 0)
-	{
-		double x;
-		double SqrtN = -number / 2;
-		do
-		{
-			x = SqrtN;
-			SqrtN = (x + (-number / x)) / 2;
-		} while ((x - SqrtN) != 0);
-		if (answer)
-		{
-			cout << "Square root of " << number << " is: i * " << SqrtN << endl;
-		}
 		return SqrtN;
 	}
 }
@@ -73,13 +52,7 @@ int F(int number)
 {
 	if (number == 0)
 	{
-		cout << "Factorial of " << number << " is: " << 1 << endl;
 		return 1;
-	}
-	if (number < 0)
-	{
-		cout << "error: imposible to calculate factorial of " << number << endl;
-		return 727;
 	}
 	int Out = 1;
 	if (number > 0)
@@ -92,73 +65,70 @@ int F(int number)
 				Out *= i;
 			}
 		}
-		cout << "Factorial of " << number << " is: " << Out << endl;
 		return Out;
 	}
 }
-void PrimeOrNot(int number)
+result PrimeOrNot(int number)
 {
 	int step1 = 0, step2 = 0;
 	bool PrimeExclusive = false;
-	bool PrimeCheck = true;
+	bool PrimeCheck = false;
 	bool answer = false;
 	int n = 1;
-	int check = MySqrt(number, answer);
+	int check = MySqrt(number);
 	if (number == 1)
 	{
-		cout << number << " - NOT PRIME & NOT COMPOUND";
-		PrimeExclusive = true;
+		return result::ERROR;
 	}
 	if (number == 2 || number == 3)
 	{
-		cout << number << " - PRIME";
-		PrimeExclusive = true;
+		return result::PRIME;
 	}
-	if (number % 2 != 0 && number % 3 != 0 && PrimeExclusive == false)
+	if (number % 2 != 0 && number % 3 != 0 )
 	{
-		while (step1 <= check && step2 <= check)
+		for (int i = 1; i < check; ++i)
 		{
 			step1 = 6 * n + 1;
 			step2 = 6 * n - 1;
 			++n;
-			if (number%step1 == 0 || number%step2 == 0)
+			if (number%step1 == 0 && number == step1 || number%step2 == 0 && number == step2)
 			{
-				cout << number << " - NOT PRIME.";
+				PrimeCheck = true;
+				PrimeExclusive = true;
+			}
+			if (((number%step1 == 0 && number != step1) || (number%step2 == 0 && number != step2))&& PrimeExclusive == false)
+			{
 				PrimeCheck = false;
-				break;
 			}
 		}
 	}
-	else if (!PrimeExclusive)
+	if (PrimeCheck)
 	{
-		cout << number << " - NOT PRIME.";
-		PrimeCheck = false;
+		return result::PRIME;
 	}
-	if (PrimeCheck && !PrimeExclusive)
+	else
 	{
-		cout << number << " - PRIME.";
+		return result::NOT_PRIME;
 	}
-	cout << endl;
 }
 int main()
 {
-	bool answer = true;
-	F(-4);
-	F(4);
-	F(0);
-	MyPower(4, -1);
-	MyPower(4, 0);
-	MyPower(0, 4);
-	MyPower(4, 3);
-	MySqrt(4, answer);
-	MySqrt(2, answer);
-	MySqrt(0, answer);
-	MySqrt(-2, answer);
-	PrimeOrNot(1);
-	PrimeOrNot(2);
-	PrimeOrNot(4);
-	PrimeOrNot(13);
-	PrimeOrNot(412421);
+	std::cout << F(4) << std::endl;
+	std::cout << F(0) << std::endl;
+	std::cout << MyPower(4, -1) << std::endl;
+	std::cout << MyPower(4, 0) << std::endl;
+	std::cout << MyPower(0, 4) << std::endl;
+	std::cout << MyPower(4, 3) << std::endl;
+	std::cout << MyPower(2.3, 4) << std::endl;
+	std::cout << MySqrt(4) << std::endl;
+	std::cout << MySqrt(13) << std::endl;
+	std::cout << MySqrt(2) << std::endl;
+	std::cout << MySqrt(0) << std::endl;
+	std::cout << (int)PrimeOrNot(1) << std::endl;
+	std::cout << (int)PrimeOrNot(2) << std::endl;
+	std::cout << (int)PrimeOrNot(4) << std::endl;
+	std::cout << (int)PrimeOrNot(13) << std::endl;
+	std::cout << (int)PrimeOrNot(412421) << std::endl;
 	system("pause");
 	return 0;
 }
