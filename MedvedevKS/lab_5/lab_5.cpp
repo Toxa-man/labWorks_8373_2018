@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-const int M = 50, N = 50;
+const int M = 49, N = 50;
 
 void MatrixSum(int* M1, int* M2, int* M3, int m, int n)
 {
@@ -27,14 +27,14 @@ void MatrixSubstraction(int* M1, int* M2, int* M3, int m, int n)
 	}
 }
 
-void MatrixProduct(int* M1, int m1, int n1, int* M2, int m2, int n2, int* M3)
+void MatrixProduct(int* M1, int* M2, int* M3, int m1, int common, int n2)
 {
 	for (int i = 0; i < m1; i++)
 	{
 		for (int j = 0; j < n2; j++)
 		{
-			int k=0;
-			for (int q = 0; q < n1; q++)
+			int k = 0;
+			for (int q = 0; q < common; q++)
 			{
 				*(M3 + i*N + j) += *(M1 + i*N + k) * *(M2 + k*N + j);
 				k++;
@@ -47,7 +47,7 @@ int main()
 {
 	char end;
 	cout << "MaTrIxCaLc\n\n";
-	do 
+	do
 	{
 		int m1, n1, m2, n2, m3, n3;
 		int MatrixA[M][N], MatrixB[M][N];
@@ -63,7 +63,7 @@ int main()
 				cin >> *(p1 + i*N + j);
 			}
 		}
-		cout<< "\n\nEnter matrix B size (m2 n2)\n";
+		cout << "\n\nEnter matrix B size (m2 n2)\n";
 		cin >> m2 >> n2;
 		cout << "Define matrix B\n\n";
 		for (int i = 0; i < m2; i++)
@@ -85,10 +85,10 @@ int main()
 				m3 = m1;
 				n3 = n2;
 				cout << "1) A+B\n"
-					 << "2) A-B\n"
-					 << "3) A*B\n"
-					 << "4) B*A\n"
-					 << "Press code button (1/2/3/4)\n";
+					<< "2) A-B\n"
+					<< "3) A*B\n"
+					<< "4) B*A\n"
+					<< "Press code button (1/2/3/4)\n";
 				char code = _getch();
 				while (code != '1' && code != '2' && code != '3' && code != '4')
 				{
@@ -107,11 +107,11 @@ int main()
 					break;
 				case('3') :
 					cout << "You pressed " << code << " so A*B result:\n\n";
-					MatrixProduct(p1, m1, n1, p2, m2, n2, p3);
+					MatrixProduct(p1, p2, p3, m1, n1, n2);
 					break;
 				case('4') :
 					cout << "You pressed " << code << " so B*A result:\n\n";
-					MatrixProduct(p2, m2, n2, p1, m1, n1, p3);
+					MatrixProduct(p2, p1, p3, m2, n2, n1);
 				}
 			}
 			else
@@ -134,13 +134,13 @@ int main()
 						cout << "You pressed " << code << " so A*B result:\n\n";
 						m3 = m1;
 						n3 = n2;
-						MatrixProduct(p1, m1, n1, p2, m2, n2, p3);
+						MatrixProduct(p1, p2, p3, m1, n1, n2);
 						break;
 					case('2') :
 						m3 = m2;
 						n3 = n1;
 						cout << "You pressed " << code << " so B*A result:\n\n";
-						MatrixProduct(p2, m2, n2, p1, m1, n1, p3);
+						MatrixProduct(p2, p1, p3, m2, n2, n1);
 					}
 				}
 				else
@@ -153,14 +153,14 @@ int main()
 							n3 = n2;
 							m3 = m1;
 							cout << "1) A*B\nThere is only one possible operation so A*B result:\n\n";
-							MatrixProduct(p1, m1, n1, p2, m2, n2, p3);
+							MatrixProduct(p1, p2, p3, m1, n1, n2);
 						}
 						if (m1 == n2)
 						{
 							n3 = n1;
 							m3 = m2;
 							cout << "1)B*A\nThere is only one possible operation so B*A result:\n\n";
-							MatrixProduct(p2, m2, n2, p1, m1, n1, p3);
+							MatrixProduct(p2, p1, p3, m2, n2, n1);
 						}
 					}
 					else
@@ -204,7 +204,7 @@ int main()
 				{
 					for (int j = 0; j < n3; j++)
 					{
-						cout << MatrixRes[i][j]<<"  ";
+						cout << MatrixRes[i][j] << "  ";
 					}
 					cout << endl;
 				}
@@ -215,5 +215,5 @@ int main()
 			end = _getch();
 		} while (end == 32);
 	} while (end != 27);
-    return 0;
+	return 0;
 }
