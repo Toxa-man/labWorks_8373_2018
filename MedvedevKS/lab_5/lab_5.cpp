@@ -33,11 +33,10 @@ void MatrixProduct(int* M1, int m1, int n1, int* M2, int m2, int n2, int* M3)
 	{
 		for (int j = 0; j < n2; j++)
 		{
-			int l=0, k=0;
+			int k=0;
 			for (int q = 0; q < n1; q++)
 			{
-				*(M3 + i*N + j) += *(M1 + i*N + l) * *(M2 + k*M + j);
-				l++;
+				*(M3 + i*N + j) += *(M1 + i*N + k) * *(M2 + k*N + j);
 				k++;
 			}
 		}
@@ -50,7 +49,6 @@ int main()
 	cout << "MaTrIxCaLc\n\n";
 	do 
 	{
-		system("color E5");
 		int m1, n1, m2, n2, m3, n3;
 		int MatrixA[M][N], MatrixB[M][N];
 		int* p1 = &MatrixA[0][0];
