@@ -1,11 +1,9 @@
 #include <iostream>
 using namespace std;
 
-void power(int digit) {
+void power(int digit, int pow) {
 	int pow, i = 0;
 	float b = 1.0;
-	cout << "Ââåäèòå ñòåïåíü: ";
-	cin >> pow;
 	if (digit != 0 && pow != 0) {
 		if (pow > 0) {
 			while (i != pow) {
@@ -22,12 +20,8 @@ void power(int digit) {
 		else {
 			b = 1;
 		}
-		cout << "×èñëî " << digit << " â ñòåïåíè " << pow << " ðàâíî " << b;
+		return b;
 	}
-	else {
-		cout << "×èñëî " << digit << " â ñòåïåíè " << pow << " íå ñóùåñòâóåò";
-	}
-	cout << endl;
 }
 
 void factorial(int digit) {
@@ -37,54 +31,67 @@ void factorial(int digit) {
 			fac *= p;
 			p++;
 		}
-		cout << "Ôàêòîðèàë ÷èñëà " << digit << " ðàâåí " << fac;
+		return fac;
 	}
-	else {
-		cout << "Ôàêòîðèàëà ÷èñëà " << digit << " íå ñóùåñòâóåò";
-	}
-	cout << endl;
 }
 
 void root(int digit) {
-	if (digit >= 0) {
-		cout << "Êîðåíü èç ÷èñëà " << digit << " ðàâåí " << sqrt(digit);
-	}
-	else {
-		cout << "Êîðíÿ èç ÷èñëà " << digit << " íå ñóùåñòâóåò";
-	}
-	cout << endl;
+	float root;
+	root = sqrt(digit);
+	return root;
 }
 
 void simple(int digit) {
-	if (digit <= 1) {
-		cout << "×èñëî " << digit << " íå ïðîñòîå";
+	int a = 2, k = 0;
+	while (a < digit) {
+		if (digit%a == 0) {
+			k++;
+		}
+		a++;
 	}
-	else {
-		int a = 2, k = 0;
-		while (a < digit) {
-			if (digit%a == 0) {
-				k++;
-			}
-			a++;
-		}
-		if (k == 0) {
-			cout << "×èñëî " << digit << " ïðîñòîå";
-		}
-		else {
-			cout << "×èñëî " << digit << " íå ïðîñòîå";
-		}
-	}
-	cout << endl;
+	return k;
 }
 
 int main() {
 	setlocale(0, "");
-	int digit;
-	cout << "Ââåäèòå ÷èñëî: ";
+	int digit, pow;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾: ";
 	cin >> digit;
-	power(digit);
-	factorial(digit);
-	root(digit);
-	simple(digit);
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚ÐµÐ¿ÐµÐ½ÑŒ: ";
+	cin >> pow;
+	if (digit != 0 && pow != 0) {
+		power(digit, pow);
+		cout << "Ð§Ð¸ÑÐ»Ð¾ " << digit << " Ð² ÑÑ‚ÐµÐ¿ÐµÐ½Ð¸ " << pow << " Ñ€Ð°Ð²Ð½Ð¾ " << b;
+	}
+	else {
+		cout << "Ð§Ð¸ÑÐ»Ð¾ " << digit << " Ð² ÑÑ‚ÐµÐ¿ÐµÐ½Ð¸ " << pow << " Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚";
+	}
+	cout << endl;
+	if (digit >= 0) {
+		factorial(digit);
+		cout << "Ð¤Ð°ÐºÑ‚Ð¾Ñ€Ð¸Ð°Ð» Ñ‡Ð¸ÑÐ»Ð° " << digit << " Ñ€Ð°Ð²ÐµÐ½ " << fac;
+		cout << endl;
+		root(digit);
+		cout << "ÐšÐ¾Ñ€ÐµÐ½ÑŒ Ð¸Ð· Ñ‡Ð¸ÑÐ»Ð° " << digit << " Ñ€Ð°Ð²ÐµÐ½ " << root;
+	}
+	else {
+		cout << "Ð¤Ð°ÐºÑ‚Ð¾Ñ€Ð¸Ð°Ð»Ð° Ñ‡Ð¸ÑÐ»Ð° " << digit << " Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚";
+		cout << endl;
+		cout << "ÐšÐ¾Ñ€ÐµÐ½Ñ Ð¸Ð· Ñ‡Ð¸ÑÐ»Ð° " << digit << " Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚";
+	}
+	cout << endl;
+	if (digit <= 1) {
+		cout << "Ð§Ð¸ÑÐ»Ð¾ " << digit << " Ð½Ðµ Ð¿Ñ€Ð¾ÑÑ‚Ð¾Ðµ";
+	}
+	else {
+		simple(digit);
+		if (k == 0) {
+			cout << "Ð§Ð¸ÑÐ»Ð¾ " << digit << " Ð¿Ñ€Ð¾ÑÑ‚Ð¾Ðµ";
+		}
+		else {
+			cout << "Ð§Ð¸ÑÐ»Ð¾ " << digit << " Ð½Ðµ Ð¿Ñ€Ð¾ÑÑ‚Ð¾Ðµ";
+		}
+	}
+	cout << endl;
 	return 0;
 }
