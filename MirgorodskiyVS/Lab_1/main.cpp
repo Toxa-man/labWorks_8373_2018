@@ -26,7 +26,7 @@ int main()
                 cout << "Null non devidable";
            break;
         default:
-            cout << "You are Alesha, man" << endl;
+            cout << "You are wrong" << endl;
     }
     return 0;
 }
