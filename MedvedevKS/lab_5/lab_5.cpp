@@ -33,11 +33,9 @@ void MatrixProduct(int* M1, int* M2, int* M3, int m1, int common, int n2)
 	{
 		for (int j = 0; j < n2; j++)
 		{
-			int k = 0;
-			for (int q = 0; q < common; q++)
+			for (int k = 0; k < common; k++)
 			{
 				*(M3 + i*N + j) += *(M1 + i*N + k) * *(M2 + k*N + j);
-				k++;
 			}
 		}
 	}
