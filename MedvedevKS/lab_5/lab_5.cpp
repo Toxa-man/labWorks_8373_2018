@@ -41,15 +41,106 @@ void MatrixProduct(int* M1, int* M2, int* M3, int m1, int common, int n2)
 	}
 }
 
-void BothSquare(int* p1, int* p2, int* p3, int& m3, int& n3, int n);
+void BothSquare(int* p1, int* p2, int* p3, int& m3, int& n3, int n)
+{
+	m3 = n;
+	n3 = n;
+	cout << "1) A+B\n"
+		<< "2) A-B\n"
+		<< "3) A*B\n"
+		<< "4) B*A\n"
+		<< "Press code button (1/2/3/4)\n";
+	char code = _getch();
+	while (code != '1' && code != '2' && code != '3' && code != '4')
+	{
+		cout << "You pressed the wrong key press another (1 2 3 or 4)\n";
+		code = _getch();
+	}
+	switch (code)
+	{
+	case('1'):
+		cout << "You pressed " << code << " so A+B result:\n\n";
+		MatrixSum(p1, p2, p3, n, n);
+		break;
+	case('2'):
+		cout << "You pressed " << code << " so A-B result:\n\n";
+		MatrixSubstraction(p1, p2, p3, n, n);
+		break;
+	case('3'):
+		cout << "You pressed " << code << " so A*B result:\n\n";
+		MatrixProduct(p1, p2, p3, m3, n, n);
+		break;
+	case('4'):
+		cout << "You pressed " << code << " so B*A result:\n\n";
+		MatrixProduct(p2, p1, p3, n, n, n);
+	}
+}
 
-void BothSideProduct(int* p1, int* p2, int* p3, int& m3, int& n3, int m, int n);
+void BothSideProduct(int* p1, int* p2, int* p3, int& m3, int& n3, int m, int n)
+{
+	cout << "1) A*B\n"
+		<< "2) B*A\n"
+		<< "Press code button (1/2)\n";
+	char code = _getch();
+	while (code != '1' && code != '2')
+	{
+		cout << "You pressed the wrong key press another (1 or 2)\n";
+		code = _getch();
+	}
+	switch (code)
+	{
+	case('1'):
+		cout << "You pressed " << code << " so A*B result:\n\n";
+		m3 = m;
+		n3 = m;
+		MatrixProduct(p1, p2, p3, m, n, m);
+		break;
+	case('2'):
+		m3 = n;
+		n3 = n;
+		cout << "You pressed " << code << " so B*A result:\n\n";
+		MatrixProduct(p2, p1, p3, n, m, n);
+	}
+}
 
-void OneSideProduct(int* p1, int* p2, int* p3, int& m3, int& n3, int m, int n, int common);
+void OneSideProduct(int* p1, int* p2, int* p3, int& m3, int& n3, int m, int n, int common) // m,n - final MatrixRes sizes, common - common size of A and B matrices
+{
+	m3 = m;
+	n3 = n;
+	MatrixProduct(p1, p2, p3, m, common, n);
+}
 
-void sameNSsize(int* p1, int* p2, int* p3, int& m3, int& n3, int m, int n);	// same NOT SQUARE size
+void sameNSsize(int* p1, int* p2, int* p3, int& m3, int& n3, int m, int n)	// same NOT SQUARE size
+{
+	m3 = m;
+	n3 = n;
+	cout << "1) A+B\n"
+		<< "2) A-B\n"
+		<< "Press code button (1/2)\n";
+	char code = _getch();
+	while (code != '1' && code != '2')
+	{
+		cout << "You pressed the wrong key press another (1 or 2)\n";
+		code = _getch();
+	}
+	switch (code)
+	{
+	case('1'):
+		cout << "You pressed " << code << " so A+B result:\n\n";
+		MatrixSum(p1, p2, p3, m, n);
+		break;
+	case('2'):
+		cout << "You pressed " << code << " so A-B result:\n\n";
+		MatrixSubstraction(p1, p2, p3, m, n);
+	}
+}
 
-void coutEnd();
+void coutEnd()
+{
+	cout << "\nTo close the program press ESC\n"
+		<< "To make another operation with the same matrices press SPACE\n"
+		<< "To overrun the program press ANY OTHER KEY\n\n";
+}
 
 int main()
 {
@@ -146,105 +237,4 @@ int main()
 		} while (end == 32);
 	} while (end != 27);
 	return 0;
-}
-
-void BothSquare(int* p1, int* p2, int* p3, int& m3, int& n3, int n)	// m1=n1=m2=n3=m3=n3 = n so doesnt matter which value ill take than ill take n in +-* functions
-{
-	m3 = n;
-	n3 = n;
-	cout << "1) A+B\n"
-		<< "2) A-B\n"
-		<< "3) A*B\n"
-		<< "4) B*A\n"
-		<< "Press code button (1/2/3/4)\n";
-	char code = _getch();
-	while (code != '1' && code != '2' && code != '3' && code != '4')
-	{
-		cout << "You pressed the wrong key press another (1 2 3 or 4)\n";
-		code = _getch();
-	}
-	switch (code)
-	{
-	case('1') :
-		cout << "You pressed " << code << " so A+B result:\n\n";
-		MatrixSum(p1, p2, p3, n, n);
-		break;
-	case('2') :
-		cout << "You pressed " << code << " so A-B result:\n\n";
-		MatrixSubstraction(p1, p2, p3, n, n);
-		break;
-	case('3') :
-		cout << "You pressed " << code << " so A*B result:\n\n";
-		MatrixProduct(p1, p2, p3, m3, n, n);
-		break;
-	case('4') :
-		cout << "You pressed " << code << " so B*A result:\n\n";
-		MatrixProduct(p2, p1, p3, n, n, n);
-	}
-}
-
-void BothSideProduct(int* p1, int* p2, int* p3, int& m3, int& n3, int m, int n) //m = m1,n = n1 == sizes of matrix A (we dont need matrix B size: m2 == n1, n2 == m1)
-{
-	cout << "1) A*B\n"
-		<< "2) B*A\n"
-		<< "Press code button (1/2)\n";
-	char code = _getch();
-	while (code != '1' && code != '2')
-	{
-		cout << "You pressed the wrong key press another (1 or 2)\n";
-		code = _getch();
-	}
-	switch (code)
-	{
-	case('1') :
-		cout << "You pressed " << code << " so A*B result:\n\n";
-		m3 = m;
-		n3 = m;
-		MatrixProduct(p1, p2, p3, m, n, m);
-		break;
-	case('2') :
-		m3 = n;
-		n3 = n;
-		cout << "You pressed " << code << " so B*A result:\n\n";
-		MatrixProduct(p2, p1, p3, n, m, n);
-	}
-}
-
-void OneSideProduct(int* p1, int* p2, int* p3, int& m3, int& n3, int m, int n, int common) // m,n - final MatrixRes sizes, common - common size of A and B matrices
-{
-	m3 = m;
-	n3 = n;
-	MatrixProduct(p1, p2, p3, m, common, n);
-}
-
-void sameNSsize(int* p1, int* p2, int* p3, int& m3, int& n3, int m, int n)	//same NOT SQUARE size
-{
-	m3 = m;
-	n3 = n;
-	cout << "1) A+B\n"
-		<< "2) A-B\n"
-		<< "Press code button (1/2)\n";
-	char code = _getch();
-	while (code != '1' && code != '2')
-	{
-		cout << "You pressed the wrong key press another (1 or 2)\n";
-		code = _getch();
-	}
-	switch (code)
-	{
-	case('1') :
-		cout << "You pressed " << code << " so A+B result:\n\n";
-		MatrixSum(p1, p2, p3, m, n);
-		break;
-	case('2') :
-		cout << "You pressed " << code << " so A-B result:\n\n";
-		MatrixSubstraction(p1, p2, p3, m, n);
-	}
-}
-
-void coutEnd()
-{
-	cout << "\nTo close the program press ESC\n"
-		<< "To make another operation with the same matrices press SPACE\n"
-		<< "To overrun the program press ANY OTHER KEY\n\n";
 }
