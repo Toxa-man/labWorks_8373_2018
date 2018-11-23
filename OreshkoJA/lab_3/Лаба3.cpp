@@ -5,11 +5,12 @@ using namespace std;
 const int con = 100;
 int main()
 {
-	int pluss(0), index1(0), index2(0), error(0);
+	int pluss(0), index1(0), index2(0), error(0), dop, index3;
 	int counter(0),prob(0), min, minind, probel(0),begin,end(0);
 	char fn[con], fin[con];
 	int help1[con] = { 0 };
 	int help2[con] = { 0 };
+	cout << "Input string:";
 	cin.getline(fn, con);
 	for (int i=0; fn[i-1] != '\0';i++)
 	{
@@ -27,13 +28,12 @@ int main()
 		}
 	}
 	counter = 0;
-	index1--;
-	for (int i = 0; fn[i] != '\0'; i++)
+	for (int i = 0; fn[i-1] != '\0'; i++)
 	{
-		if (fn[i] == ' ' || i == 0)
+		if (fn[i] == ' ' || fn[i] == '\0')
 		{
 			help2[counter] = prob;
-			prob++;
+			prob=0;
 			counter++;
 		}
 		else
@@ -42,8 +42,8 @@ int main()
 		}
 	}
 	counter = 0;
-	while (index1+1 != index2)
-	{ 
+	while (index1 != index2)
+	{
 		min = help1[0];
 		minind = 0;
 		for (int i = 0; help1[i] != 0; i++)
@@ -54,58 +54,44 @@ int main()
 				minind = i;
 			}
 		}
-		for (int i = 0; i < con; i++)
+		for (int i = minind; i < con; i++)
 		{
-			if (min == help1[i] ||error==1)
-			{
-				error = 1;
-				help1[i] = help1[i + 1];
-			}
+			help1[i] = help1[i + 1];
 		}
 		error = 0;
-		for (int i = 0; minind+1 != probel || minind ==0; i++)
+		for (int i = minind; i < con; i++)
 		{
-			if (fn[i]==' ' || fn[i] == (char) -52 )
+			help2[i] = help2[i + 1];
+		}
+		error = 0;
+
+		for (int i = 0; i != minind; i++)
+		{
+			counter = counter + help2[i];
+		}
+		counter += minind;
+		for (int i = counter; fn[i] != ' ' ; i++)
+		{
+			if (fn[i] != '\0')
 			{
-				probel++;
+				fin[index2] = fn[i];
+				index2++;
+				probel++;// изменить
 			}
-			if (probel == minind && fn[i] !=' ')
-			{
-				for (int j = counter; fn[i]!=' '; j++)
-					{ 
-					if (fn[i - 1] == ' ' || i == 0)
-					{
-						begin = i;
-					}
-					if (fn[i] =='\0')
-						break;
-					else 
-					{ 
-						fin[j] = fn[i];
-						counter++;
-						i++;
-						end++;
-						index2++;
-					}
-				}
-			}
-			if (fn[i] == '\0')
+			else
 				break;
-			if (minind == 0)
-			{
-				probel = 2 ;
-				minind = 1;
-			}
 		}
-		for (int i = begin; i < con; i++)
+		if (index2 != index1)
 		{
-			fn[i] = fn[i + end + 1];
+			fin[index2] = ' ';
+			index2++;
 		}
+		for (int i = counter; i < con; i++)
+		{
+			fn[i] = fn[i + probel + 1];
+		}
+		counter = 0;
 		probel = 0;
-		fin[counter] = ' ';
-		counter++;
-		index2++;
-		end = 0;
 	}
 	fin[index1] = '\0';
 	cout << fin << endl;
