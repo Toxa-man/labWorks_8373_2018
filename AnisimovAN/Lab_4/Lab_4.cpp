@@ -25,15 +25,16 @@ double power(double number_stepen, int stepen)
 	return rez;
 }
 
-int fact (int number_fact)
+int fact(int number_fact)
 {
 	int rez = 1;
 
-for (int i=1;  i <= number_fact; i++)
+	for (int i = 1; i <= number_fact; i++)
 	{
 	rez *= i;
 	}
-return rez;
+
+	return rez;
 }
 
 double sqrt(int number_sqrt) 
@@ -44,10 +45,11 @@ double sqrt(int number_sqrt)
 		t = rez;
 		rez = (t + (number_sqrt / t)) / 2;
 	} while ((t - rez) != 0);
+
 	return rez;
 }
 
-bool simple(int number_simple)
+bool simple (int number_simple)
 {
 	bool simple = true;
 	for (int i = 2; i < number_simple; i++)
@@ -76,27 +78,52 @@ int main()
 	int number_fact;
 	cout << "Write a nummber: ";
 	cin >> number_fact;
-	cout << number_fact << "! = " << fact(number_fact) << endl;
-	cout << endl;
-
-	cout << "Third" << endl;
-	int number_sqrt;
-	cout << "Write a number: ";
-	cin >> number_sqrt;
-	cout << "Sqrt from " << number_sqrt << " = " << sqrt(number_sqrt) << endl;
-	cout << endl;
-
-	cout << "Fourth" << endl;
-	int number_simple;
-	cout << "Write a number to get checked: ";
-	cin >> number_simple;
-	if (simple(number_simple) == 1)
+	if (number_fact < 0)
 	{
-		cout << "Number " << number_simple << " is a " << "simple number" << endl;
+		cout << "Error: impossible to take Fact. from this number: " << number_fact << endl;
 	}
 	else
 	{
-		cout << "Number " << number_simple << " is a " << "simple number" << endl;
+		if (number_fact == 0)
+		{
+			cout << "0! = 1" << endl;
+
+		}
+		else
+		{
+			cout << number_fact << "! = " << fact(number_fact) << endl;
+		}
+	}
+	cout << endl;
+	
+
+	cout << "Third: " << endl;
+	int number_sqrt;
+	cout << "Write a number: ";
+	cin >> number_sqrt;
+	if (number_sqrt < 0)
+	{
+		cout << "It is impossible to find sqrt from this number: " << number_sqrt << endl;
+		
+	} 
+	else
+	{
+		cout << "Sqrt from " << number_sqrt << " = " << sqrt(number_sqrt) << endl;
+		
+	}
+	cout << endl;
+
+	cout << "Fourth: " << endl;
+	int number_simple;
+	cout << "Write a number to get checked: ";
+	cin >> number_simple;
+	if (simple (number_simple) == 1)
+	{
+		cout << "Number " << number_simple << " is a simple number" << endl;
+	}
+	else
+	{
+		cout << "Number " << number_simple << " is not a simple number" << endl;
 	}
 
 	cout << endl; //Is it ok to use this string in the end, to make finalconcole more attractive?
