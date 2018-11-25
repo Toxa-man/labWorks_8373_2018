@@ -235,6 +235,14 @@ int main()
 			coutEnd();
 			end = _getch();
 		} while (end == 32);
+		char clear;
+		cout << "Do you want to clear console? (y/any char)\n";
+		cin >> clear;
+		if (clear == 'y')
+		{
+			system("cls");
+		}
+		cout << "\n\n";
 	} while (end != 27);
 	return 0;
 }
