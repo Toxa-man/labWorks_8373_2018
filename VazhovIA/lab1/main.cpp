@@ -1,6 +1,37 @@
 #include <iostream>
 #include <cmath>
+
+#ifdef __linux__
+#include <termios.h>
+#elif _WIN32
+#include <conio.h>
+#endif
+
 using namespace std;
+static struct termios oldSetts, nwSetts;
+
+void initTermios()
+{
+  tcgetattr(0, &oldSetts);
+  nwSetts = oldSetts;
+  nwSetts.c_lflag &= ~ICANON;
+  nwSetts.c_lflag &= ~ECHO;
+  tcsetattr(0, TCSANOW, &nwSetts);
+}
+
+void resetTermios(void) 
+{
+  tcsetattr(0, TCSANOW, &oldSetts);
+}
+
+char getch_() 
+{
+  char ch;
+  initTermios();
+  ch = getchar();
+  resetTermios();
+  return ch;
+}
 
 int main()
 {
@@ -24,11 +55,13 @@ int main()
         if (right == 0) {
             cout << "Division by zero is forbidden" << endl;
             #ifdef __linux__
-            system("read -p 'press any key' ");
+            cin.ignore(1,'\n');
+            char a = getch_();
             #elif _WIN32
-            system("pause");
+            _getch();
             #endif
-            exit;
+            exit(2);
+            break;
         }
         result = left / right;
         break;
@@ -38,10 +71,11 @@ int main()
         break;
     }
     cout << result << endl;
-    #ifdef __linux__ //im using linux so i have no getch or system("pause")
-    system("read -p 'press any key' ");
+    #ifdef __linux__
+    cin.ignore(1,'\n');
+    char a = getch_();
     #elif _WIN32
-    system("pause");
+    _getch();
     #endif
     return 0;
 }
