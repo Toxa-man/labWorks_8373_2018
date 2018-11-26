@@ -238,11 +238,11 @@ int main()
 		char clear;
 		cout << "Do you want to clear console? (y/any char)\n";
 		cin >> clear;
+		cout << "\n\n";
 		if (clear == 'y')
 		{
 			system("cls");
 		}
-		cout << "\n\n";
 	} while (end != 27);
 	return 0;
 }
