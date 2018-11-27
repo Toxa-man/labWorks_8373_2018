@@ -49,17 +49,17 @@ double sqrt(int number_sqrt)
 	return rez;
 }
 
-bool simple (int number_simple)
+bool prime (int number_prime)
 {
-	bool simple = true;
-	for (int i = 2; i < number_simple; i++)
+	bool prime = true;
+	for (int i = 2; i < number_prime; i++)
 	{
-		if (number_simple%i == 0)
+		if (number_prime%i == 0)
 		{
-			simple = false;
+			prime = false;
 		}
 	}
-	return simple;
+	return prime;
 }
 
 int main()
@@ -114,16 +114,24 @@ int main()
 	cout << endl;
 
 	cout << "Fourth: " << endl;
-	int number_simple;
+	int number_prime;
 	cout << "Write a number to get checked: ";
-	cin >> number_simple;
-	if (simple (number_simple) == 1)
+	cin >> number_prime;
+
+	if (number_prime <= 1)
 	{
-		cout << "Number " << number_simple << " is a simple number" << endl;
+		cout << "Number " << number_prime << " is not a prime number" << endl;
 	}
 	else
 	{
-		cout << "Number " << number_simple << " is not a simple number" << endl;
+		if (prime(number_prime) == 1)
+		{
+			cout << "Number " << number_prime << " is a prime number" << endl;
+		}
+		else
+		{
+			cout << "Number " << number_prime << " is not a prime number" << endl;
+		}
 	}
 
 	cout << endl; //Is it ok to use this string in the end, to make finalconcole more attractive?
