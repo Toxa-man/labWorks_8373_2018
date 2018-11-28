@@ -5,31 +5,29 @@
 
 using namespace std;
 
-int KEY_ESC = 1;
-
-void matrix_sum (int* matrix1, int* matrix2, int* result, int n, int m)
+void matrix_sum(int* matrix1, int* matrix2, int* result, int n, int m)
 {
-	for (int i = 0; i < m; ++i)
-		for (int j = 0; j < n; ++j)
-			*(result + i*20 +j) = *(matrix1 + i * 20 + j) + *(matrix2 + i * 20 + j);
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < n; j++)
+			*(result + i * 20 + j) = *(matrix1 + i * 20 + j) + *(matrix2 + i * 20 + j);
 }
 
-void matrix_difference (int* matrix1, int* matrix2, int* result, int n, int m)
+void matrix_difference(int* matrix1, int* matrix2, int* result, int n, int m)
 {
-	for (int i = 0; i < m; ++i)
-		for (int j = 0; j < n; ++j)
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < n; j++)
 			*(result + i * 20 + j) = *(matrix1 + i * 20 + j) - *(matrix2 + i * 20 + j);
 }
 
-void matrix_mult (int* matrix1, int* matrix2, int* result, int N, int M, int S, int K)
+void matrix_mult(int* matrix1, int* matrix2, int* result, int N, int M, int S)
 {
-	for (int i = 0; i < N; ++i)
+	for (int i = 0; i < N; i++)
 	{
-		for (int j = 0; j < M; ++j)
+		for (int j = 0; j < S; j++)
 		{
-			for (int z = 0; z < S; ++j)
+			for (int z = 0; z < M; z++)
 			{
-				*(result + i * 20 + j) += (*(matrix1 + i*20 + z))*(*(matrix2 + z*20 + j));
+				*(result + i * 20 + j) += (*(matrix1 + i * 20 + z))*(*(matrix2 + z * 20 + j));
 			}
 		}
 	}
@@ -44,7 +42,7 @@ int main()
 
 		setlocale(LC_ALL, "RUS");
 
-		int i, j, N, M, S, K, mat_A[20][20], mat_B[20][20], mat_C[20][20];
+		int i, j, N, M, S, K, mat_A[20][20], mat_B[20][20], mat_C[20][20] = {0};
 
 		char sign;
 
@@ -187,7 +185,7 @@ int main()
 
 		case '*': if (N == K)
 		{
-			matrix_mult(*mat_A, *mat_B, *mat_C, N, M, S, K);
+			matrix_mult(*mat_A, *mat_B, *mat_C, N, M, S);
 			cout << "Matrix C \n";
 			for (i = 0; i < N; i++)
 			{
@@ -211,7 +209,8 @@ int main()
 
 		cout << "Are you sure you want to quit this great program? (Press 'ESC' button to leave or another to continue)" << endl;
 
+		system("pause");
 		return 0;
 	}
 }
-	
+
