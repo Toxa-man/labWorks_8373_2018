@@ -84,8 +84,6 @@ int main()
 		act = _getch();
 		switch (act)
 		{
-		case 'ESC':
-			break;
 		case '1':
 			if ((m1 == m2) && (n1 == n2))
 				my_add(*arr1, *arr2, *arr3);
@@ -133,7 +131,7 @@ int main()
 		}
 		cout << "Для выхода нажмите ESC, для продолжения - любую другую клавишу" << endl << endl;
 		act = _getch();
-	} while (act != '\x1b');
+	} while (act != 27);
     return 0;
 }
 
