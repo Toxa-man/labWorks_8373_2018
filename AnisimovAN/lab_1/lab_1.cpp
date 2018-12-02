@@ -13,11 +13,12 @@ int main()
 	cin >> right;
 
 
-	switch (sign){
-	case '+':result = left + right;
+	switch (sign)
+	{
+	case '+':result = left + right; 
 		break;
 
-	case '-':result = left - right;
+	case '-':result = left - right; 
 		break;
 
 	case '*':result = left * right;
