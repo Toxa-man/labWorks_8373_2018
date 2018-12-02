@@ -1,4 +1,3 @@
-﻿#include "pch.h"
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -133,7 +132,7 @@ int main()
 		case('q'): flag = true;
 			break;
 		default:
-			cout << "Don't understand what to do " << endl;
+			cout << "Don't understand what to do, none of keys S, D, M, Q was pressed " << endl;
 			break;
 		}
 		if (!flag)
