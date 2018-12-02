@@ -36,8 +36,11 @@ void factorial(int digit) {
 }
 
 void root(int digit) {
-	float root;
-	root = sqrt(digit);
+	float root = 0.00;
+	while (root*root < digit) {
+		root += 0.01;
+	}
+	root -= 0.01;
 	return root;
 }
 
