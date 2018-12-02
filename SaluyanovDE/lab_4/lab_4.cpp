@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 
-enum class result {ERROR, PRIME, NOT_PRIME};
+enum class result { ERROR, PRIME, NOT_PRIME };
 
 double MyPower(double number, int grade)
 {
@@ -73,7 +73,7 @@ result PrimeOrNot(int number)
 	int step1 = 0, step2 = 0;
 	bool PrimeExclusive = false;
 	bool PrimeCheck = false;
-	bool answer = false;
+	bool Step1MultOf5 = false, Step2MultOf5 = false;
 	int n = 1;
 	int check = MySqrt(number);
 	if (number == 1)
@@ -84,19 +84,27 @@ result PrimeOrNot(int number)
 	{
 		return result::PRIME;
 	}
-	if (number % 2 != 0 && number % 3 != 0 )
+	if (number % 2 != 0 && number % 3 != 0)
 	{
 		for (int i = 1; i < check; ++i)
 		{
 			step1 = 6 * n + 1;
 			step2 = 6 * n - 1;
 			++n;
-			if (number%step1 == 0 && number == step1 || number%step2 == 0 && number == step2)
+			if (n >= 4 && step1%5 == 0)
+			{
+				Step1MultOf5 = true;
+			}
+			if (n >= 4 && step2 % 5 == 0)
+			{
+				Step2MultOf5 = true;
+			}
+			if (number%step1 == 0 && number == step1 && !Step1MultOf5 || number%step2 == 0 && number == step2 && !Step2MultOf5)
 			{
 				PrimeCheck = true;
 				PrimeExclusive = true;
 			}
-			if (((number%step1 == 0 && number != step1) || (number%step2 == 0 && number != step2))&& PrimeExclusive == false)
+			if (((number%step1 == 0 && number != step1) || (number%step2 == 0 && number != step2)) && PrimeExclusive == false)
 			{
 				PrimeCheck = false;
 			}
@@ -113,22 +121,23 @@ result PrimeOrNot(int number)
 }
 int main()
 {
-	std::cout << F(4) << std::endl;
-	std::cout << F(0) << std::endl;
-	std::cout << MyPower(4, -1) << std::endl;
-	std::cout << MyPower(4, 0) << std::endl;
-	std::cout << MyPower(0, 4) << std::endl;
-	std::cout << MyPower(4, 3) << std::endl;
-	std::cout << MyPower(2.3, 4) << std::endl;
-	std::cout << MySqrt(4) << std::endl;
-	std::cout << MySqrt(13) << std::endl;
-	std::cout << MySqrt(2) << std::endl;
-	std::cout << MySqrt(0) << std::endl;
-	std::cout << (int)PrimeOrNot(1) << std::endl;
-	std::cout << (int)PrimeOrNot(2) << std::endl;
-	std::cout << (int)PrimeOrNot(4) << std::endl;
-	std::cout << (int)PrimeOrNot(13) << std::endl;
-	std::cout << (int)PrimeOrNot(412421) << std::endl;
+	std::cout << "Factorial of 4 is: " << F(4) << std::endl;
+	std::cout << "Factorial of 0 is: " << F(0) << std::endl;
+	std::cout << "4^-1 equal: " << MyPower(4, -1) << std::endl;
+	std::cout << "4^0 equal: " << MyPower(4, 0) << std::endl;
+	std::cout << "0^4 equal: " << MyPower(0, 4) << std::endl;
+	std::cout << "4^3 equal: " << MyPower(4, 3) << std::endl;
+	std::cout << "2.3^4 equal: " << MyPower(2.3, 4) << std::endl;
+	std::cout << "square root of 4 equal: " << MySqrt(4) << std::endl;
+	std::cout << "square root of 13 equal: " << MySqrt(13) << std::endl;
+	std::cout << "square root of 2 equal: " << MySqrt(2) << std::endl;
+	std::cout << "square root of 0 equal: " << MySqrt(0) << std::endl;
+	std::cout << "number 1 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(1) << std::endl;
+	std::cout << "number 2 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(2) << std::endl;
+	std::cout << "number 4 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(4) << std::endl;
+	std::cout << "number 13 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(13) << std::endl;
+	std::cout << "number 412421 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(412421) << std::endl;
+	std::cout << "number 25 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(25) << std::endl;
 	system("pause");
 	return 0;
 }
