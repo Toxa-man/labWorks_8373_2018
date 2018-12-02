@@ -46,10 +46,9 @@ int WordMass(char* text, int number)
 	}
 	return mass;
 }
-void AddWord(char* text, int number, char* SortedText, int* LenSorted)
+void AddWord(char* text, int number, char* SortedText, int& LenSorted)
 {
 	int num = 1;
-	int k = *LenSorted;
 	int i = 0;
 	int mass = 0;
 	while (*(text + i) != '\0')
@@ -61,8 +60,8 @@ void AddWord(char* text, int number, char* SortedText, int* LenSorted)
 		}
 		while (num == number)
 		{
-			*(SortedText + k) = *(text + i);
-			++k;
+			*(SortedText + LenSorted) = *(text + i);
+			++LenSorted;
 			++i;
 			if (*(text + i) == ' ' || *(text + i) == '\0')
 			{
@@ -71,7 +70,6 @@ void AddWord(char* text, int number, char* SortedText, int* LenSorted)
 			}
 		}
 		++i;
-		*LenSorted = k;
 		if (num > number)
 		{
 			break;
@@ -85,29 +83,29 @@ int main()
 	cout << "insert your text (length must be less than 100 symbols)" << endl;
 	cin.getline(text, arr_size);
 	int WordNum[arr_size];
-	int k = 0;
-	for (int i = 1; i <= WordCounter(text); ++i)
+	int LenSorted = 0;
+	for (int i = 0; i < WordCounter(text); ++i)
 	{
-		WordNum[i - 1] = i;
+		WordNum[i] = i+1;
 	}
-	for (int i = 0; i < WordCounter(text)-1; ++i)
+	for (int i = 0; i < WordCounter(text) - 1; ++i)
 	{
 		for (int j = 1; j < WordCounter(text); ++j)
 		{
 			int buff;
 			if (WordMass(text, WordNum[j - 1]) > WordMass(text, WordNum[j]))
 			{
-				buff = WordNum[j-1];
-				WordNum[j-1] = WordNum[j];
+				buff = WordNum[j - 1];
+				WordNum[j - 1] = WordNum[j];
 				WordNum[j] = buff;
 			}
 		}
 	}
 	for (int i = 0; i < WordCounter(text); i++)
 	{
-		AddWord(text, WordNum[i], SortedText, &k);
-		SortedText[k] = ' ';
-		++k;
+		AddWord(text, WordNum[i], SortedText, LenSorted);
+		SortedText[LenSorted] = ' ';
+		++LenSorted;
 	}
 	cout << "Your text was sorted. It looks like: ";
 	for (int j = 0; j < strlen(text); ++j)
