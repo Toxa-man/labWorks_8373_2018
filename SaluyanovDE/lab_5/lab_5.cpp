@@ -1,9 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <conio.h>
-
 const int size = 100;
-
 void MySummation(int First_matrix_column_size, int First_matrix_line_size, int* matrix1, int Second_matrix_column_size, int Second_matrix_line_size, int* matrix2, int& Output_matrix_column_size, int& Output_matrix_line_size, int* Output)
 {
 	if (First_matrix_column_size == Second_matrix_column_size && First_matrix_line_size == Second_matrix_line_size)
@@ -23,9 +21,9 @@ void MySubtraction(int First_matrix_column_size, int First_matrix_line_size, int
 {
 	if (First_matrix_column_size == Second_matrix_column_size && First_matrix_line_size == Second_matrix_line_size)
 	{
-			Output_matrix_column_size = First_matrix_column_size;
-			Output_matrix_line_size = First_matrix_line_size;
-			for (int i = 0; i < Output_matrix_line_size; i++)
+		Output_matrix_column_size = First_matrix_column_size;
+		Output_matrix_line_size = First_matrix_line_size;
+		for (int i = 0; i < Output_matrix_line_size; i++)
 		{
 			for (int j = 0; j < Output_matrix_column_size; j++)
 			{
@@ -54,8 +52,6 @@ void MyMultiplication(int First_matrix_column_size, int First_matrix_line_size, 
 		}
 	}
 }
-
-
 int main()
 {
 	int matrix1[size][size];
@@ -114,8 +110,9 @@ int main()
 				}
 				MyMultiplication(First_matrix_column_size, First_matrix_line_size, *matrix1, Second_matrix_column_size, Second_matrix_line_size, *matrix2, Output_matrix_column_size, Output_matrix_line_size, *output);
 				break;
+			default:
+				std::cout << "Wrong action\n";
 			}
-
 			if (Posibility_to_calculate)
 			{
 				std::cout << "Result is\n";
@@ -130,12 +127,12 @@ int main()
 						}
 					}
 				}
+				Posibility_to_calculate = false;
 			}
 			else
 			{
 				std::cout << "Imposible to calculate!\n";
 			}
-			Posibility_to_calculate = false;
 			std::cout << "Do you want to choice another action? (press ESC for no/press any other button for yes)\n";
 			key = _getch();
 			if (key != 27)
@@ -172,4 +169,3 @@ int main()
 	} while (key != 27);
 	return 0;
 }
-
