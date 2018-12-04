@@ -3,6 +3,31 @@
 using namespace std;
 const int arrSize = 4;
 
+#ifdef __linux__
+#include <termios.h>
+#elif _WIN32
+#include <conio.h>
+#endif
+
+using namespace std;
+static struct termios oldSetts, nwSetts;
+void initTermios()
+{
+	tcgetattr(0, &oldSetts);
+	nwSetts = oldSetts;
+	nwSetts.c_lflag &= ~ICANON;
+	nwSetts.c_lflag &= ~ECHO;
+	tcsetattr(0, TCSANOW, &nwSetts);
+}
+char _getch() 
+{
+	cin.ignore(1,'\n');
+	char ch;
+	initTermios();
+	ch = getchar();
+	tcsetattr(0, TCSANOW, &oldSetts);
+	return ch;
+}
 
 void multiply(int *arr1Ptr, int *arr2Ptr, int *arrRPtr) {
 //строка 1 матрицы на столбец 2 матрицы
@@ -35,7 +60,7 @@ void sum(bool sum, int *arr1Ptr, int *arr2Ptr, int *arrRPtr) {
 void app() {
 	int matrix1[arrSize][arrSize], matrix2[arrSize][arrSize], matrixRes[arrSize][arrSize];
 	char act;
-	cout << "Enter first matrix with arrSize" << arrSize << endl;
+	cout << "Enter first matrix with size" << arrSize << endl;
 
 	for (int i(0);i<arrSize;i++) {
 		for (int k(0);k<arrSize;k++) {
@@ -44,7 +69,7 @@ void app() {
 
 		cout << endl;
 	}
-	cout << "Enter second matrix with arrSize" << arrSize << endl;
+	cout << "Enter second matrix with size" << arrSize << endl;
 	for (int i(0);i<arrSize;i++) {
 		for (int k(0);k<arrSize;k++) {
 			cin >> matrix2[i][k];
@@ -81,8 +106,9 @@ void app() {
 bool replay()
 {
 	char ans;
-	cout << "Do you want to rerun? (y/n)" << endl;
-	cin >> ans;
+	cout << "Do you want to rerun? (y/n/anykey for yes)" << endl;
+	ans = _getch();
+	cout << ans;
 	switch (ans) {
 		case 'y':
 			return true;
@@ -91,8 +117,7 @@ bool replay()
 			return false;
 			break;
 		default:
-			cout << "Wrong answer" << endl;
-			return false;
+			return true;
 			break;
 	}
 }
@@ -102,7 +127,5 @@ int main() {
 		app();
 		work = replay();
 	} while (work);
-
-	
 }
 
