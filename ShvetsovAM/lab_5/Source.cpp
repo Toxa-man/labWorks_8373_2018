@@ -136,7 +136,7 @@ int main()
 					break;
 				}
 			}
-			if (!(row1 == row2 && column1 == column2) || !(row1 == row2 && column1 == column2))
+			if (!((column1 == row2 && row1 != column2) || (row1 == row2 && column1 == column2)))
 			{
 				cout << endl << "It's impossible to do something with this matrixes..." << endl << endl
 				<< "Press the 'ESC' to exit this program," << endl
