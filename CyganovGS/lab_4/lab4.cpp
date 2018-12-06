@@ -1,8 +1,9 @@
 #include<iostream>
+#include<limits>
 
 using namespace std;
 
-double step(int ch, int pok){
+double step(double ch, int pok){
     if (pok>=0) {
         double x=1;
         for(int h=0; h<pok; h++){
@@ -18,7 +19,7 @@ double step(int ch, int pok){
     }
 }
 
-int fackt(int arg){
+long int fackt(int arg){
     int otv=0;
     if (arg<0){
         return -1;
@@ -33,7 +34,7 @@ int fackt(int arg){
 }
 
 double kvadr_kor(double arg){
-    const double EPS=1E-15;
+    //const double EPS=1E-15;
     double x;
     if(arg<0){
         return -1;
@@ -45,12 +46,12 @@ double kvadr_kor(double arg){
         for(;;){
             double xp=(x+arg/x)/2;
             if (x-xp>=0){
-                if(x-xp<EPS){
+                if(x-xp<numeric_limits<double>::epsilon()){
                     break;
                 }
             }
             if (x-xp<0){
-                if(x-xp>-EPS){
+                if(x-xp>-numeric_limits<double>::epsilon()){
                     break;
                 }
             }
@@ -61,6 +62,9 @@ double kvadr_kor(double arg){
 }
 
 bool my_prime(int arg){
+    if (arg<=1){
+        return false;
+    }
     for(int i=2; i<arg; i++){
         if(arg%i==0){
             return false;
@@ -70,8 +74,8 @@ bool my_prime(int arg){
 }
 
 int main(){
-    int ch, pok, facktor, pri;
-    double kor;
+    int pok, facktor, pri;
+    double kor, ch;
     cout<<"First we calculate the power of number. Enter a number: ";
     cin>>ch;
     cout<<"Enter the power of number: ";
@@ -88,7 +92,8 @@ int main(){
     cout<<"The square root of "<<kor<<" is "<<kvadr_kor(kor)<<endl;
     cout<<"If the program outputs -1, you are probably trying to calculate square root of negative number"<<endl;
     cout<<endl;
-    cout<<"Now let's check is your number prime or not? Print your number here: ";
+    cout<<"Now let's check is your number prime or not? "<<endl;
+    cout<<"Print your number here: ";
     cin>>pri;
     if(my_prime(pri)){
         cout<<"Your number is prime."<<endl;
