@@ -35,7 +35,7 @@ void my_sub(int* arr1, int* arr2, int* arr3)
 
 void my_mult(int* arr1, int* arr2, int* arr3)
 {
-	if (actmult = '2')
+	if (actmult == '2')
 	{
 		swap(m1, m2);
 		swap(n1, n2);
