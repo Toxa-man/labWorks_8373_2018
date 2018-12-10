@@ -47,6 +47,10 @@ double root(int ch)
 	{
 		return 1;
 	}
+	if (ch < 0)
+	{
+		return ch;
+	}
 	if (ch > 1)
 	{
 		
@@ -105,7 +109,7 @@ int main()
 	int p;
 	cout << "prostoe?   ";
 	cin >> p;
-	if (pr(p) == 1) {
+	if (pr(p) == true) {
 		cout <<"Prostoe"<<endl;
      }
 	else
