@@ -49,14 +49,14 @@ int main()
 	int matr1[cont][cont];
 	int matr2[cont][cont];
 	int otv[cont][cont];
-	int key, V;
-	cout << "size  string 1st matrix :";
+	char key;
+	cout << "size  row 1st matrix :";
 	cin >> str1;
 	cout << endl;
 	cout << " size  column  1st matrix   :";
 	cin >> st1;
 	cout << endl;
-	cout << "size  string 2nd matrix :";
+	cout << "size  row 2nd matrix :";
 	cin >> str2;
 	cout << endl;
 	cout << " size  column  2nd matrix   :";
@@ -86,7 +86,8 @@ int main()
 		key = _getch();
 		switch (key)
 		{
-		case 49:if (str1 == st2)
+		case'1':
+			if (str1 == st2)
 		{
 			pr(*matr1, *matr2, *otv, str1);
 			cout << "Matrix multiplication  \n";
@@ -101,12 +102,13 @@ int main()
 		}
 				else
 				{
-					cout << "Error! different number of string 1st and column 2nd" << endl;
+					cout << "Error! different number of row 1st and column 2nd" << endl;
 				}
 
 				break;
 			
-		case 50:if (str1 == str2 && st1 == st2)
+		case '2':
+			if (str1 == str2 && st1 == st2)
 		{
 			min(*matr1, *matr2, *otv, str1, st1);
 			cout << "Matrix Subtract  \n";
@@ -121,11 +123,11 @@ int main()
 		}
 				else
 				{
-					cout << "Error! different number of stringd or columns" << endl;
+					cout << "Error! different number of row or columns" << endl;
 				}
 
 				break;
-		case 51:
+		case '3':
 			if (str1 == str2 && st1 == st2)
 			{
 				sum(*matr1, *matr2, *otv, str1, st1);
@@ -141,7 +143,7 @@ int main()
 			}
 			else
 			{
-				cout << "Error! different number of stringd or columns" << endl;
+				cout << "Error! different number of row or columns" << endl;
 			}
 			break; 
 		}
