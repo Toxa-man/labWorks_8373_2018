@@ -7,11 +7,8 @@
 #include <conio.h>
 
 using namespace std;
-const int N = 10;
-int m1, m2, n1, n2, m3, n3;
-char act, actmult;
 
-void my_add(int* arr1, int* arr2, int* arr3)
+void my_add(int* arr1, int* arr2, int* arr3, int m1, int n1, int &m3, int &n3, const int N)
 {
 	m3 = m1;
 	n3 = n1;
@@ -22,7 +19,7 @@ void my_add(int* arr1, int* arr2, int* arr3)
 	}
 }
 
-void my_sub(int* arr1, int* arr2, int* arr3)
+void my_sub(int* arr1, int* arr2, int* arr3, int m1, int n1, int &m3, int &n3, const int N)
 {
 	m3 = m1;
 	n3 = n1;
@@ -33,7 +30,7 @@ void my_sub(int* arr1, int* arr2, int* arr3)
 	}
 }
 
-void my_mult(int* arr1, int* arr2, int* arr3)
+void my_mult(int* arr1, int* arr2, int* arr3, int &m1, int &n1, int &m2, int &n2, int &m3, int &n3, char actmult, const int N)
 {
 	if (actmult == '2')
 	{
@@ -56,6 +53,9 @@ void my_mult(int* arr1, int* arr2, int* arr3)
 
 int main()
 {
+	const int N = 10;
+	int m1, m2, n1, n2, m3, n3;
+	char act, actmult;
 	setlocale(0, "");
 	int arr1[N][N], arr2[N][N], arr3[N][N];
 	cout << "ДЛЯ КОРРЕКТНОЙ РАБОТЫ ПРОГРАММЫ ОГРАНИЧИВАЙТЕ РАЗМЕР МАССИВОВ ДО " << N << " НА " << N << " СТРОК!" << endl << endl;
@@ -70,6 +70,7 @@ int main()
 		for (int j = 0; j < n1; j++)
 			cin >> arr1[i][j];
 	}
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	cout << "Введите количество строк второго массива: ";
 	cin >> m2;
 	cout << "Введите количество столбцов второго массива: ";
@@ -80,19 +81,20 @@ int main()
 		for (int j = 0; j < n2; j++)
 			cin >> arr2[i][j];
 	}
+	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		cout << endl << "Выберите требуемое действие:" << endl << "1 - сложение матриц" << endl << "2 - вычитание матриц" << endl << "3 - умножение матриц" << endl;
 		act = _getch();
 		switch (act)
 		{
 		case '1':
 			if ((m1 == m2) && (n1 == n2))
-				my_add(*arr1, *arr2, *arr3);
+				my_add(*arr1, *arr2, *arr3, m1, n1, m3, n3, N);
 			else
 				cout << "Размеры матриц не совпадают. Попробуйте еще раз.";
 			break;
 		case '2':
 			if ((m1 == m2) && (n1 == n2))
-				my_sub(*arr1, *arr2, *arr3);
+				my_sub(*arr1, *arr2, *arr3, m1, n1, m3, n3, N);
 			else
 				cout << "Размеры матриц не совпадают. Попробуйте еще раз.";
 			break;
@@ -102,7 +104,7 @@ int main()
 			if (actmult == '1')
 			{
 				if (m2 == n1)
-					my_mult(*arr1, *arr2, *arr3);
+					my_mult(*arr1, *arr2, *arr3, m1, n1, m2, n2, m3, n3, actmult, N);
 				else
 					cout << "Размеры матриц не позволяют выполнить умножение. Попробуйте еще раз.";
 				break;
@@ -110,7 +112,7 @@ int main()
 			else if (actmult == '2')
 			{
 				if (m1 == n2)
-					my_mult(*arr2, *arr1, *arr3);
+					my_mult(*arr1, *arr2, *arr3, m1, n1, m2, n2, m3, n3, actmult, N);
 				else
 					cout << "Размеры матриц не позволяют выполнить умножение. Попробуйте еще раз.";
 				break;
