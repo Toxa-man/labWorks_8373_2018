@@ -15,7 +15,7 @@ void del(int** mas, int n)
 
 void input_matrix(int** &mas, int n, int m)
 {
-	mas = new int* [n];
+	mas = new int*[n];
 	for (int i = 0; i < n; i++)
 	{
 		mas[i] = new int[m];
@@ -44,13 +44,7 @@ void output_matrix(int** &mas, int n, int m)
 
 void matrix_mult(int** &mas1, int** &mas2, int** &resault, int n1, int n2, int m1, int m2)
 {
-	if (m1 != n2)
-	{
-		cout << "=========================================\n" << "error: Количество столбцов первой матрицы не равно количеству количеству строк второй" << endl;
-	}
-	else	
-	{
-		resault = new int* [n1];
+		resault = new int*[n1];
 		for (int i = 0; i < n1; i++)
 		{
 			resault[i] = new int[m2];
@@ -65,18 +59,11 @@ void matrix_mult(int** &mas1, int** &mas2, int** &resault, int n1, int n2, int m
 		}
 		output_matrix(resault, n1, m2);
 		del(resault, n1);
-	}
 }
 
 void matrix_sum(int** &mas1, int** &mas2, int** &resault, int n1, int m1, int n2, int m2)
 {
-	if ((n1 != n2) || (m1 != m2))
-	{
-		cout << "=========================================\n" << "eror: Матрицы разного размера нельзя сложить" << endl;
-	}
-	else
-	{
-		resault = new int* [n1];
+		resault = new int*[n1];
 		for (int i = 0; i < n1; i++)
 		{
 			resault[i] = new int[m1];
@@ -87,16 +74,9 @@ void matrix_sum(int** &mas1, int** &mas2, int** &resault, int n1, int m1, int n2
 		}
 		output_matrix(resault, n1, m1);
 		del(resault, n1);
-	}
 }
 void matrix_sub(int** &mas1, int** &mas2, int** &resault, int n1, int m1, int n2, int m2)
 {
-	if ((n1 != n2) || (m1 != m2))
-	{
-		cout << "=========================================\n" << "error: Нельзя вычислить разность матриц разного размера" << endl;
-	}
-	else
-	{
 		resault = new int*[n1];
 		for (int i = 0; i < n1; i++)
 		{
@@ -108,7 +88,6 @@ void matrix_sub(int** &mas1, int** &mas2, int** &resault, int n1, int m1, int n2
 		}
 		output_matrix(resault, n1, m1);
 		del(resault, n1);
-	}
 }
 
 
@@ -135,7 +114,7 @@ int main()
 	input_matrix(ppMatrix2, n2, m2);
 	output_matrix(ppMatrix2, n2, m2);
 	cout << "=========================================\n";
-	
+
 	int matrix3;
 	int* pMatrix3 = &matrix3;
 	int** ppMatrix3 = &pMatrix3;
@@ -149,28 +128,49 @@ int main()
 		cin >> select;
 		switch (select)
 		{
-			case(1): 
+		case(1):
+		{
+			if (m1 != n2)
+			{
+				cout << "=========================================\n" << "error: Количество столбцов первой матрицы не равно количеству количеству строк второй" << endl;
+			}
+			else
 			{
 				cout << "A*B= " << endl;
 				matrix_mult(ppMatrix1, ppMatrix2, ppMatrix3, n1, n2, m1, m2);
-				break;
 			}
-			case(2):
+			break;
+		}
+		case(2):
+		{
+			if ((n1 != n2) || (m1 != m2))
+			{
+				cout << "=========================================\n" << "eror: Матрицы разного размера нельзя сложить" << endl;
+			}
+			else
 			{
 				cout << "A+B= " << endl;
 				matrix_sum(ppMatrix1, ppMatrix2, ppMatrix3, n1, n2, m1, m2);
-				break;
 			}
-			case(3):
+			break;
+		}
+		case(3):
+		{
+			if ((n1 != n2) || (m1 != m2))
+			{
+				cout << "=========================================\n" << "error: Нельзя вычислить разность матриц разного размера" << endl;
+			}
+			else
 			{
 				cout << "A-B= " << endl;
 				matrix_sub(ppMatrix1, ppMatrix2, ppMatrix3, n1, n2, m1, m2);
-				break;
 			}
-			default:
-			{
-				cout << "Введен некоректный номер операции\n";
-			}
+			break;
+		}
+		default:
+		{
+			cout << "Введен некоректный номер операции\n";
+		}
 		}
 
 		cout << "=========================================\n" << "Нажмите \"esc\" для завершения или любую другую кнопку для выбора операции" << endl;
