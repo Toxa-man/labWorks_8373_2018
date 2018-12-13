@@ -37,7 +37,7 @@ int factorial(int n)
 	}
 	return n*factorial(n - 1);
 }
-double root(int ch)
+double root(double ch)
 {
 	if (ch == 0)
 	{
