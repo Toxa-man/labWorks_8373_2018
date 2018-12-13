@@ -35,15 +35,14 @@ float factorial(int digit) {
 	}
 }
 
-float root (float digit) {
-	float result = digit/2;
+float root(float digit) {
+	float sqrt = digit / 2;
 	float temp;
 	do {
-		temp = result;
-		result = (temp + (digit / temp)) / 2;
-	}
-	while ((temp - result) != 0);
-	return result;
+		temp = sqrt;
+		sqrt = (temp + (digit / temp)) / 2;
+	} while ((temp - sqrt) != 0);
+	return sqrt;
 }
 
 float simple(int digit) {
