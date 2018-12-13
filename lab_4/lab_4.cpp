@@ -102,7 +102,7 @@ int main()
 	cout << "factorial   :";
 	cin >> c;
 	cout << factorial(c) << endl;
-	int n;
+	double n;
      cout << "root number :";
 	 cin >> n;
 	 cout << root(n) << endl;
