@@ -47,26 +47,26 @@ int main()
 		int matrix_1[size][size];
 		int matrix_2[size][size];
 		int ctr_matrix_1, ctr_matrix_2, stlb_matrix_1, stlb_matrix_2;
-		cout << "Ââåäèòå êîëè÷åñòâî ñòðîê ïåðâîãî ìàññèâà: ";
+		cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã±Ã²Ã°Ã®Ãª Ã¯Ã¥Ã°Ã¢Ã®Ã£Ã® Ã¬Ã Ã±Ã±Ã¨Ã¢Ã : ";
 		cin >> ctr_matrix_1;
-		cout << "Ââåäèòå êîëè÷åñòâî ñòîëáöîâ ïåðâîãî ìàññèâà: ";
+		cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã±Ã²Ã®Ã«Ã¡Ã¶Ã®Ã¢ Ã¯Ã¥Ã°Ã¢Ã®Ã£Ã® Ã¬Ã Ã±Ã±Ã¨Ã¢Ã : ";
 		cin >> stlb_matrix_1;
 		for (int i = 0; i < ctr_matrix_1; ++i)
 		{
-			cout << "Ââåäèòå " << i + 1 << " ñòðîêó ìàññèâà" << endl;
+			cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ " << i + 1 << " Ã±Ã²Ã°Ã®ÃªÃ³ Ã¬Ã Ã±Ã±Ã¨Ã¢Ã " << endl;
 			for (int g = 0; g < stlb_matrix_1; ++g)
 			{
 				cin >> matrix_1[i][g];
 			}
 			cout << endl;
 		}
-		cout << "Ââåäèòå êîëè÷åñòâî ñòðîê âòîðîãî ìàññèâà: ";
+		cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã±Ã²Ã°Ã®Ãª Ã¢Ã²Ã®Ã°Ã®Ã£Ã® Ã¬Ã Ã±Ã±Ã¨Ã¢Ã : ";
 		cin >> ctr_matrix_2;
-		cout << "Ââåäèòå êîëè÷åñòâî ñòîëáöîâ âòîðîãî ìàññèâà: ";
+		cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«Ã¨Ã·Ã¥Ã±Ã²Ã¢Ã® Ã±Ã²Ã®Ã«Ã¡Ã¶Ã®Ã¢ Ã¢Ã²Ã®Ã°Ã®Ã£Ã® Ã¬Ã Ã±Ã±Ã¨Ã¢Ã : ";
 		cin >> stlb_matrix_2;
 		for (int i = 0; i < ctr_matrix_2; ++i)
 		{
-			cout << "Ââåäèòå " << i + 1 << " ñòðîêó ìàññèâà" << endl;
+			cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ " << i + 1 << " Ã±Ã²Ã°Ã®ÃªÃ³ Ã¬Ã Ã±Ã±Ã¨Ã¢Ã " << endl;
 			for (int g = 0; g < stlb_matrix_2; ++g)
 			{
 				cin >> matrix_2[i][g];
@@ -75,14 +75,13 @@ int main()
 		}
 		int matrix_result[size][size] = { 0 };
 		char znak;
-		cout << "Âûáåðèòå îïåðàöèþ(+,-,*) ";
+		cout << "Ã‚Ã»Ã¡Ã¥Ã°Ã¨Ã²Ã¥ Ã®Ã¯Ã¥Ã°Ã Ã¶Ã¨Ã¾(+,-,*) ";
 		cin >> znak;
-		cout << "Ðåçóëüòàò: " << endl;
+		cout << "ÃÃ¥Ã§Ã³Ã«Ã¼Ã²Ã Ã²: " << endl;
 		switch (znak) {
 		case '+':
 			if (ctr_matrix_1 == ctr_matrix_2 && stlb_matrix_1 == stlb_matrix_2)
 			{
-				Closhenie(*matrix_1, *matrix_2, *matrix_result, ctr_matrix_1, stlb_matrix_1, size);
 				Closhenie(*matrix_1, *matrix_2, *matrix_result, ctr_matrix_1, stlb_matrix_1, size);
 				for (int i = 0; i < ctr_matrix_1; ++i)
 				{
@@ -95,7 +94,7 @@ int main()
 			}
 			else
 			{
-				cout << "Íåâîçìîæíî ñëîæèòü";
+				cout << "ÃÃ¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã® Ã±Ã«Ã®Ã¦Ã¨Ã²Ã¼";
 			}
 			break;
 		case'-':
@@ -113,7 +112,7 @@ int main()
 			}
 			else
 			{
-				cout << "Íåâîçìîæíî âû÷åñòü";
+				cout << "ÃÃ¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã® Ã¢Ã»Ã·Ã¥Ã±Ã²Ã¼";
 			}
 			break;
 		case'*':
@@ -131,14 +130,14 @@ int main()
 			}
 			else
 			{
-				cout << "Íåâîçìîæíî ïåðåìíîæèòü";
+				cout << "ÃÃ¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã® Ã¯Ã¥Ã°Ã¥Ã¬Ã­Ã®Ã¦Ã¨Ã²Ã¼";
 			}
 			break;
 		default:
-			cout << "Íåïðàâèëüíûé çíàê";
+			cout << "ÃÃ¥Ã¯Ã°Ã Ã¢Ã¨Ã«Ã¼Ã­Ã»Ã© Ã§Ã­Ã Ãª";
 		}
 		cout << endl;
-		cout << "Äëÿ ïðîäîëæåíèÿ íàæìèòå ëþáóþ êëàâèøó, äëÿ âûõîäà íàæíèòå ESC";
+		cout << "Ã„Ã«Ã¿ Ã¯Ã°Ã®Ã¤Ã®Ã«Ã¦Ã¥Ã­Ã¨Ã¿ Ã­Ã Ã¦Ã¬Ã¨Ã²Ã¥ Ã«Ã¾Ã¡Ã³Ã¾ ÃªÃ«Ã Ã¢Ã¨Ã¸Ã³, Ã¤Ã«Ã¿ Ã¢Ã»ÃµÃ®Ã¤Ã  Ã­Ã Ã¦Ã­Ã¨Ã²Ã¥ ESC";
 		exit = _getch();
 		cout << endl;
 	}
