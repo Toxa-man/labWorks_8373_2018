@@ -70,47 +70,19 @@ int F(int number)
 }
 result PrimeOrNot(int number)
 {
-	int step1 = 0, step2 = 0;
-	bool PrimeExclusive = false;
-	bool PrimeCheck = false;
-	bool Step1MultOf5 = false, Step2MultOf5 = false;
-	int n = 1;
-	int check = MySqrt(number);
+	int counter = 0;
 	if (number == 1)
 	{
 		return result::ERROR;
 	}
-	if (number == 2 || number == 3)
+	for (int i = 2; i <= MySqrt(number); ++i)
 	{
-		return result::PRIME;
-	}
-	if (number % 2 != 0 && number % 3 != 0)
-	{
-		for (int i = 1; i < check; ++i)
+		if (number % i == 0)
 		{
-			step1 = 6 * n + 1;
-			step2 = 6 * n - 1;
-			++n;
-			if (n >= 4 && step1%5 == 0)
-			{
-				Step1MultOf5 = true;
-			}
-			if (n >= 4 && step2 % 5 == 0)
-			{
-				Step2MultOf5 = true;
-			}
-			if (number%step1 == 0 && number == step1 && !Step1MultOf5 || number%step2 == 0 && number == step2 && !Step2MultOf5)
-			{
-				PrimeCheck = true;
-				PrimeExclusive = true;
-			}
-			if (((number%step1 == 0 && number != step1) || (number%step2 == 0 && number != step2)) && PrimeExclusive == false)
-			{
-				PrimeCheck = false;
-			}
+			++counter;
 		}
 	}
-	if (PrimeCheck)
+	if (counter == 0)
 	{
 		return result::PRIME;
 	}
@@ -138,6 +110,7 @@ int main()
 	std::cout << "number 13 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(13) << std::endl;
 	std::cout << "number 412421 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(412421) << std::endl;
 	std::cout << "number 25 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(25) << std::endl;
+	std::cout << "number 199 is(0-error, 1-prime, 2-not prime): " << (int)PrimeOrNot(199) << std::endl;
 	system("pause");
 	return 0;
 }
