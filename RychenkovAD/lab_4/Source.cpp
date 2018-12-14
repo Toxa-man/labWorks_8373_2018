@@ -5,7 +5,7 @@ using namespace std;
 enum def {error, prime, no_prime};
 
 
-int negativ_number(double num)
+def negativ_number(double num)
 {
 	if (num < 0)
 	{
@@ -29,8 +29,7 @@ double power(double number, int ind)
 			buf /= number;
 		}
 	}
-	
-	
+
 	return buf;	
 }
 
@@ -75,7 +74,7 @@ double root(double x)
 }
 
 
-int simple(int number)
+def simple(int number)
 {
 	if (number <= 1)
 	{
@@ -151,6 +150,7 @@ int main()
 			break;
 		}
 	}
-	
 
+	
+	_getch();
 }
