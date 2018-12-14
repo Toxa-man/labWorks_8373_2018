@@ -1,6 +1,3 @@
-// ConsoleApplication20.cpp: определяет точку входа для консольного приложения.
-//
-
 #include "stdafx.h"
 #include <iostream>
 #include <iomanip>  
@@ -8,43 +5,44 @@
 
 using namespace std;
 
-void my_add(int* arr1, int* arr2, int* arr3, int m1, int n1, int &m3, int &n3, const int N)
+void my_add(int* arr1, int* arr2, int* arr3, int array1_height, int array1_weight, int &array3_height, int &array3_weight, const int N)
 {
-	m3 = m1;
-	n3 = n1;
-	for (int i = 0; i < m3; i++)
+	array3_height = array1_height;
+	array3_weight = array1_weight;
+	for (int i = 0; i < array3_height; i++)
 	{
-		for (int j = 0; j < n3; j++)
-			*(arr3 + (i*N) + j) = *(arr1 + (i*N) + j)+*(arr2 + (i*N) + j);
+		for (int j = 0; j < array3_weight; j++)
+			*(arr3 + (i*N) + j) = *(arr1 + (i*N) + j) + *(arr2 + (i*N) + j);
 	}
 }
 
-void my_sub(int* arr1, int* arr2, int* arr3, int m1, int n1, int &m3, int &n3, const int N)
+void my_sub(int* arr1, int* arr2, int* arr3, int array1_height, int array1_weight, int &array3_height, int &array3_weight, const int N)
 {
-	m3 = m1;
-	n3 = n1;
-	for (int i = 0; i < m3; i++)
+	array3_height = array1_height;
+	array3_weight = array1_weight;
+	for (int i = 0; i < array3_height; i++)
 	{
-		for (int j = 0; j < n3; j++)
+		for (int j = 0; j < array3_weight; j++)
 			*(arr3 + (i*N) + j) = *(arr1 + (i*N) + j) - *(arr2 + (i*N) + j);
 	}
 }
 
-void my_mult(int* arr1, int* arr2, int* arr3, int &m1, int &n1, int &m2, int &n2, int &m3, int &n3, char actmult, const int N)
+void my_mult(int* arr1, int* arr2, int* arr3, int &array1_height, int &array1_weight, int &array2_height, int &array2_weight, int &array3_height, int &array3_weight, char actmult, const int N)
 {
 	if (actmult == '2')
 	{
-		swap(m1, m2);
-		swap(n1, n2);
+		swap(array1_height, array2_height);
+		swap(array1_weight, array2_weight);
+		swap(arr1, arr2);
 	}
-	m3 = m1;
-	n3 = n2;
-	for (int i = 0; i < m3; i++)
+	array3_height = array1_height;
+	array3_weight = array2_weight;
+	for (int i = 0; i < array3_height; i++)
 	{
-		for (int j = 0; j < n3; j++)
+		for (int j = 0; j < array3_weight; j++)
 		{
 			int sum = 0;
-			for (int p = 0; p < m2; p++)
+			for (int p = 0; p < array2_height; p++)
 				sum += *(arr1 + (i*N) + p)**(arr2 + (p*N) + j);
 			*(arr3 + (i*N) + j) = sum;
 		}
@@ -54,47 +52,48 @@ void my_mult(int* arr1, int* arr2, int* arr3, int &m1, int &n1, int &m2, int &n2
 int main()
 {
 	const int N = 10;
-	int m1, m2, n1, n2, m3, n3;
+	int array1_height, array2_height, array1_weight, array2_weight, array3_height, array3_weight;
 	char act, actmult;
 	setlocale(0, "");
 	int arr1[N][N], arr2[N][N], arr3[N][N];
 	cout << "ДЛЯ КОРРЕКТНОЙ РАБОТЫ ПРОГРАММЫ ОГРАНИЧИВАЙТЕ РАЗМЕР МАССИВОВ ДО " << N << " НА " << N << " СТРОК!" << endl << endl;
 	do {
-	cout << "Введите количество строк первого массива: ";
-	cin >> m1;
-	cout << "Введите количество столбцов первого массива: ";
-	cin >> n1;
-	for (int i = 0; i < m1; i++)
-	{
-		cout << "Введите " << i + 1 << "-ую строку первого массива: ";
-		for (int j = 0; j < n1; j++)
-			cin >> arr1[i][j];
-	}
-	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	cout << "Введите количество строк второго массива: ";
-	cin >> m2;
-	cout << "Введите количество столбцов второго массива: ";
-	cin >> n2;
-	for (int i = 0; i < m2; i++)
-	{
-		cout << "Введите " << i + 1 << "-ую строку первого массива: ";
-		for (int j = 0; j < n2; j++)
-			cin >> arr2[i][j];
-	}
-	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Введите количество строк первого массива: ";
+		cin >> array1_height;
+		cout << "Введите количество столбцов первого массива: ";
+		cin >> array1_weight;
+		for (int i = 0; i < array1_height; i++)
+		{
+			cout << "Введите " << i + 1 << "-ую строку первого массива: ";
+			for (int j = 0; j < array1_weight; j++)
+				cin >> arr1[i][j];
+		}
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Введите количество строк второго массива: ";
+		cin >> array2_height;
+		cout << "Введите количество столбцов второго массива: ";
+		cin >> array2_weight;
+		for (int i = 0; i < array2_height; i++)
+		{
+			cout << "Введите " << i + 1 << "-ую строку первого массива: ";
+			for (int j = 0; j < array2_weight; j++)
+				cin >> arr2[i][j];
+		}
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		cout << endl << "Выберите требуемое действие:" << endl << "1 - сложение матриц" << endl << "2 - вычитание матриц" << endl << "3 - умножение матриц" << endl;
+		act = '0';
 		act = _getch();
 		switch (act)
 		{
 		case '1':
-			if ((m1 == m2) && (n1 == n2))
-				my_add(*arr1, *arr2, *arr3, m1, n1, m3, n3, N);
+			if ((array1_height == array2_height) && (array1_weight == array2_weight))
+				my_add(*arr1, *arr2, *arr3, array1_height, array1_weight, array3_height, array3_weight, N);
 			else
 				cout << "Размеры матриц не совпадают. Попробуйте еще раз.";
 			break;
 		case '2':
-			if ((m1 == m2) && (n1 == n2))
-				my_sub(*arr1, *arr2, *arr3, m1, n1, m3, n3, N);
+			if ((array1_height == array2_height) && (array1_weight == array2_weight))
+				my_sub(*arr1, *arr2, *arr3, array1_height, array1_weight, array3_height, array3_weight, N);
 			else
 				cout << "Размеры матриц не совпадают. Попробуйте еще раз.";
 			break;
@@ -103,16 +102,16 @@ int main()
 			actmult = _getch();
 			if (actmult == '1')
 			{
-				if (m2 == n1)
-					my_mult(*arr1, *arr2, *arr3, m1, n1, m2, n2, m3, n3, actmult, N);
+				if (array2_height == array1_weight)
+					my_mult(*arr1, *arr2, *arr3, array1_height, array1_weight, array2_height, array2_weight, array3_height, array3_weight, actmult, N);
 				else
 					cout << "Размеры матриц не позволяют выполнить умножение. Попробуйте еще раз.";
 				break;
 			}
 			else if (actmult == '2')
 			{
-				if (m1 == n2)
-					my_mult(*arr1, *arr2, *arr3, m1, n1, m2, n2, m3, n3, actmult, N);
+				if (array1_height == array2_weight)
+					my_mult(*arr1, *arr2, *arr3, array1_height, array1_weight, array2_height, array2_weight, array3_height, array3_weight, actmult, N);
 				else
 					cout << "Размеры матриц не позволяют выполнить умножение. Попробуйте еще раз.";
 				break;
@@ -122,18 +121,18 @@ int main()
 			break;
 		default:
 			cout << "Неверная клавиша. Попробуйте еще раз." << endl;
-			break;
+			continue;
 		}
 		cout << endl << "Ваш ответ: " << endl;
-		for (int i = 0; i < m3; i++)
+		for (int i = 0; i < array3_height; i++)
 		{
-			for (int j = 0; j < n3; j++)
+			for (int j = 0; j < array3_weight; j++)
 				cout << setw(10) << right << arr3[i][j];
 			cout << endl;
 		}
 		cout << "Для выхода нажмите ESC, для продолжения - любую другую клавишу" << endl << endl;
 		act = _getch();
 	} while (act != 27);
-    return 0;
+	return 0;
 }
 
