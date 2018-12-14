@@ -4,22 +4,21 @@ using namespace std;
 
 int main() {
 	setlocale(0, "");
-	int count = 0, sum = 0, temp = 0, time_count = 0;
+	int count = 0, sum = 0, temp = 0;
 	char str1[200];
 	string arr[200], str2;
-	cout << "Введите строку: ";
+	cout << "Aaaaeoa no?ieo: ";
 	cin.getline(str1, 200);
 	for (int i = 0; i < strlen(str1); i++) {
 		if (str1[i] == ' ') {
+			arr[count] = str2;
 			count++;
-			arr[time_count] = str2;
-			time_count++;
 			str2 = "";
 		}
 		else if (i == strlen(str1) - 1) {
 			str2 += str1[i];
+			arr[count] = str2;
 			count++;
-			arr[time_count] = str2;
 		}
 		else {
 			str2 += str1[i];
@@ -46,7 +45,7 @@ int main() {
 			}
 		}
 	}
-	cout << "Отсортированная строка: ";
+	cout << "Ioni?oe?iaaiiay no?iea: ";
 	for (int i = 0; i < count; i++) {
 		cout << arr[i] << " ";
 	}
