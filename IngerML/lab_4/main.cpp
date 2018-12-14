@@ -1,25 +1,24 @@
 #include<iostream>
 using namespace std;
-//int a, error, st, nam; // namber число, error для проверки ошибки, step степень
-//double cor, rez; //rez это результат. cor корень
+
 double Step(double st, double nam)
 {
 	double A = nam;
-	if (st == 0) //если степень равна 0
+	if (st == 0) 
 	{
 		return 1;
 	}
-	else // если степень не равна 0
+	else 
 	{
-		if (st == 1) // если степень равна 1
+		if (st == 1) 
 		{
 			return A;
 		}
-		else // если степень не равна 1 но и не равна 0
+		else 
 		{
-			if (st > 0) // если степень > 0
+			if (st > 0) 
 			{
-				int a;
+				double a;
 				a = A;
 				while (st > 1)
 				{
@@ -33,7 +32,7 @@ double Step(double st, double nam)
 }
 
 
-int Fact(int nam) //факториал находится лишь для целой части
+int Fact(int nam) 
 {
 	long int F = nam;
 	for (int f = F - 1; f > 0; f--)
@@ -43,17 +42,15 @@ int Fact(int nam) //факториал находится лишь для целой части
 	return F;
 }
 
-float Coren (double nam) // методом половиного деления
+float Coren (double nam) 
 {
-
 	double x1, x, C;
 	x1 = 0;
 	x = nam / 2;
 	C = nam;
-
-	while (x*x < C - 0.5 || x*x > C)//(x*x > C - 1 && x*x < C + 1) //(x*x != C ) //(x*x != C- 0,9 && x*x != C + 0,9 )//(x*x > C-1 && x*x < C+1)
-	{// коментарий рядом с while это то как я пробовала задать интервал. Иногда работает но находит корень не правильно. 
-		
+	const double EPS = 0.001;
+	while (fabs(C - x * x) > EPS ) 
+	{
 		x = (nam + x1) / 2;
 		if (x*x > C)
 		{
@@ -67,16 +64,18 @@ float Coren (double nam) // методом половиного деления
 	return x;
 }
 
-int proverca(int nam)
+bool proverca(int nam)
 {
-	bool P = true;
+	
 	for (int i = 2; i < nam - 1; i++)
 	{
 		nam = (int)nam;
 		if (nam%i == 0)
-		{P = false;	} // ne prostoe
+		{
+			return false;
+		} 
 	}
-	return P;
+	return true;
 }
 
 int main()
@@ -84,14 +83,14 @@ int main()
 	setlocale(LC_ALL, "rus");
 	cout << "Введите число: ";
 	double nam;
-	cin >> nam; //if (namber = 0) {	cout << "Error" << endl;	} error = 1;
+	cin >> nam; 
 	cout << "Введите степень: ";
 	int st;
 	cin >> st;
 	cout << nam << "^" << st << "=" << Step(st, nam) << endl;
-	cout <<"Факториал (только целой части, если число дробное):"<< Fact(nam) << endl;
-	cout <<"Корень:" << Coren(nam) << endl;
+	cout <<"Факториал (если число дробное  факториал береться только целой части ):"<< Fact(nam) << endl;
 	cout <<"Проверка (0 - не простое, 1 - простое):" << proverca(nam) << endl; 
+	cout <<"Корень:" << Coren(nam) << endl;
 	system("pause");
 	return 0;	
 }
