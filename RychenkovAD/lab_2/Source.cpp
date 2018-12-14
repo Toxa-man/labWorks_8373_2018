@@ -7,7 +7,8 @@ void quicksort(int *arr, int right)
 {
 	int i = 0;
 	int j = right - 1;
-	int center = arr[(sizeof(arr)) / (2 * sizeof(int))];
+	int center = arr[right / 2];
+	
 	while (i <= j)
 	{
 		while (arr[i] < center)
@@ -43,6 +44,7 @@ int main()
 
 	const int SIZE = 10;
 	int arr[SIZE];
+	int center = arr[(sizeof(arr)) / (2 * sizeof(int))];
 	bool t;
 	cout << "Неотсортированный массив: " << endl;
 	for (int i = 0; i < SIZE; )
@@ -111,7 +113,6 @@ int main()
 	cout << "\n\nmin = " << min << endl;
 	cout << "max = " << max << endl;
 	cout << "meen = " << float(sum) / count << endl;
-
-
+	system("pause");
 
 }
