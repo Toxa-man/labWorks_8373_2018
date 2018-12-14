@@ -63,30 +63,18 @@ double root( double ch)
 	{
 		return ch;
 	}
-	if (ch > 1)
+	if (ch > 0)
 	{
-
-		for (int a = 1; a < ch; a++)
-		{
-			if (ch == a*a)
-			{
-				if (ch - a*a == 0,00001)
-				{
-					return a;
-				}
-			}
-		}
-		double ch_2;
+	        double ch_2;
 		double otv = ch / 2;
 		do
 		{
 			ch_2 = otv;
 			otv = (ch_2 + ch / ch_2) / 2;
 		} while (ch_2 - otv != 0);
-
+		
 		return otv;
 	}
-
 }
 bool pr(int p)
 {
