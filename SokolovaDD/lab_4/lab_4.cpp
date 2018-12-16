@@ -4,11 +4,11 @@ using namespace std;
 double stepen(int  num, int stp)
 {
 	double D = 1.0;
-	if (stp == 0) 
+	if (stp == 0)
 	{
 		return D;
 	}
-	 if (stp > 0)
+	if (stp > 0)
 	{
 		for (int p = 1; p <= stp; p++)
 		{
@@ -17,17 +17,29 @@ double stepen(int  num, int stp)
 		}
 		return D;
 	}
-	
-	 if (stp < 0)
-	{
-		 for (int p = 1; p <= -stp;++p)
-		 {
 
-			 D = D*num;
-		 }
+	if (stp < 0)
+	{
+		for (int p = 1; p <= -stp; ++p)
+		{
+
+			D = D*num;
+		}
 		return (1.0 / D);
 	}
-	 return D;
+}
+int fact(int m)
+{
+	int o=1;
+	if (m == 0)
+	{
+		return 1;
+	}
+		for (int i=1; i<= m; i++)
+		{
+			o =i*o;
+		}
+		return o;
 }
 int factorial(int n)
 {
@@ -37,7 +49,7 @@ int factorial(int n)
 	}
 	return n*factorial(n - 1);
 }
-double root(double ch)
+double root( double ch)
 {
 	if (ch == 0)
 	{
@@ -51,28 +63,19 @@ double root(double ch)
 	{
 		return ch;
 	}
-	if (ch > 1)
+	if (ch > 0)
 	{
-		
-		for (int a = 1; a < ch; a++)
-		{
-			if (ch == a*a)
-			{
-				return a;
-			}
-		}
-		double ch_2;
+	        double ch_2;
 		double otv = ch / 2;
-				do
-				{
-					ch_2 = otv;
-					otv = (ch_2 + ch / ch_2)/2;
-				} while (ch_2 - otv != 0);
-
-				return otv;
-		}
-
+		do
+		{
+			ch_2 = otv;
+			otv = (ch_2 + ch / ch_2) / 2;
+		} while (ch_2 - otv != 0);
+		
+		return otv;
 	}
+}
 bool pr(int p)
 {
 	bool pro = true;
@@ -86,32 +89,32 @@ bool pr(int p)
 		{
 			pro = false;
 		}
-		
+
 	}
 	return pro;
- }
-	
+}
+
 
 int main()
 {
 	int num, st;
 	cout << " stepen   :";
-	cin >> num>> st;
-	cout << stepen(num, st)<<endl;
-	int c;
+	cin >> num >> st;
+	cout << stepen(num, st) << endl;
+	int m;
 	cout << "factorial   :";
-	cin >> c;
-	cout << factorial(c) << endl;
+	cin >> m;
+	cout << fact(m) << endl;
 	double n;
-     cout << "root number :";
-	 cin >> n;
-	 cout << root(n) << endl;
+	cout << "root number :";
+	cin >> n;
+	cout << root(n) << endl;
 	int p;
-	cout << "prostoe?   ";
-	cin >> p;
+	cout << "prostoe?   " << endl;
+	cin >> p ;
 	if (pr(p) == true) {
-		cout <<"Prostoe"<<endl;
-     }
+		cout << "Prostoe" << endl;
+	}
 	else
 	{
 		cout << "Ne prostoe" << endl;
