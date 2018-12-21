@@ -3,7 +3,7 @@ using namespace std;
 
 int main() {
 	setlocale(0, "");
-	int count = 0, sum = 0, temp = 0, counter=0;
+	int count = 0, sum = 0, temp = 0, counter = 0;
 	char str1[100], temp1[1] = {};
 	char words[100][100];
 	for (int i = 0; i < 100; i++) {
