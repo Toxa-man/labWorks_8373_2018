@@ -5,14 +5,14 @@ using namespace std;
 enum def {error, prime, no_prime};
 
 
-def negativ_number(double num)
+/*def negativ_number(double num)
 {
 	if (num < 0)
 	{
 		return error;
 	}
 
-}
+}*/
 
 double power(double number, int ind)
 {
@@ -109,7 +109,7 @@ int main()
 	cout << "\n\n¬ведите число дл€ вз€ти€ его факториала: ";
 	int num;
 	cin >> num;
-	if (negativ_number(num) == error)
+	if (num < 0)
 	{
 		cout << "\nerror";		
 	}
@@ -120,7 +120,7 @@ int main()
 	
 	cout << "\n\n¬ведите число дл€ извлечени€ его корн€: ";
 	cin >> N;
-	if (negativ_number(N) == error)
+	if (num < 0)
 	{
 		cout << "\nerror";
 	}
