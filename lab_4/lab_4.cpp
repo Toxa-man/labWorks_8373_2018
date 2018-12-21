@@ -46,9 +46,15 @@ float root(float digit) {
 }
 
 float simple(int digit) {
-	int k = 0;
-	if (((digit*digit) - 1) % 24 != 0) {
-		k = 1;
+	int k = 0, i = 0;
+	while (i < digit / 2){
+		i++;
+		if (digit % i == 0) {
+			k++;
+			if (k == 2) {
+				break;
+			}
+		}
 	}
 	return k;
 }
@@ -97,7 +103,7 @@ int main() {
 	}
 	else {
 		float k = simple(digit);
-		if (k == 0) {
+		if (k == 1) {
 			cout << "Число " << digit << " простое";
 		}
 		else {
