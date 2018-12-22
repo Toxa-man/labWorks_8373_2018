@@ -17,7 +17,7 @@ void multy(int *beg_mat1, int *beg_mat2, int *beg_mat3, int str1, int col1, int 
 void plu(int *beg_mat1, int *beg_mat2, int *beg_mat3, int str1, int col1) {
 	for (int i = 0; i < str1; i++) {
 		for (int j = 0; j < col1; j++) {
-				*(beg_mat3 + i * str1 + j) = *(beg_mat1 + i * str1 + j) + *(beg_mat2 + i * str1 + j);
+			*(beg_mat3 + i * str1 + j) = *(beg_mat1 + i * str1 + j) + *(beg_mat2 + i * str1 + j);
 		}
 	}
 }
@@ -34,21 +34,21 @@ int main()
 {
 	setlocale(0, "");
 	int *beg_mat1, *beg_mat2, *beg_mat3, mat1[100], mat2[100], mat3[100] = { 0 }, str1, str2, col1, col2;
-	cout << "Ââåäèòå êîë-âî ñòğîê 1 ìàòğèöû: ";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«-Ã¢Ã® Ã±Ã²Ã°Ã®Ãª 1 Ã¬Ã Ã²Ã°Ã¨Ã¶Ã»: ";
 	cin >> str1;
-	cout << "Ââåäèòå êîë-âî ñòîëáöîâ 1 ìàòğèöû: ";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«-Ã¢Ã® Ã±Ã²Ã®Ã«Ã¡Ã¶Ã®Ã¢ 1 Ã¬Ã Ã²Ã°Ã¨Ã¶Ã»: ";
 	cin >> col1;
-	cout << "Ââåäèòå êîë-âî ñòğîê 2 ìàòğèöû: ";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«-Ã¢Ã® Ã±Ã²Ã°Ã®Ãª 2 Ã¬Ã Ã²Ã°Ã¨Ã¶Ã»: ";
 	cin >> str2;
-	cout << "Ââåäèòå êîë-âî ñòîëáöîâ 2 ìàòğèöû: ";
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã«-Ã¢Ã® Ã±Ã²Ã®Ã«Ã¡Ã¶Ã®Ã¢ 2 Ã¬Ã Ã²Ã°Ã¨Ã¶Ã»: ";
 	cin >> col2;
-	cout << "Ââåäèòå 1 ìàòğèöó: " << endl;
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ 1 Ã¬Ã Ã²Ã°Ã¨Ã¶Ã³: " << endl;
 	for (int i = 0; i < str1; i++) {
 		for (int j = 0; j < col1; j++) {
 			cin >> mat1[i * str1 + j];
 		}
 	}
-	cout << "Ââåäèòå 2 ìàòğèöó: " << endl;
+	cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ 2 Ã¬Ã Ã²Ã°Ã¨Ã¶Ã³: " << endl;
 	for (int i = 0; i < str2; i++) {
 		for (int j = 0; j < col2; j++) {
 			cin >> mat2[i * str2 + j];
@@ -60,7 +60,7 @@ int main()
 	char choise = {};
 	int check = 0;
 	while (check != 1) {
-		cout << "Âûáåğèòå äåéñòâèå: *, +, -, E (âûõîä)" << endl;
+		cout << "Ã‚Ã»Ã¡Ã¥Ã°Ã¨Ã²Ã¥ Ã¤Ã¥Ã©Ã±Ã²Ã¢Ã¨Ã¥: *, +, -, E (Ã¢Ã»ÃµÃ®Ã¤)" << endl;
 		cin >> choise;
 		switch (choise) {
 		case '*':
@@ -74,7 +74,7 @@ int main()
 				}
 			}
 			else {
-				cout << "Óìíîæåíèå íåâîçìîæíî!" << endl;
+				cout << "Ã“Ã¬Ã­Ã®Ã¦Ã¥Ã­Ã¨Ã¥ Ã­Ã¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã®!" << endl;
 			}
 			break;
 		case '+':
@@ -88,7 +88,7 @@ int main()
 				}
 			}
 			else {
-				cout << "Ñëîæåíèå íåâîçìîæíî!" << endl;
+				cout << "Ã‘Ã«Ã®Ã¦Ã¥Ã­Ã¨Ã¥ Ã­Ã¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã®!" << endl;
 			}
 			break;
 		case '-':
@@ -102,14 +102,14 @@ int main()
 				}
 			}
 			else {
-				cout << "Âû÷èòàíèå íåâîçìîæíî!" << endl;
+				cout << "Ã‚Ã»Ã·Ã¨Ã²Ã Ã­Ã¨Ã¥ Ã­Ã¥Ã¢Ã®Ã§Ã¬Ã®Ã¦Ã­Ã®!" << endl;
 			}
 			break;
 		case 'E':
 			check = 1;
 			break;
 		default:
-			cout << "Ââåäåí íå ïğàâèëüíûé çíàê!";
+			cout << "Ã‚Ã¢Ã¥Ã¤Ã¥Ã­ Ã­Ã¥ Ã¯Ã°Ã Ã¢Ã¨Ã«Ã¼Ã­Ã»Ã© Ã§Ã­Ã Ãª!";
 		}
 	}
 	return 0;
