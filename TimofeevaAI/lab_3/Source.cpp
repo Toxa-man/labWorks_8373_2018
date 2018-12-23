@@ -1,59 +1,33 @@
-#include <iostream>
-#include <string>
-#include<stdio.h>
-
+#include <string> 
+#include <vector> 
+#include <sstream> 
+#include <iostream> 
 using namespace std;
 
 int main() {
-	char str[100][100];
-	cout << "Enter a number of words:" << endl;
-	int n;
-	cin >> n;
+	string s, w, c;
 
-	cout << "Enter words:" << endl;
-	for (int i = 0; i < n; i++)
-		cin >> str[i];
+	cout << "Enter words: " << endl;
+	getline(cin, s);
 
-	int a[100], och[100];
-	for (int i = 0; i < n; i++)
-	{
-		int sum = 0, s = strlen(str[i]);
+	istringstream iss(s);
+	vector<string> v;
+	
+	while (iss >> w) 
+		v.push_back(w);
 
-		for (int j = 0; j < s; j++)
-		{
-			sum += (int)str[i][j];
-		}
-		a[i] = sum;
-		och[i] = i;
-	}
-
-	for (int i = 0; i < n - 1; i++)
-	{
-		for (int j = i + 1; j < n; j++)
-		{
-			if (a[j] < a[i])
-			{
-				int q = a[i];
-				a[i] = a[j];
-				a[j] = q;
-
-				q = och[i];
-				och[i] = och[j];
-				och[j] = q;
+	for (int i = 0; i < v.size() - 1; i++) {
+		for (int j = 0; j < v.size() - i - 1; j++) {
+			if (v[j].size() > v[j + 1].size()) {
+				c = v[j];
+				v[j] = v[j + 1];
+				v[j + 1] = c;
 			}
 		}
-
-
 	}
 
-	cout << "Sorted string:" << endl;
-	for (int i = 0; i < n; i++)
-	{
-		cout << str[och[i]];
-		if (i != n - 1)
-			cout << ' ';
-	}
-	cout << endl;
+	cout << "Sorted string: " << endl;
+	for (int c = 0; c < v.size(); ++c) cout << v[c] << " ";
 	system("pause");
 	return 0;
 }
