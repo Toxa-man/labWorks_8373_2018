@@ -6,7 +6,6 @@
 using namespace std;
 
 int main(){
-        
         setlocale(0, "");
         const int size = 256;
         const int half_size=128;
