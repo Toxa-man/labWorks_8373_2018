@@ -10,11 +10,11 @@ int main()
 	int left, right;
 	int result;
 	char sign;
-	cout << "Ââåäèòå ÷èñëî";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾";
 	cin >> left;
-	cout << "Âûáåðèòå îïåðàöèþ";
+	cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸ÑŽ";
 	cin >> sign;
-	cout << "Ââåäèòå ÷èñëî";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‡Ð¸ÑÐ»Ð¾";
 	cin >> right;
 
 	switch (sign)
