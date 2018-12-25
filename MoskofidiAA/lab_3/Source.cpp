@@ -6,7 +6,8 @@ using namespace std;
 
 int main()
 {
-	const int N = 500;
+	const int N = 256;
+	const int M = 15;
 	char str_in[N];
 	char str_out[N];
 	char str[M][N];
