@@ -45,9 +45,9 @@ float root(float digit) {
 	return sqrt;
 }
 
-float simple(int digit) {
+bool simple(int digit) {
 	int k = 0, i = 0;
-	while (i < digit / 2){
+	while (i < digit / 2) {
 		i++;
 		if (digit % i == 0) {
 			k++;
@@ -56,7 +56,9 @@ float simple(int digit) {
 			}
 		}
 	}
-	return k;
+	if (k == 1) {
+		return true;
+	}
 }
 
 int main() {
@@ -80,7 +82,6 @@ int main() {
 	}
 	cout << endl;
 	if (digit >= 0) {
-
 		float fac = factorial(digit);
 		cout << "Факториал числа " << digit << " равен " << fac;
 		cout << endl;
@@ -102,8 +103,7 @@ int main() {
 		cout << "Число " << digit << " не простое";
 	}
 	else {
-		float k = simple(digit);
-		if (k == 1) {
+		if (simple(digit) == true) {
 			cout << "Число " << digit << " простое";
 		}
 		else {
