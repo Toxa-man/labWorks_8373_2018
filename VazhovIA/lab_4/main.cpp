@@ -2,64 +2,78 @@
 using namespace std;
 
 
-int pow(int num, int deg)
+double pow(double num, int deg)
 {
-	if (deg == 1)
-		return num;
-	if (deg == 2) {
-	        return num*num;
-	} else
-	{
-	        return num*pow(num,deg-1);
-	}
+    if (deg < 0) {
+        if (deg == -1)
+            return 1/num;
+        if (deg == -2) {
+            return 1/num*pow(num,deg+1);
+        } else
+        {
+            return 1/num*pow(num,deg+1);
+        }
+    } else {
+        if (deg == 0)
+            return 1.0;
+        if (deg == 1)
+            return num;
+        if (deg == 2) {
+            return num*num;
+        } else
+        {
+            return num*pow(num,deg-1);
+        }
+    }
 }
-
-unsigned int long fact(unsigned num)
+unsigned int long fact(double num)
 {
-    if (num == 1) {
+    if (num <= 1.0)
+    {
         return 1;
     } else
     {
         return num*fact(num-1);
     }
 }
-double sqrt(int input)
+double sqrt(double input)
 {
-	double t;
-	double result = input / 2;
-	do {
-		t = result;
-		result = (t + (input / t)) / 2;
-	} while ((t - result) != 0);
+    double t;
+    double result = input / 2.0;
+    do {
+        t = result;
+        result = (t + (input / t)) / 2.0;
+    } while ((t - result) != 0.0);
 
-	return result;
+    return result;
 }
 bool simple(int input)
 {
-	for (int i(2);i<input;i++) {
-		if (input % i == 0)
-			return false;
-	}
-	return true;
+    for (int i(2);i<input;i++) {
+        if (input % i == 0)
+            return false;
+    }
+    return true;
 }
 int main()
 {
-    int input,degree;
+    double input;
+    int degree;
     cout << "Enter number" << endl;
     cin >> input;
     cout << "Enter degree" << endl;
     cin >> degree;
-	cout << "Warning!\nFactorial's maximum is 65\nResults:\nPow: " << pow(input,degree) << endl;
+    cout << "Warning! Factorial's maximum is 65\n\nResults:\nPow: " << pow(input,degree) << endl;
     if (input < 0) {
-        cout << "\nfactorial, sqrt and simplicity are unavailable" << endl;
+        cout << "\nfactorial, square root and simplicity check are unavailable" << endl;
     }
-	else
-	{
-		cout << "sqrt: " << sqrt(input) << "\nsimple? " << simple(input);
-		if (input <= 65)
-			cout << "\nfact: " << fact(input);
-		cout << endl;
-	}
+    else
+    {
+        cout << "Square root: " << sqrt(input) << "\nsimple? " << simple(input);
+        if (input <= 65)
+            cout << "\nfact: " << fact(input);
+        cout << endl;
+    }
 
     return 0;
 }
