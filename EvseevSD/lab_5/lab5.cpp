@@ -11,6 +11,7 @@ void my_nul(int *mat, int m, int n) {
 		}
 	}
 }
+
 void my_cout(int *mat, int m, int n) {
 	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < n; j++) {
@@ -20,6 +21,7 @@ void my_cout(int *mat, int m, int n) {
 		cout << endl;
 	}
 }
+
 void my_cin(int *mat, int m, int n) {
 	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < n; j++) {
