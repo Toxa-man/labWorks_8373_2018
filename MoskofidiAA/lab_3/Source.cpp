@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	const int N = 256;
+	const int N = 500;
 	const int M = 15;
 	char str_in[N];
 	char str_out[N];
@@ -24,13 +24,13 @@ int main()
 		if (str_in[i] == ' ') count += 1;
 	}
 	int *sum = new int[count];
-	int Summa = 0;
 	for (int i = 0; i < count; i++)
 	{
 		while ((str_in[j] != ' ') && (str_in[j] != '\0'))
 		{
+			sum[i] = 0;
 			str[i][m] = str_in[j];
-			sum[i] += (int)str_in[j];
+			sum[i] += static_cast<int>(str_in[j]);
 			j++;
 			m++;
 		}
@@ -58,11 +58,12 @@ int main()
 		sum[SumMax] = 0;
 		p = 0;
 	}
-	for (int i = 0; i < len; i++)
+	str_out[l] = '\0';
+	for (int i = 0; i <= len; i++)
 	{
 		cout << str_out[i];
 	}
-	delete [] sum;
+	delete[] sum;
 	_getch();
 	return 0;
 }
