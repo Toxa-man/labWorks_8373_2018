@@ -27,7 +27,7 @@ int main()
 	int Summa = 0;
 	for (int i = 0; i < count; i++)
 	{
-		while ((str_in[j] != ' ') || (str_in[j] != '\0'))
+		while ((str_in[j] != ' ') && (str_in[j] != '\0'))
 		{
 			str[i][m] = str_in[j];
 			sum[i] += (int)str_in[j];
@@ -62,6 +62,7 @@ int main()
 	{
 		cout << str_out[i];
 	}
+	delete [] sum;
 	_getch();
 	return 0;
 }
