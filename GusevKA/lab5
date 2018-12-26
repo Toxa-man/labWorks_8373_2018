@@ -1,0 +1,215 @@
+#include "pch.h"
+#include <iostream>
+#include <conio.h>
+
+
+using namespace std;
+
+const int str = 2;
+const int colum = 2;
+
+int sum(int a, int b, int matrix1[str][colum], int matrix2[str][colum])
+{
+
+	int matrix3[str][colum];
+	matrix3[a][b] = matrix1[a][b] + matrix2[a][b];
+
+	return matrix3[a][b];
+}
+
+int subtraction(int a, int b, int matrix1[str][colum], int matrix2[str][colum])
+{
+	int matrix3[str][colum];
+	matrix3[a][b] = matrix1[a][b] - matrix2[a][b];
+
+	return matrix3[a][b];
+}
+
+int multiplication(int a, int b, int matrix1[str][colum], int matrix2[str][colum])
+{
+	int matrix3[str][colum];
+	matrix3[a][b] = 0;
+	for (int temp = 0; temp < str; temp++)
+	{
+		matrix3[a][b] = matrix3[a][b] + matrix1[a][temp] * matrix2[temp][a + (b - a)];
+	}
+	return matrix3[a][b];
+}
+
+
+int main()
+{
+	char act;
+	int matrix1[str][colum];
+	int matrix2[str][colum];
+	int matrix3[str][colum];
+	cout << "Write matrix 1 " ;
+	cout << endl;
+	for (int i = 0; i < str; i++)
+	{
+		for (int j = 0; j < colum; j++)
+		{
+			cin >> matrix1[i][j];
+		}
+	}
+	cout << endl;
+	cout << "Write matrix 2 " ;
+	cout << endl;
+	for (int i = 0; i < str; i++)
+	{
+		for (int j = 0; j < colum; j++)
+		{
+			cin >> matrix2[i][j];
+		}
+	}
+	cout << endl;
+	cout << "Write action " ;
+	cout << endl;
+	cin >> act;
+	cout << endl;
+	switch (act)
+	{
+	case '+':
+		
+		for (int i = 0; i < str; i++)
+		{
+			for (int j = 0; j < colum; j++)
+			{
+				
+				matrix3[i][j] = sum(i, j, matrix1, matrix2);
+				cout << matrix3[i][j];
+				cout << ' ';
+			} 
+			cout << endl;
+		}
+		cout << endl;
+		break;
+
+	case '-': 
+		
+		for (int i = 0; i < str; i++)
+		{
+			for (int j = 0; j < colum; j++)
+			{
+				
+				matrix3[i][j] = subtraction(i, j, matrix1, matrix2);
+				cout << matrix3[i][j] ;
+				cout << ' ' ; 
+			}
+			cout << endl;
+		}
+		cout << endl;
+		break;
+	case '*': if (str == colum)
+	{
+		
+		for (int i = 0; i < str; i++)
+		{
+			for (int j = 0; j < colum; j++)
+			{
+				
+				matrix3[i][j] = multiplication(i, j, matrix1, matrix2);
+				cout << matrix3[i][j];
+				cout << ' ';
+			}
+			cout << endl;
+		}
+		cout << endl;
+	}
+		else 
+		cout << "Str and colum of matrix mast be equal ";
+		cout << endl;
+		break;
+	
+	default: 
+		cout << "Wrong number " ;
+		cout << endl;
+		break;
+	}
+
+	char choose;
+	cout << "Press C to contunue  ";
+	cout << endl;
+	cout << "Pres E to exit";
+	cout << endl;
+	cin >> choose;
+
+	while (1)
+	{
+		if ((choose == 'c') || (choose == 'C'))
+		{
+
+			cout << "Write action ";
+			cout << endl;
+			cin >> act;
+			cout << endl;
+			switch (act)
+			{
+			case '+':
+				for (int i = 0; i < str; i++)
+				{
+					for (int j = 0; j < colum; j++)
+					{
+						matrix3[i][j] = sum(i, j, matrix3, matrix2);
+						cout << matrix3[i][j];
+						cout << ' ';
+					}
+					cout << endl;
+				}
+				cout << endl;
+				break;
+			case '-':
+				for (int i = 0; i < str; i++)
+				{
+					for (int j = 0; j < colum; j++)
+					{
+						matrix3[i][j] = subtraction(i, j, matrix3, matrix2);
+						cout << matrix3[i][j];
+						cout << ' ';
+					}
+					cout << endl;
+				}
+				cout << endl;
+				break;
+			case '*': if (str == colum)
+			{
+				
+				for (int i = 0; i < str; i++)
+				{
+					for (int j = 0; j < colum; j++) 
+					{
+						matrix3[i][j] = multiplication(i, j, matrix3, matrix2);
+						cout << matrix3[i][j];
+						cout << ' ';
+					} 
+					cout << endl;
+				}
+				cout << endl;
+			}
+			else
+			cout << "Str and colum of matrix mast be equal ";
+			cout << endl;
+			break;
+						
+			default:
+			cout << "Wrong number ";
+			cout << endl;
+			break;
+			}
+		}
+		else 
+		if ((choose == 'e') || (choose == 'E'))
+		{
+			exit(1);
+		}
+		
+		cout << "Press C to contunue  ";
+		cout << endl;
+		cout << "Pres E to exit";
+		cout << endl;
+		cin >> choose;
+	} 
+	
+	system("pauze");
+	return 0;
+}
