@@ -13,22 +13,22 @@ int main()
 	char str[M][N];
 	int j(0), m(0), l(0), p(0);
 	int len(0);
-	int SumMax(0);
+	int SumMin(0);
 	int count(1);
 	cout << "Enter string: ";
 	cin.getline(str_in, N);
 	cout << endl;
 	len = strlen(str_in);
-	for (int i = 0; i < len; i++)  
+	for (int i = 0; i < len; i++)
 	{
 		if (str_in[i] == ' ') count += 1;
 	}
 	int *sum = new int[count];
 	for (int i = 0; i < count; i++)
 	{
+		sum[i] = 0;
 		while ((str_in[j] != ' ') && (str_in[j] != '\0'))
 		{
-			sum[i] = 0;
 			str[i][m] = str_in[j];
 			sum[i] += static_cast<int>(str_in[j]);
 			j++;
@@ -42,20 +42,20 @@ int main()
 	{
 		for (int i = 0; i < count; i++)
 		{
-			if (sum[i] > sum[SumMax])
+			if (sum[i] < sum[SumMin])
 			{
-				SumMax = i;
+				SumMin = i;
 			}
 		}
-		while (str[SumMax][p] != '\0')
+		while (str[SumMin][p] != '\0')
 		{
-			str_out[l] = str[SumMax][p];
+			str_out[l] = str[SumMin][p];
 			l++;
 			p++;
 		}
 		str_out[l] = ' ';
 		l++;
-		sum[SumMax] = 0;
+		sum[SumMin] = 10000000;
 		p = 0;
 	}
 	str_out[l] = '\0';
