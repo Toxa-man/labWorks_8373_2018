@@ -15,8 +15,8 @@ int coun_neib(int *b_l_1, int a, int b, int y, int z, int size) {
 }
 
 int main() {
-	int const space = 25;
-	int const size = 5;
+	int const space = 100;
+	int const size = 10;
 	int life_1[space], life_2[space], *b_l_1, check = 0, check_nulls = 0;
 	b_l_1 = &life_1[0];
 	for (int i = 0; i < size; i++) {
