@@ -1,0 +1,32 @@
+﻿  Boodle Jump.cpp
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(65): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(74): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(85): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(87): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(86): warning C4101: first_plat_width: неиспользованная локальная переменная
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(155): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(167): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(185): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(196): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(296): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(307): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(316): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(327): warning C4244: -=: преобразование "float" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(329): warning C4244: -=: преобразование "float" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(336): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(337): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(346): warning C4244: -=: преобразование "float" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(366): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(368): warning C4244: +=: преобразование "float" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(371): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(437): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(439): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(445): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(467): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(473): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(474): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(549): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(614): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
+c:\users\bonda\documents\visual studio 2015\projects\boodle jump\boodle jump\boodle jump.cpp(617): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
+  Boodle Jump.vcxproj -> C:\Users\bonda\Documents\Visual Studio 2015\Projects\Boodle Jump\Debug\Boodle Jump.exe
+  Boodle Jump.vcxproj -> C:\Users\bonda\Documents\Visual Studio 2015\Projects\Boodle Jump\Debug\Boodle Jump.pdb (Full PDB)
