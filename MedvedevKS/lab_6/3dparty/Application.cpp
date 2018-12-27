@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 using namespace std;
 
+
 const unsigned short    frameW = 341,
                         frameH = 76,
                         frameX = 227,
@@ -26,21 +27,71 @@ const unsigned short    frameW = 341,
                         deerStartX = 50,
                         textCoords = 25,
                         fontSize = 100,
+                        CTBSw = 818,
+                        CTBSh = 101,
+                        CTBSx = 212,
+                        CTBSy = 50,
+                        WTTCDGw = 1092,
+                        WTTCDGh = 50,
+                        WTTCDGx = 137,
+                        WTTCDGy = 50,
                         ScreenW = 1366,
                         ScreenH = 768;
 
+
 const char  *defGr_p = "textures/ground.png",
-            *bonusGr_p = "textures/groundBonus.png";
+            *bonusGr_p = "textures/groundBonus.png",
+            *ttf_p = "ttf/sus.ttf",
+            *bonusbg_p = "textures/2newbg.png",
+            *bonuspipe_p = "textures/newBonusPipe.png",
+            *gamebg_p = "textures/1newbg.jpg",
+            *defpipe_p = "textures/1newPipe.png",
+            *healthpipe_p = "textures/2newPipe.png",
+            *bonusStartpipe_p = "textures/3newPipe.png",
+            *deer_p = "textures/deerMale.png",
+            *CTBS_p = "textures/menu/textCTBS.png",
+            *mAvariaBlue_p = "textures/menu/textMusicAvariaBlue.png",
+            *mAvariaWhite_p = "textures/menu/textMusicAvariaWhite.png",
+            *mBlestyashieBlue_p = "textures/menu/textMusicBlestyashieBlue.png",
+            *mBlestyashieWhite_p = "textures/menu/textMusicBlestyashieWhite.png",
+            *mDigiBlue_p = "textures/menu/textMusicDigiBlue.png",
+            *mDigiWhite_p = "textures/menu/textMusicDigiWhite.png",
+            *mElkaBlue_p = "textures/menu/textMusicElkaBlue.png",
+            *mElkaWhite_p = "textures/menu/textMusicElkaWhite.png",
+            *mVerkaBlue_p = "textures/menu/textMusicVerkaBlue.png",
+            *mVerkaWhite_p = "textures/menu/textMusicVerkaWhite.png",
+            *menubg_p = "textures/anime.jpg",
+            *frameBlue_p = "textures/menu/buttonFrameBlue.png",
+            *frameWhite_p = "textures/menu/buttonFrameWhite.png",
+            *textWTTCDG_p = "textures/menu/textWTTCDG.png",
+            *textPlayBlue_p = "textures/menu/textPlayBlue.png",
+            *textPlayWhite_p = "textures/menu/textPlayWhite.png",
+            *textSettingsBlue_p = "textures/menu/textSettingsBlue.png",
+            *textSettingsWhite_p = "textures/menu/textSettingsWhite.png",
+            *textQuitBlue_p = "textures/menu/textQuitBlue.png",
+            *textQuitWhite_p = "textures/menu/textQuitWhite.png",
+            *avariamp3_p = "audio/avaria.mp3",
+            *blestyashiemp3_p = "audio/blestyashie.mp3",
+            *digimp3_p = "audio/digi.mp3",
+            *elkamp3_p = "audio/elka.mp3",
+            *verkamp3_p = "audio/verka.mp3";
+
+
 
 enum ground {defGr, bonusGr};
 
+
 enum tubeType {def, health, bonus};
+
 
 enum menuType {start, inGame, death};
 
+
 enum frame {FrameBlue, FrameWhite};
 
+
 enum menuExitCode {quitApp, gameStart};
+
 
 struct text
 {
@@ -49,6 +100,7 @@ struct text
     SDL_Texture *texture;
     short fontSize;
 };
+
 
 struct obj
 {
@@ -66,13 +118,14 @@ struct animated_obj
 
 SDL_Texture* renderText(const string &text, SDL_Color color, SDL_Renderer *renderer, short fontSize)
 {
-    TTF_Font *font = TTF_OpenFont("ttf/sus.ttf", fontSize);
+    TTF_Font *font = TTF_OpenFont(ttf_p, fontSize);
     SDL_Surface *surface = TTF_RenderText_Solid(font, text.c_str(), color);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
     TTF_CloseFont(font);
     return texture;
 }
+
 
 tubeType generator()
 {
@@ -94,19 +147,20 @@ tubeType generator()
     }
 }
 
+
 void bonusLvl(unsigned int &sessionHighscore, unsigned int move, unsigned int deerX, unsigned int deerAnimationSize, unsigned int deerTextureW, bool& gameOver, bool& gamehappening, bool& mainMenu, const Uint8 *keyboardState, animated_obj deer, unsigned int& score, SDL_Renderer* ren, obj *ground, text scoreText)
 {
-    SDL_Texture* bg = IMG_LoadTexture(ren, "textures/2newbg.png");
+    SDL_Texture* bg = IMG_LoadTexture(ren, bonusbg_p);
     
     obj tube1;
-    tube1.texture = IMG_LoadTexture(ren, "textures/newBonusPipe.png");
+    tube1.texture = IMG_LoadTexture(ren, bonuspipe_p);
     tube1.rect.x = ScreenW;
     tube1.rect.y = -rand() % groundH * 3;
     tube1.rect.w = tubeW;
     tube1.rect.h = tubeH;
 
     obj tube2;
-    tube2.texture = IMG_LoadTexture(ren, "textures/newBonusPipe.png");
+    tube2.texture = IMG_LoadTexture(ren, bonuspipe_p);
     tube2.rect.x = ScreenW;
     tube2.rect.y = tube1.rect.y;
     tube2.rect.w = tubeW;
@@ -128,6 +182,7 @@ void bonusLvl(unsigned int &sessionHighscore, unsigned int move, unsigned int de
             pipe3_failed = false,
                 _pipe2generated = false;
     SDL_Event bonusE;
+
     while(bonus)
     {
         SDL_RenderClear(ren);
@@ -149,19 +204,12 @@ void bonusLvl(unsigned int &sessionHighscore, unsigned int move, unsigned int de
                 }
             }
         }
-        ground[defGr].rect.x -= groundSpeed;
-        if (ground[defGr].rect.x <= -groundOffset)
-        {
-            ground[defGr].rect.x = 0;
-        }
         //ground physics
         ground[bonusGr].rect.x -= groundSpeed;
         if (ground[bonusGr].rect.x <= -groundOffset)
         {
             ground[bonusGr].rect.x = 0;
         }
-        //scoreText.rect.w = 25*numberOfDigits(score);
-        scoreText.rect.x = (ScreenW - scoreText.rect.w) / 2;
         //deer animation
         if (SDL_GetTicks() - animationTimer > 200)
         {
@@ -264,12 +312,15 @@ void bonusLvl(unsigned int &sessionHighscore, unsigned int move, unsigned int de
             pipe2_failed = false;
         }
         scoreText.texture = renderText(to_string(score), scoreText.color, ren, scoreText.fontSize);
-        SDL_RenderCopy(ren, bg, NULL, NULL);
-        SDL_RenderCopy(ren, tube1.texture, NULL, &tube1.rect);
-        SDL_RenderCopy(ren, tube2.texture, NULL, &tube2.rect);
+        SDL_QueryTexture(scoreText.texture, nullptr, nullptr, &scoreText.rect.w, &scoreText.rect.h);
+        scoreText.rect.x = (ScreenW - scoreText.rect.w) / 2;
+
+        SDL_RenderCopy(ren, bg, nullptr, nullptr);
+        SDL_RenderCopy(ren, tube1.texture, nullptr, &tube1.rect);
+        SDL_RenderCopy(ren, tube2.texture, nullptr, &tube2.rect);
         SDL_RenderCopy(ren, deer.texture, &deer.srcrect, &deer.dstrect);
-        SDL_RenderCopy(ren, ground[bonusGr].texture, NULL, &ground[bonusGr].rect);
-        SDL_RenderCopy(ren, scoreText.texture, NULL, &scoreText.rect);
+        SDL_RenderCopy(ren, ground[bonusGr].texture, nullptr, &ground[bonusGr].rect);
+        SDL_RenderCopy(ren, scoreText.texture, nullptr, &scoreText.rect);
         SDL_RenderPresent(ren);
     }
     SDL_DestroyTexture(bg);
@@ -277,16 +328,17 @@ void bonusLvl(unsigned int &sessionHighscore, unsigned int move, unsigned int de
     SDL_DestroyTexture(tube2.texture);
 }
 
+
 void gameLoop(unsigned int &sessionHighscore, SDL_Renderer *ren, const Uint8 *keyboardState, bool& mainMenu)
 {
-    SDL_Texture *gameBg = IMG_LoadTexture(ren, "textures/1newbg.jpg");
+    SDL_Texture *gameBg = IMG_LoadTexture(ren, gamebg_p);
 
     const unsigned short    tubeNumber = 3;
 
     SDL_Texture *tubeTexture[tubeNumber];
-    tubeTexture[def] = IMG_LoadTexture(ren, "textures/1newPipe.png");
-    tubeTexture[health] = IMG_LoadTexture(ren, "textures/2newPipe.png");
-    tubeTexture[bonus] = IMG_LoadTexture(ren, "textures/3newPipe.png");
+    tubeTexture[def] = IMG_LoadTexture(ren, defpipe_p);
+    tubeTexture[health] = IMG_LoadTexture(ren, healthpipe_p);
+    tubeTexture[bonus] = IMG_LoadTexture(ren, bonusStartpipe_p);
 
     obj ground[2];
     ground[defGr].texture = IMG_LoadTexture(ren, defGr_p);
@@ -324,26 +376,12 @@ void gameLoop(unsigned int &sessionHighscore, SDL_Renderer *ren, const Uint8 *ke
     tube3.rect.w = tubeW;
     tube3.rect.h = tubeH;
 
-    int deerTextureW, deerTextureH, treeW, treeH;
+    int deerTextureW, deerTextureH;
 
-    animated_obj tree;
-    tree.texture = IMG_LoadTexture(ren, "textures/christmas_tree_animation.png");
-
-    SDL_QueryTexture(tree.texture, NULL, NULL, &treeW, &treeH);
-    short   treeAnimationW = treeW / 2,
-            treeAnimationH = treeH / 2;
-    tree.dstrect.x = ScreenW / 4;
-    tree.dstrect.y = ScreenH / 2.4;
-    tree.dstrect.w = treeAnimationW / 2;
-    tree.dstrect.h = treeAnimationH / 2;
-    tree.srcrect.x = 0;
-    tree.srcrect.y = 0;
-    tree.srcrect.w = treeAnimationW;
-    tree.srcrect.h = treeAnimationH;
 
     animated_obj deer;
-    deer.texture = IMG_LoadTexture(ren, "textures/deerMale.png");
-    SDL_QueryTexture(deer.texture, NULL, NULL, &deerTextureW, &deerTextureH);
+    deer.texture = IMG_LoadTexture(ren, deer_p);
+    SDL_QueryTexture(deer.texture, nullptr, nullptr, &deerTextureW, &deerTextureH);
     short deerAnimationSize = deerTextureW / 5;
     deer.dstrect.x = deerStartX;
     deer.dstrect.y = ScreenH - deerH - groundH;
@@ -381,7 +419,6 @@ void gameLoop(unsigned int &sessionHighscore, SDL_Renderer *ren, const Uint8 *ke
     unsigned int    timer = SDL_GetTicks(),
                     moveTimer = SDL_GetTicks(),
                     animationTimer = SDL_GetTicks(),
-                    treeTimer = SDL_GetTicks(),
                     score = 0;
 
     text scoreText;
@@ -431,21 +468,6 @@ void gameLoop(unsigned int &sessionHighscore, SDL_Renderer *ren, const Uint8 *ke
                     gamehappening = false;
                     mainMenu = false;
                 }
-            }
-        }
-        //tree animation
-        if (SDL_GetTicks() - treeTimer > 100)
-        {
-            treeTimer = SDL_GetTicks();
-            tree.srcrect.x += treeAnimationW;
-            if (tree.srcrect.x >= treeW)
-            {
-                tree.srcrect.y += treeAnimationH;
-                tree.srcrect.x = 0;
-            }
-            if (tree.srcrect.y >= treeH)
-            {
-                tree.srcrect.y = 0;
             }
         }
         //deer start animation
@@ -531,9 +553,9 @@ void gameLoop(unsigned int &sessionHighscore, SDL_Renderer *ren, const Uint8 *ke
                 gameOver = false;
                 deerX = deer.dstrect.x;
             }
-            SDL_RenderCopy(ren, gameBg, NULL, NULL);
+            SDL_RenderCopy(ren, gameBg, nullptr, nullptr);
             SDL_RenderCopy(ren, deer.texture, &deer.srcrect, &deer.dstrect);
-            SDL_RenderCopy(ren, ground[defGr].texture, NULL, &ground[defGr].rect);
+            SDL_RenderCopy(ren, ground[defGr].texture, nullptr, &ground[defGr].rect);
             SDL_RenderPresent(ren);
         }
         
@@ -619,8 +641,10 @@ void gameLoop(unsigned int &sessionHighscore, SDL_Renderer *ren, const Uint8 *ke
                 }
                 pipe1_crossed = true;
             }
-            //tubes physics
+            //tube1 physics
             tube1.rect.x -= tubeSpeed;
+
+            //tube1 failure check
             if (!pipe1_failed && tube1.rect.x < deerX + deer.dstrect.w && tube1.rect.x > deerX - tube1.rect.w && (deer.dstrect.y <= tube1.rect.y + tubeHalfY - freeSpaceY || deer.dstrect.y >= tube1.rect.y + tube1.rect.h - tubeHalfY - deer.dstrect.h))
             {
                 lives--;
@@ -674,7 +698,10 @@ void gameLoop(unsigned int &sessionHighscore, SDL_Renderer *ren, const Uint8 *ke
                 pipe2generated = false;
                 _pipe2generated = true;
             }
+            //tube2 physics
             tube2.rect.x -= tubeSpeed;
+
+            //tube1 failure check
             if (!pipe2_failed && tube2.rect.x < deerX + deer.dstrect.w  && tube2.rect.x > deerX - tube2.rect.w && (deer.dstrect.y <= tube2.rect.y + tubeHalfY - freeSpaceY || deer.dstrect.y >= tube2.rect.y + tube2.rect.h - tubeHalfY - deer.dstrect.h))
             {
                 lives--;
@@ -707,33 +734,37 @@ void gameLoop(unsigned int &sessionHighscore, SDL_Renderer *ren, const Uint8 *ke
             SDL_QueryTexture(SH.texture, nullptr, nullptr, &SH.rect.w, &SH.rect.h);
             SH.rect.x = ScreenW - SH.rect.w - textCoords;
 
-            SDL_RenderCopy(ren, gameBg, NULL, NULL);
-            SDL_RenderCopy(ren, tube1.texture, NULL, &tube1.rect);
-            SDL_RenderCopy(ren, tube2.texture, NULL, &tube2.rect);
+            SDL_RenderCopy(ren, gameBg, nullptr, nullptr);
+            SDL_RenderCopy(ren, tube1.texture, nullptr, &tube1.rect);
+            SDL_RenderCopy(ren, tube2.texture, nullptr, &tube2.rect);
             SDL_RenderCopy(ren, deer.texture, &deer.srcrect, &deer.dstrect);
-            SDL_RenderCopy(ren, ground[defGr].texture, NULL, &ground[defGr].rect);
-            SDL_RenderCopy(ren, scoreText.texture, NULL, &scoreText.rect);
-            SDL_RenderCopy(ren, livesText.texture, NULL, &livesText.rect);
-            SDL_RenderCopy(ren, SH.texture, NULL, &SH.rect);
+            SDL_RenderCopy(ren, ground[defGr].texture, nullptr, &ground[defGr].rect);
+            SDL_RenderCopy(ren, scoreText.texture, nullptr, &scoreText.rect);
+            SDL_RenderCopy(ren, livesText.texture, nullptr, &livesText.rect);
+            SDL_RenderCopy(ren, SH.texture, nullptr, &SH.rect);
             SDL_RenderPresent(ren);
+
         }
-        SDL_RenderCopy(ren, gameBg, NULL, NULL);
-        SDL_RenderCopy(ren, tree.texture, &tree.srcrect, &tree.dstrect);
-        SDL_RenderCopy(ren, tube1.texture, NULL, &tube1.rect);
-        SDL_RenderCopy(ren, tube2.texture, NULL, &tube2.rect);
+
+        SDL_RenderCopy(ren, gameBg, nullptr, nullptr);
+        SDL_RenderCopy(ren, tube1.texture, nullptr, &tube1.rect);
+        SDL_RenderCopy(ren, tube2.texture, nullptr, &tube2.rect);
         SDL_RenderCopy(ren, deer.texture, &deer.srcrect, &deer.dstrect);
-        SDL_RenderCopy(ren, ground[defGr].texture, NULL, &ground[defGr].rect);
+        SDL_RenderCopy(ren, ground[defGr].texture, nullptr, &ground[defGr].rect);
         SDL_RenderPresent(ren);
+
     }
+
     SDL_DestroyTexture(gameBg);
     SDL_DestroyTexture(tube1.texture);
     SDL_DestroyTexture(tube2.texture);
     SDL_DestroyTexture(deer.texture);
-    SDL_DestroyTexture(tree.texture);
     SDL_DestroyTexture(scoreText.texture);
     SDL_DestroyTexture(ground[bonusGr].texture);
     SDL_DestroyTexture(ground[defGr].texture);
+
 }
+
 
 void settingsMenu(bool& mainMenu, SDL_Renderer *ren, SDL_Texture *menuBg, const Uint8 *keyboardState, short frameX, short frameY, short frameW, short frameH, short dY, obj *frame, Mix_Music *avaria, Mix_Music *blestyashie, Mix_Music *digi, Mix_Music *elka, Mix_Music *verka)
 {
@@ -751,47 +782,49 @@ void settingsMenu(bool& mainMenu, SDL_Renderer *ren, SDL_Texture *menuBg, const 
     frame[FrameBlue].rect = {frameX, 0/*inicialization in da cicle*/, frameW, frameH};
     frame[FrameWhite].rect = {frameX, frameY, frameW, frameH};
 
-    blue[CTBS].texture = IMG_LoadTexture(ren, "textures/menu/textCTBS.png");    //Choose the background song
-    blue[CTBS].rect.w = frameW * 12 / 5;
-    blue[CTBS].rect.h = frameH * 4 / 3;
-    blue[CTBS].rect.x = frameX - 3*dY;
-    blue[CTBS].rect.y = blue[CTBS].rect.h / 2;
+    blue[CTBS].texture = IMG_LoadTexture(ren, CTBS_p);    //Choose the background song
+    blue[CTBS].rect.w = CTBSw;
+    blue[CTBS].rect.h = CTBSh;
+    blue[CTBS].rect.x = CTBSx;
+    blue[CTBS].rect.y = CTBSy;
 
     //avaria text
-    blue[AvariaBlue].texture = IMG_LoadTexture(ren, "textures/menu/textMusicAvariaBlue.png");
-    white[AvariaWhite].texture = IMG_LoadTexture(ren, "textures/menu/textMusicAvariaWhite.png");
+    blue[AvariaBlue].texture = IMG_LoadTexture(ren, mAvariaBlue_p);
+    white[AvariaWhite].texture = IMG_LoadTexture(ren, mAvariaWhite_p);
     blue[AvariaBlue].rect = white[AvariaWhite].rect = {frameX, frameY, frameW, frameH};
 
     //blestyashie text
-    blue[BlestyashieBlue].texture = IMG_LoadTexture(ren, "textures/menu/textMusicBlestyashieBlue.png");
-    white[BlestyashieWhite].texture = IMG_LoadTexture(ren, "textures/menu/textMusicBlestyashieWhite.png");
+    blue[BlestyashieBlue].texture = IMG_LoadTexture(ren, mBlestyashieBlue_p);
+    white[BlestyashieWhite].texture = IMG_LoadTexture(ren, mBlestyashieWhite_p);
     blue[BlestyashieBlue].rect = white[BlestyashieWhite].rect = {frameX, frameY + frameH - dY, frameW, frameH};
     
     //digi text
-    blue[DigiBlue].texture = IMG_LoadTexture(ren, "textures/menu/textMusicDigiBlue.png");
-    white[DigiWhite].texture = IMG_LoadTexture(ren, "textures/menu/textMusicDigiWhite.png");
+    blue[DigiBlue].texture = IMG_LoadTexture(ren, mDigiBlue_p);
+    white[DigiWhite].texture = IMG_LoadTexture(ren, mDigiWhite_p);
     blue[DigiBlue].rect = white[DigiWhite].rect = {frameX, frameY + 2*(frameH-dY), frameW, frameH};
 
     //elka text
-    blue[ElkaBlue].texture = IMG_LoadTexture(ren, "textures/menu/textMusicElkaBlue.png");
-    white[ElkaWhite].texture = IMG_LoadTexture(ren, "textures/menu/textMusicElkaWhite.png");
+    blue[ElkaBlue].texture = IMG_LoadTexture(ren, mElkaBlue_p);
+    white[ElkaWhite].texture = IMG_LoadTexture(ren, mElkaWhite_p);
     blue[ElkaBlue].rect = white[ElkaWhite].rect = {frameX, frameY + 3*(frameH-dY), frameW, frameH};
 
     //verka text
-    blue[VerkaBlue].texture = IMG_LoadTexture(ren, "textures/menu/textMusicVerkaBlue.png");
-    white[VerkaWhite].texture = IMG_LoadTexture(ren, "textures/menu/textMusicVerkaWhite.png");
+    blue[VerkaBlue].texture = IMG_LoadTexture(ren, mVerkaBlue_p);
+    white[VerkaWhite].texture = IMG_LoadTexture(ren, mVerkaWhite_p);
     blue[VerkaBlue].rect = white[VerkaWhite].rect = {frameX, frameY + 4*(frameH-dY), frameW, frameH};
     
     bool settingsMenu = true;
     short   buttons = 5,
             whiteTextPos = 0;
+
     SDL_Event SME;  //settings menu event
 
     while (settingsMenu)
     {
         SDL_RenderClear(ren);
-        SDL_RenderCopy(ren, menuBg, NULL, NULL);
-        SDL_RenderCopy(ren, blue[CTBS].texture, NULL, &blue[CTBS].rect);
+        SDL_RenderCopy(ren, menuBg, nullptr, nullptr);
+        SDL_RenderCopy(ren, blue[CTBS].texture, nullptr, &blue[CTBS].rect);
+
         frame[FrameBlue].rect.y = frameY;
         while(SDL_PollEvent(&SME))
         {
@@ -857,16 +890,16 @@ void settingsMenu(bool& mainMenu, SDL_Renderer *ren, SDL_Texture *menuBg, const 
         }
         /*for (int i = 0; i < buttons; i++)
         {
-            SDL_RenderCopy(ren, frame[FrameBlue].texture, NULL, &frame[FrameBlue].rect);
+            SDL_RenderCopy(ren, frame[FrameBlue].texture, nullptr, &frame[FrameBlue].rect);
             frame[FrameBlue].rect.y += frame[FrameBlue].rect.h - dY;
         }*/
-        SDL_RenderCopy(ren, blue[AvariaBlue].texture, NULL, &blue[AvariaBlue].rect);
-        SDL_RenderCopy(ren, blue[BlestyashieBlue].texture, NULL, &blue[BlestyashieBlue].rect);
-        SDL_RenderCopy(ren, blue[DigiBlue].texture, NULL, &blue[DigiBlue].rect);
-        SDL_RenderCopy(ren, blue[ElkaBlue].texture, NULL, &blue[ElkaBlue].rect);
-        SDL_RenderCopy(ren, blue[VerkaBlue].texture, NULL, &blue[VerkaBlue].rect);
-        SDL_RenderCopy(ren, white[whiteTextPos].texture, NULL, &white[whiteTextPos].rect);
-        //SDL_RenderCopy(ren, frame[FrameWhite].texture, NULL, &frame[FrameWhite].rect);
+        SDL_RenderCopy(ren, blue[AvariaBlue].texture, nullptr, &blue[AvariaBlue].rect);
+        SDL_RenderCopy(ren, blue[BlestyashieBlue].texture, nullptr, &blue[BlestyashieBlue].rect);
+        SDL_RenderCopy(ren, blue[DigiBlue].texture, nullptr, &blue[DigiBlue].rect);
+        SDL_RenderCopy(ren, blue[ElkaBlue].texture, nullptr, &blue[ElkaBlue].rect);
+        SDL_RenderCopy(ren, blue[VerkaBlue].texture, nullptr, &blue[VerkaBlue].rect);
+        SDL_RenderCopy(ren, white[whiteTextPos].texture, nullptr, &white[whiteTextPos].rect);
+        //SDL_RenderCopy(ren, frame[FrameWhite].texture, nullptr, &frame[FrameWhite].rect);
         SDL_RenderPresent(ren);
     }
 
@@ -876,10 +909,10 @@ void settingsMenu(bool& mainMenu, SDL_Renderer *ren, SDL_Texture *menuBg, const 
         SDL_DestroyTexture(white[i].texture);
 }
 
+
 menuExitCode startMenu(const Uint8 *keyboardState, bool& mainMenu, SDL_Renderer *ren, Mix_Music *avaria, Mix_Music *blestyashie, Mix_Music *digi, Mix_Music *elka, Mix_Music *verka)
 {
-    ////
-    SDL_Texture *menuBg = IMG_LoadTexture(ren, "textures/anime.jpg");
+    SDL_Texture *menuBg = IMG_LoadTexture(ren, menubg_p);
 
     enum blue {WTTCDG, PlayBlue, SettingsBlue, QuitBlue}; //WTTCDG = Welcome to the christmas deer game
     enum white {PlayWhite, SettingsWhite, QuitWhite};
@@ -893,39 +926,36 @@ menuExitCode startMenu(const Uint8 *keyboardState, bool& mainMenu, SDL_Renderer 
     obj white[whites];
     obj frame[frames];
 
-    
     //blue frame
-    frame[FrameBlue].texture = IMG_LoadTexture(ren, "textures/menu/buttonFrameBlue.png");
+    frame[FrameBlue].texture = IMG_LoadTexture(ren, frameBlue_p);
     frame[FrameBlue].rect = {frameX, 0/*inicialization in da cicle*/, frameW, frameH};
 
     //white frame
-    frame[FrameWhite].texture = IMG_LoadTexture(ren, "textures/menu/buttonFrameWhite.png");
+    frame[FrameWhite].texture = IMG_LoadTexture(ren, frameWhite_p);
     frame[FrameWhite].rect = {frameX, frameY, frameW, frameH};
 
     //head text
-    blue[WTTCDG].texture = IMG_LoadTexture(ren, "textures/menu/textWTTCDG.png");
-    blue[WTTCDG].rect.w = ScreenW * 4 / 5;
-    blue[WTTCDG].rect.h = frameH * 2 / 3;
-    blue[WTTCDG].rect.x = (ScreenW - blue[WTTCDG].rect.w)/2;
-    blue[WTTCDG].rect.y = blue[WTTCDG].rect.h;
+    blue[WTTCDG].texture = IMG_LoadTexture(ren, textWTTCDG_p);
+    blue[WTTCDG].rect.w = WTTCDGw;
+    blue[WTTCDG].rect.h = WTTCDGh;
+    blue[WTTCDG].rect.x = WTTCDGx;
+    blue[WTTCDG].rect.y = WTTCDGy;
 
     //play text
-    blue[PlayBlue].texture = IMG_LoadTexture(ren, "textures/menu/textPlayBlue.png");
-    white[PlayWhite].texture = IMG_LoadTexture(ren, "textures/menu/textPlayWhite.png");
+    blue[PlayBlue].texture = IMG_LoadTexture(ren, textPlayBlue_p);
+    white[PlayWhite].texture = IMG_LoadTexture(ren, textPlayWhite_p);
     blue[PlayBlue].rect = white[PlayWhite].rect = {frameX, frameY, frameW, frameH};
 
     //settings text
-    blue[SettingsBlue].texture = IMG_LoadTexture(ren, "textures/menu/textSettingsBlue.png");
-    white[SettingsWhite].texture = IMG_LoadTexture(ren, "textures/menu/textSettingsWhite.png");
+    blue[SettingsBlue].texture = IMG_LoadTexture(ren, textSettingsBlue_p);
+    white[SettingsWhite].texture = IMG_LoadTexture(ren, textSettingsWhite_p);
     blue[SettingsBlue].rect = white[SettingsWhite].rect = {frameX, frameY + frameH - dY, frameW, frameH};
     
     //quit text
-    blue[QuitBlue].texture = IMG_LoadTexture(ren, "textures/menu/textQuitBlue.png");
-    white[QuitWhite].texture = IMG_LoadTexture(ren, "textures/menu/textQuitWhite.png");
+    blue[QuitBlue].texture = IMG_LoadTexture(ren, textQuitBlue_p);
+    white[QuitWhite].texture = IMG_LoadTexture(ren, textQuitWhite_p);
     blue[QuitBlue].rect = white[QuitWhite].rect = {frameX, frameY + 2*(frameH-dY), frameW, frameH};
-    //
-
-    //
+    
     short   buttons = 3,
             whiteTextPos = 0;
 
@@ -984,20 +1014,20 @@ menuExitCode startMenu(const Uint8 *keyboardState, bool& mainMenu, SDL_Renderer 
                 }
             }
         }
-        SDL_RenderCopy(ren, menuBg, NULL, NULL);
-        SDL_RenderCopy(ren, blue[WTTCDG].texture, NULL, &blue[WTTCDG].rect);
+        SDL_RenderCopy(ren, menuBg, nullptr, nullptr);
+        SDL_RenderCopy(ren, blue[WTTCDG].texture, nullptr, &blue[WTTCDG].rect);
         //button shown
         /*for (int i = 0; i < buttons; i++)
         {
-            SDL_RenderCopy(ren, frame[FrameBlue].texture, NULL, &frame[FrameBlue].rect);
+            SDL_RenderCopy(ren, frame[FrameBlue].texture, nullptr, &frame[FrameBlue].rect);
             frame[FrameBlue].rect.y += frame[FrameBlue].rect.h - dY;
         }*/
         //text render
-        SDL_RenderCopy(ren, blue[PlayBlue].texture, NULL, &blue[PlayBlue].rect);
-        SDL_RenderCopy(ren, blue[SettingsBlue].texture, NULL, &blue[SettingsBlue].rect);
-        SDL_RenderCopy(ren, blue[QuitBlue].texture, NULL, &blue[QuitBlue].rect);
-        SDL_RenderCopy(ren, white[whiteTextPos].texture, NULL, &white[whiteTextPos].rect);
-        //SDL_RenderCopy(ren, frame[FrameWhite].texture, NULL, &frame[FrameWhite].rect);
+        SDL_RenderCopy(ren, blue[PlayBlue].texture, nullptr, &blue[PlayBlue].rect);
+        SDL_RenderCopy(ren, blue[SettingsBlue].texture, nullptr, &blue[SettingsBlue].rect);
+        SDL_RenderCopy(ren, blue[QuitBlue].texture, nullptr, &blue[QuitBlue].rect);
+        SDL_RenderCopy(ren, white[whiteTextPos].texture, nullptr, &white[whiteTextPos].rect);
+        //SDL_RenderCopy(ren, frame[FrameWhite].texture, nullptr, &frame[FrameWhite].rect);
         SDL_RenderPresent(ren);
     }
     
@@ -1014,17 +1044,20 @@ menuExitCode startMenu(const Uint8 *keyboardState, bool& mainMenu, SDL_Renderer 
 int main()
 {
     srand(time(nullptr));
+
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         cout << SDL_GetError() << endl;
         return 1;
     }
+
     if (TTF_Init() != 0)
     {
         cout << TTF_GetError() << endl;
         SDL_Quit();
         return 1;
     }
+
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) != 0)
     {
         cout << Mix_GetError() << endl;
@@ -1034,6 +1067,7 @@ int main()
     }
 
     SDL_Window *win = SDL_CreateWindow("Christmas Deer", 0, 0, ScreenW, ScreenH, SDL_WINDOW_FULLSCREEN);
+
     SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     Mix_Music *avaria = Mix_LoadMUS("audio/avaria.mp3");
@@ -1042,18 +1076,22 @@ int main()
     Mix_Music *elka = Mix_LoadMUS("audio/elka.mp3");
     Mix_Music *verka = Mix_LoadMUS("audio/verka.mp3");
 
-
     SDL_Event event;
     bool quit = false;
-    const Uint8 *keyboardState = SDL_GetKeyboardState(NULL);
+    const Uint8 *keyboardState = SDL_GetKeyboardState(nullptr);
     bool mainMenu = true;
     unsigned int sessionHighscore = 0;
+
     while (!quit)
     {
         if(startMenu(keyboardState, mainMenu, ren, avaria, blestyashie, digi, elka, verka))
+        {
             gameLoop(sessionHighscore, ren, keyboardState, mainMenu);
+        }
         else
+        {
             quit = true;
+        }
     }
 
     Mix_FreeMusic(avaria);
@@ -1061,8 +1099,10 @@ int main()
     Mix_FreeMusic(digi);
     Mix_FreeMusic(elka);
     Mix_FreeMusic(verka);
+
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
+
     SDL_Quit();
     TTF_Quit();
     Mix_Quit();
