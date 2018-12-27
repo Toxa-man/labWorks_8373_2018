@@ -1,0 +1,307 @@
+#include<iostream>
+#include<string.h>
+#include<conio.h>
+#include<stdio.h>
+using namespace std;
+
+const int maxsize = 100;
+
+void null(int *arr) {
+	for (int i = 0; i < maxsize; i++) {
+		arr[i] = 0;
+	}
+}
+
+void one(int *arr) {
+	for (int i = 0; i < maxsize; i++) {
+		arr[i] = 1;
+	}
+}
+
+void readlong(int *arr) {
+	char str[maxsize];
+	gets_s(str);
+	for (int i = 0; i < maxsize; i++) {
+		arr[i] = 0;
+	}
+	arr[0] = strlen(str);
+	for (int i = 0; i < arr[0]; i++) {
+	  arr[arr[0] - i] = int(str[i]) - int('0');
+	}
+}
+
+void writelong(int *arr) {
+	for(int i=arr[0];i>0;i--){
+		
+			cout << arr[i];
+		
+	}
+}
+
+int my_check(int *arr1, int *arr2) {
+	if (arr1[0] < arr2[0]) {
+		return -1;
+	}
+	if (arr1[0] > arr2[0]) {
+		return 1;
+	}
+	if (arr1[0] == arr2[0]) {
+		for (int i = arr1[0]; i > 0; i--) {
+			if (arr1[i] < arr2[i]) return -1;
+			if (arr1[i] > arr2[i]) return 1;
+		}
+	}
+	return 0;//если равны
+}
+
+void long_sum(int *arr1, int *arr2, int *arr3, int check, char &sign3, char &sign1) {
+	int remainder = 0, max;
+	if (check == 1 || check == 0) {
+		max = arr1[0];
+	}
+	else {
+		max = arr2[0];
+	}
+	arr3[0] = max;
+	sign3 = sign1;
+	for (int i = 1; i <= max; i++) {
+		remainder = remainder + arr1[i] + arr2[i],
+		arr3[i] = remainder % 10,
+		remainder /= 10;
+	}
+}
+
+void long_dif(int *arr1, int *arr2, int *arr3, int check ,char &sign3) {
+	int remainder = 0, max;
+	if (check == 1 || check == 0) {
+		max = arr1[0];
+		arr3[0] = max;
+		for (int i = 1; i <= max; i++) {
+			remainder = remainder + arr1[i] - arr2[i] + 10,
+			arr3[i] = remainder%10;
+			if (remainder < 10) {
+				remainder = -1;
+			}
+			else {
+				remainder = 0;
+			}
+		}
+	}
+	else {
+		max = arr2[0];
+		arr3[0] = max;
+		sign3 = '-';
+		remainder = 0;
+		for (int i = 1; i <= max; i++) {
+			remainder = remainder + arr2[i] - arr1[i] + 10,
+			arr3[i] = remainder%10;
+			if (remainder < 10) {
+				remainder = -1;
+			}
+			else {
+				remainder = 0;
+			}
+		}
+	}
+}
+
+void long_mult(int *arr1, int *arr2, int *arr3, char &sign1, char &sign2, char &sign3) {
+	for (int i = 1; i <= arr1[0]; i++) {
+		for (int j = 1; j <= arr2[0]; j++) {
+			arr3[i + j - 1] += arr1[i] * arr2[j];
+		}
+	}
+	arr3[0] = arr1[0] + arr2[0];
+	for (int i = 1; i <= arr3[0]; i++) {
+		arr3[i + 1] += arr3[i] / 10;
+		arr3[i] = arr3[i] % 10;
+	}
+	while (arr3[arr3[0]] == 0) {
+		arr3[0]--;
+	}
+	if (sign1 == sign2) {
+		sign3 = '+';
+	}
+	else {
+		sign3 = '-';
+	}
+}
+
+void long_div(int *arr1, int number, char &sign1, char &sign2) {
+	int old = 0;
+	char sign;
+	if (sign1 == sign2) {
+		sign = '+';
+	}
+	else {
+		sign = '-';
+		cout << sign;
+	}
+	for (int i = arr1[0]; i >= 1; i--) {
+		old = old * 10 + arr1[i];
+		if (old < number && i > 1) {
+			continue;
+		}
+		else {
+			cout << (old / number);
+			old = old % number;
+		}	
+	}
+}
+
+void long_mod(int *arr1, int number, char &sign1, char &sign2) {
+	long int remainder = 0;
+	char sign;
+	if (sign1 == sign2) {
+		sign = '+';
+	}
+	else {
+		sign = '-';
+		cout << sign;
+	}
+	for (int i = arr1[0]; i >= 1; i--) {
+		
+			remainder = (remainder * 10 + arr1[i]) % number;
+		
+	}
+	cout << remainder;
+}
+int factmult(int x, int *arr3);
+
+void long_fact(int n, int *arr3) {
+	for (int x = 2; x <= n; x++) {
+		arr3[0] = factmult(x, arr3);
+	}
+}
+
+int factmult(int x, int *arr3) {
+	int carry = 0;
+	for (int i = 1; i <= arr3[0]; i++) {
+		int p = arr3[i] * x + carry;
+		arr3[i] = p % 10;
+		carry = p / 10;
+	}
+	while (carry != 0) {
+		arr3[arr3[0]] = carry % 10;
+		carry = carry / 10;
+		arr3[0]++;
+	}
+	return arr3[0];
+}
+
+int main() {
+	do {
+		int arr1[maxsize], arr2[maxsize], arr3[maxsize], check, number2;
+		char boton;
+		bool toggle_switch;
+		null(arr3);
+		long int f;
+		char sign1, sign2, sign3 ='+';
+		cout << "Enter the sign of number (+/-) or \"!\" if you want to found factorial." << endl;
+		cin >> sign1;
+		if (sign1 != '+' && sign1 != '-' && sign1 != '!' ) {
+			cout << "Mistake. You entered wrong sign. Please insert correct sign." << endl;
+			cin >> sign1;
+		}
+		if (sign1 == '+' || sign1 == '-') {
+			cin.ignore();
+			cout << "Enter number." << endl;
+			readlong(arr1);
+			cout << "Insert the opertion." << endl;
+			cout << "To find the sum, press \"+\"." << endl;
+			cout << "To found the difference, press \"-\"." << endl;
+			cout << "To found the multiplication, press \"*\"." << endl;
+			cout << "To division without remainder, press \"d\"." << endl;
+			cout << "To found remainder of division, press \"m\"." << endl;
+			cin >> boton;
+			cin.ignore();
+			if (boton == '+' || boton == '-' || boton == '*') {
+				cout << "Enter the sign of second number (+/-)." << endl;
+				cin >> sign2;
+				if (sign2 != '+' && sign2 != '-') {
+					cout << "Mistake. You entered wrong sign. Please insert correct sign." << endl;
+					cin >> sign2;
+				}
+				cin.ignore();
+				cout << "Enter second number." << endl;
+				readlong(arr2);
+				check = my_check(arr1, arr2);
+				toggle_switch = 1;
+			}
+			if (boton == 'd' || boton == 'm') {
+				cout << "Enter the sign of second number (+/-)." << endl;
+				cin >> sign2;
+				if (sign1 != '+' && sign1 != '-') {
+					cout << "Mistake. You entered wrong sign. Please insert correct sign." << endl;
+					cin >> sign2;
+				}
+				cin.ignore();
+				cout << "Enter second number." << endl;
+				cin >> number2;
+				if (number2 == 0) {
+					cout << "Mistake. You entered 0. Please insert correct number." << endl;
+					cin >> number2;
+				}
+				toggle_switch = 0;
+			}
+			switch (boton) {
+			case '+': if (sign1 == sign2) {
+				long_sum(arr1, arr2, arr3, check, sign3, sign1);
+				break;
+			}
+					  if (sign1 == '+' && sign2 == '-') {
+						  long_dif(arr1, arr2, arr3, check, sign3);
+						  break;
+					  }
+					  else {
+						  long_dif(arr2, arr1, arr3, (-1)*check, sign3);
+						  break;
+					  }
+
+			case '-': if (sign1 == '+' && sign1 == sign2) {
+				long_dif(arr1, arr2, arr3, check, sign3);
+				break;
+			}
+					  if (sign1 == '+' && sign2 == '-') {
+						  long_sum(arr1, arr2, arr3, check, sign3, sign1);
+						  break;
+					  }
+					  if (sign1 == '-' && sign2 == '+') {
+						  long_sum(arr1, arr2, arr3, check, sign3, sign1);
+						  break;
+					  }
+					  else {
+						  long_dif(arr2, arr1, arr3, (-1)*check, sign3);
+						  break;
+					  }
+
+			case '*': long_mult(arr1, arr2, arr3, sign1, sign2, sign3);
+				break;
+
+			case'd': long_div(arr1, number2, sign1, sign2);
+				break;
+
+			case'm': long_mod(arr1, number2, sign1, sign2);
+				break;
+
+			default: cout << "Mistake. You entered wrong operation." << endl;
+				break;
+			}
+			if (toggle_switch) {
+				if (sign3 == '-') {
+					cout << sign3;
+				}
+				writelong(arr3);
+			}
+		}
+		if (sign1 == '!') {
+			cout << "Enter the number." << endl;
+			cin >> f;
+			one(arr3);
+			long_fact(f, arr3);
+			writelong(arr3);
+		}
+		cout << endl << "Press any key to continue or press Esc to close the program" << endl;
+	} while (_getch() != 27);
+	return 0;
+}
