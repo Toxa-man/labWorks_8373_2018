@@ -1,12 +1,11 @@
- #include <iostream>
+#include <iostream>
 #include <conio.h>
 
 using namespace std;
 
-const int size_str = 100;
+const int size_str = 50;
 
 void word_sort(char* str, int* sums, int* words_pos, int size_sum) {
-	
 	char temp_str1[size_str], temp_str2[size_str], word_str[size_str];
 	while (size_sum > 1) {
 		int min = sums[0], imin = 0, temp_sum = 0, temp_wpos = 0, word_length = 0;
@@ -23,14 +22,16 @@ void word_sort(char* str, int* sums, int* words_pos, int size_sum) {
 			word_length = words_pos[imin + 1] - words_pos[imin];
 		}
 
-		strncpy_s(word_str, str + words_pos[imin], word_length);
-		strncpy_s(temp_str1, str, words_pos[imin]);
-		strcpy_s(temp_str2, str + words_pos[imin + 1]);
-		strcat_s(temp_str1, temp_str2);
-		strcat_s(word_str, " ");
-		strcat_s(word_str, temp_str1);
-		strcpy_s(str, size_str, word_str);
 
+		strncpy(word_str, str + words_pos[imin], word_length);
+		word_str[word_length] = '\0';
+		strncpy(temp_str1, str, words_pos[imin]);
+		temp_str1[words_pos[imin]] = '\0';
+		strcpy(temp_str2, str + words_pos[imin + 1]);
+		strcat(temp_str1, temp_str2);
+		strcat(word_str, " ");
+		strcat(word_str, temp_str1);
+		strcpy(str, word_str);
 
 		for (int i = size_sum; i > imin; i--) {
 			words_pos[i] -= word_length + 1;
@@ -47,6 +48,7 @@ void word_sort(char* str, int* sums, int* words_pos, int size_sum) {
 		words_pos += 1;
 		size_sum--;
 	}
+
 	while (str[strlen(str) - 1] == ' ') {
 		str[strlen(str) - 1] = '\0';
 	}
@@ -61,7 +63,7 @@ int main() {
 	int size_sum = 0;
 
 	cout << "Enter the string: " << endl;
-	gets_s(str);
+	cin.getline(str, size_str);
 
 	for (int i = 0; i < strlen(str); i++) {
 		if (str[i] == ' ') {
