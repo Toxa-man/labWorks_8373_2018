@@ -5,7 +5,7 @@
 #include<stdio.h>
 using namespace std;
 
-#define N 1000
+const int  N=100;
 
 struct key_char
     {
@@ -17,11 +17,11 @@ int getline(char s[], int lim)
 {
     int c, i;
 
-    for(i=0;i<lim-1 && (c=getchar()) !=EOF && c != '\n'; ++i)
+    for(i=0;i<lim-1 && (c=getchar()) !=EOF && c != '\n'; i++)
         s[i] = c;
     if (c == '\n') {
         s[i] = c;
-        ++i;
+        i++;
     }
     s[i] = '\0';
     return i;
@@ -46,16 +46,13 @@ int sort(key_char ob[],int count_kc)
 		ob[j+1]=m;
 		
 	    }
-	    
-	    
-		
-			
-	    
+	    	    						    
 	    
 	}
     }
     return 0;
 }
+
 int main()
 {
     int count_kc = 0;
@@ -87,13 +84,13 @@ int main()
 	    ob[j].c[k]=a[i];
 	    ob[j].c[k+1]= '\0';
 	    
-	    cout<<ob[j].o;
-	    cout<<endl;
+//	    cout<<ob[j].o;
+//	    cout<<endl;
 	    k=0;
 	    j++;
 	    ob[j].o = 0;
 	    count_kc++;
-	}
+	    }
 	else
 	{
 	    ob[j].c[k]=a[i];
@@ -122,9 +119,10 @@ int main()
 	    }
 		
 	}
-    }
-    cout<<endl;
-    cout<<count_kc;
-    cout<<endl;
+      }
+
+  cout<<endl;
+   
+// cout<<endl;
     return 0;
 }
