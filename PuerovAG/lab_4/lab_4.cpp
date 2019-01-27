@@ -16,13 +16,27 @@ int fact(int n)
 }
 
 
-int st(int a,int c)
+float st(int a,int c)
 {
     int i;
-    for(i=1;i<c+1;i++)
-    {
-	a=a*a;
-    }
+	int k;
+	k = 1;
+	if (c == 0)
+		return 1;
+	
+	if (c > 0)
+	{
+		for (i = 1; i < c + 1; i++)
+			a = a * a;
+		return a;
+		
+	}
+	if(0>c)
+	{
+		for (i = 1; i < -c + 1; i++)
+			k = (1 / a);
+		return k;
+	}
     return a;
 }
 
