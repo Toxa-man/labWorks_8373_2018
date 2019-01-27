@@ -1,3 +1,4 @@
+
 #include<iostream>
 
 
@@ -16,46 +17,57 @@ int fact(int n)
 }
 
 
-float st(int a,int c)
+int st(int a,int c)
 {
-    int i;
-	int k;
-	k = 1;
-	if (c == 0)
-		return 1;
-	
-	if (c > 0)
+    int i,b;
+    if(a>0)
+    {
+	for(i=1;i<c+1;i++)
 	{
-		for (i = 1; i < c + 1; i++)
-			a = a * a;
-		return a;
-		
+	    a=a*a;
 	}
-	if(0>c)
+    }
+    else if(a=0)
+    {
+	a=1;
+    }
+    else if(a<0)
+    {
+	for(i=1;i<c+1;i++)
 	{
-		for (i = 1; i < -c + 1; i++)
-			k = (1 / a);
-		return k;
+	    b=1;
+	    b=(1/a)*b;
 	}
+    }
     return a;
 }
 
 
 float sq(int a)
 {
-    return 1+((a-1)/2)-((a-1)*(a-1)/4);
+    float t,k;
+    k=a/2;
+   do
+    {
+	t=k;
+	k=(t+(a/t))/2;
+    }while((t-k)!=0);
+	
+    return k ;
+    
 }
 
 
-int prp(int a)
+bool  prp(int a)
 {
-    int k,i;
-    k=0;
-    for(i=0;i<a;i++)
+    int i;
+    bool k=false;
+    
+    for(i=1;i<a;i++)
     {
 	if(a%i==0)
 	    {
-		k=1;
+		k=true;
 	    }
     }
     return k;
@@ -70,15 +82,16 @@ int main()
     
     cin>>a>>n;
     
-    cout<< fact(a)<<endl;
+    cout<<"fact="<< fact(a)<<endl;
     
-    cout<<st(a,n)<<endl;
+    cout<<"st="<<st(a,n)<<endl;
     
-    cout <<sq(a)<<endl;
+    cout <<"sq="<<sq(a)<<endl;
     
-    cout<<prp(a)<<endl;
+    cout<<"prp="<<prp(a)<<endl;
     
 
     return 0;
     
 }
+
