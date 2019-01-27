@@ -3,7 +3,7 @@
 #include<time.h>
 using namespace std;
 
-const int n= 3;
+const int n= 100;
 
 int gen_array(int *a, int n)
 {
