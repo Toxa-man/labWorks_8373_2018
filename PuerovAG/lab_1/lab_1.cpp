@@ -1,40 +1,38 @@
-#include<iostream>
-
-
+#include <iostream>
+//#include <string.h>
 using namespace std;
-
-
 int main()
 {
-    int a;
-    int b;
-    char c;
+float a,b;
+char c;
+cout << "число1:";
+cin >> a;
+cout << "операция:";
+cin >> c;
+cout << "число2:";
+cin >> b;
 
-    cin>>a;
+switch(c)
+  {
+  case '+':
+      cout << a+b;
+    break;
+  case '-':
+      cout << a-b;
+    break;
+  case '*':
+      cout<<a*b;
+    break;
+  case'/':
+    if (b==0)
+	cout << "нельзя делить на 0";
+    else cout << a/b;
+    break;
     
-    cin>>c;
-    
-    cin>>b;
-
-    switch(c)
-    {
-    case '+':
-	cout<<a+b;
-	break;
-    case '-':
-	cout<<a-b;
-	break;
-    case '*':
-	cout<<a*b;
-	break;
-    case'/':
-	if (b==0)
-	    cout<<"its impossible";
-	else
-	    cout<<a/b);
-	break;
-    default:
-	cout<<"enter correct sign";
-    }
-    return 0;
+  default:
+      break;
+  }
+cout<<endl;
+return 0;
 }
+
