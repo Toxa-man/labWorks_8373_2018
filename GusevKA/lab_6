@@ -1,0 +1,911 @@
+#include "pch.h"
+#include <iostream>
+#include <ctime>
+#include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+using namespace std;
+
+const int SIZE = 9;
+
+int str, colum;
+int number;
+
+int sudoku[SIZE][SIZE] =
+{
+{0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
+{0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
+{0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
+{0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
+{0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
+{0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
+{0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
+{0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
+{0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
+};
+
+int kubgenerator()
+{
+	for (int d = 2; d < SIZE; d += 3)
+	{
+		for (int c = 2; c < SIZE; c += 3)
+		{
+			if ((sudoku[c][d]==sudoku[c - 1][d - 1]) && (sudoku[c - 1][d - 1] != 0) && (sudoku[c][d] != 0))
+			{
+				sudoku[c][d] = 0;
+				sudoku[c - 1][d - 1] = 0;
+				
+			}
+
+			if ((sudoku[c][d] == sudoku[c - 1][d + 1]) && (sudoku[c - 1][d + 1] != 0) && (sudoku[c][d] != 0))
+			{
+				sudoku[c][d] = 0;
+				sudoku[c - 1][d + 1] = 0;
+				
+			}
+
+			if ((sudoku[c][d] == sudoku[c + 1][d - 1]) && (sudoku[c + 1][d - 1] != 0) && (sudoku[c][d] != 0))
+			{
+				sudoku[c][d] = 0;
+				sudoku[c + 1][d - 1] = 0;
+				
+			}
+
+			if ((sudoku[c][d] == sudoku[c + 1][d + 1]) && (sudoku[c + 1][d + 1] != 0) && (sudoku[c][d] != 0))
+			{
+				sudoku[c][d] = 0;
+				sudoku[c + 1][d + 1] = 0;
+				
+			}
+		}
+	}
+	for (int d = 2; d < SIZE; d += 3)
+	{
+		for (int c = 2; c < SIZE; c += 3)
+		{
+			if ((sudoku[c - 1][d - 1] == sudoku[c][d + 1]) && (sudoku[c - 1][d - 1] != 0) && (sudoku[c][d + 1] != 0))
+			{
+				sudoku[c][d + 1] = 0;
+				sudoku[c - 1][d - 1] = 0;
+			}
+			if ((sudoku[c - 1][d - 1] == sudoku[c + 1][d]) && (sudoku[c - 1][d - 1] != 0) && (sudoku[c + 1][d] != 0))
+			{
+				sudoku[c + 1][d] = 0;
+				sudoku[c - 1][d - 1] = 0;
+			}
+			if ((sudoku[c - 1][d - 1] == sudoku[c + 1][d + 1]) && (sudoku[c - 1][d - 1] != 0) && (sudoku[c + 1][d + 1] != 0))
+			{
+				sudoku[c - 1][d - 1] = 0;
+				sudoku[c + 1][d + 1] = 0;
+			}
+			if ((sudoku[c - 1][d - 1] == sudoku[c][d]) && (sudoku[c - 1][d - 1] != 0) && (sudoku[c][d] != 0))
+			{
+				sudoku[c][d] = 0;
+				sudoku[c - 1][d - 1] = 0;
+			}
+		}
+	}
+	for (int d = 2; d < SIZE; d += 3)
+	{
+		for (int c = 2; c < SIZE; c += 3)
+		{
+			if ((sudoku[c + 1][d - 1] == sudoku[c][d + 1]) && (sudoku[c + 1][d - 1] != 0) && (sudoku[c][d + 1] != 0))
+			{
+				sudoku[c + 1][d - 1] = 0;
+				sudoku[c][d + 1] = 0;
+			}
+			if ((sudoku[c + 1][d - 1] == sudoku[c - 1][d]) && (sudoku[c + 1][d - 1] != 0) && (sudoku[c - 1][d] != 0))
+			{
+				sudoku[c + 1][d - 1] = 0;
+				sudoku[c - 1][d] = 0;
+			}
+			if ((sudoku[c + 1][d - 1] == sudoku[c - 1][d + 1]) && (sudoku[c + 1][d - 1] != 0) && (sudoku[c - 1][d + 1] != 0))
+			{
+				sudoku[c + 1][d - 1] = 0;
+				sudoku[c - 1][d + 1] = 0;
+			}
+			if ((sudoku[c + 1][d - 1] == sudoku[c][d]) && (sudoku[c + 1][d - 1] != 0) && (sudoku[c][d] != 0))
+			{
+				sudoku[c + 1][d - 1] = 0;
+				sudoku[c][d] = 0;
+			}
+		}
+	}
+	for (int d = 2; d < SIZE; d += 3)
+	{
+		for (int c = 2; c < SIZE; c += 3)
+		{
+			if ((sudoku[c + 1][d + 1] == sudoku[c - 1][d]) && (sudoku[c + 1][d + 1] != 0) && (sudoku[c - 1][d] != 0))
+			{
+				sudoku[c + 1][d + 1] = 0;
+				sudoku[c - 1][d] = 0;
+			}
+			if ((sudoku[c + 1][d + 1] == sudoku[c - 1][d - 1]) && (sudoku[c + 1][d + 1] != 0) && (sudoku[c - 1][d - 1] != 0))
+			{
+				sudoku[c + 1][d + 1] = 0;
+				sudoku[c - 1][d - 1] = 0;
+			}
+			if ((sudoku[c + 1][d + 1] == sudoku[c][d - 1]) && (sudoku[c + 1][d + 1] != 0) && (sudoku[c][d - 1] != 0))
+			{
+				sudoku[c + 1][d + 1] = 0;
+				sudoku[c][d - 1] = 0;
+			}
+			if ((sudoku[c + 1][d + 1] == sudoku[c][d]) && (sudoku[c + 1][d + 1] != 0) && (sudoku[c][d] != 0))
+			{
+				sudoku[c + 1][d + 1] = 0;
+				sudoku[c][d] = 0;
+			}
+		}
+	}
+	for (int d = 2; d < SIZE; d += 3)
+	{
+		for (int c = 2; c < SIZE; c += 3)
+		{
+			if ((sudoku[c - 1][d + 1] == sudoku[c][d - 1]) && (sudoku[c - 1][d + 1] != 0) && (sudoku[c][d - 1] != 0))
+			{
+				sudoku[c][d - 1] = 0;
+				sudoku[c - 1][d + 1] = 0;
+			}
+			if ((sudoku[c - 1][d + 1] == sudoku[c + 1][d]) && (sudoku[c - 1][d + 1] != 0) && (sudoku[c + 1][d] != 0))
+			{
+				sudoku[c + 1][d] = 0;
+				sudoku[c - 1][d + 1] = 0;
+			}
+			if ((sudoku[c - 1][d + 1] == sudoku[c + 1][d - 1]) && (sudoku[c - 1][d + 1] != 0) && (sudoku[c + 1][d - 1] != 0))
+			{
+				sudoku[c + 1][d - 1] = 0;
+				sudoku[c - 1][d + 1] = 0;
+			}
+			if ((sudoku[c - 1][d + 1] == sudoku[c][d]) && (sudoku[c - 1][d + 1] != 0) && (sudoku[c][d] != 0))
+			{
+				sudoku[c][d] = 0;
+				sudoku[c - 1][d + 1] = 0;
+			}
+		}
+	}
+	for (int d = 2; d < SIZE; d += 3)
+	{
+		for (int c = 2; c < SIZE; c += 3)
+		{
+
+			if ((sudoku[c - 1][d] == sudoku[c][d + 1]) && (sudoku[c - 1][d] != 0) && (sudoku[c][d + 1] != 0))
+			{
+				sudoku[c][d + 1] = 0;
+				sudoku[c - 1][d] = 0;
+			}
+			if ((sudoku[c - 1][d] == sudoku[c][d - 1]) && (sudoku[c - 1][d] != 0) && (sudoku[c][d - 1] != 0))
+			{
+				sudoku[c][d - 1] = 0;
+				sudoku[c - 1][d] = 0;
+			}
+			if ((sudoku[c - 1][d] == sudoku[c + 1][d - 1]) && (sudoku[c - 1][d] != 0) && (sudoku[c + 1][d - 1] != 0))
+			{
+				sudoku[c + 1][d - 1] = 0;
+				sudoku[c - 1][d] = 0;
+			}
+			if ((sudoku[c - 1][d] == sudoku[c + 1][d + 1]) && (sudoku[c - 1][d] != 0) && (sudoku[c + 1][d + 1] != 0))
+			{
+				sudoku[c + 1][d + 1] = 0;
+				sudoku[c - 1][d] = 0;
+			}
+		}
+	}
+	for (int d = 2; d < SIZE; d += 3)
+	{
+		for (int c = 2; c < SIZE; c += 3)
+		{
+			if ((sudoku[c + 1][d] == sudoku[c][d + 1]) && (sudoku[c + 1][d] != 0) && (sudoku[c][d + 1] != 0))
+			{
+				sudoku[c][d + 1] = 0;
+				sudoku[c + 1][d] = 0;
+			}
+			if ((sudoku[c + 1][d] == sudoku[c - 1][d + 1]) && (sudoku[c + 1][d] != 0) && (sudoku[c - 1][d + 1] != 0))
+			{
+				sudoku[c - 1][d + 1] = 0;
+				sudoku[c + 1][d] = 0;
+			}
+			if ((sudoku[c + 1][d] == sudoku[c - 1][d - 1]) && (sudoku[c + 1][d] != 0) && (sudoku[c - 1][d - 1] != 0))
+			{
+				sudoku[c - 1][d - 1] = 0;
+				sudoku[c + 1][d] = 0;
+			}
+			if ((sudoku[c + 1][d] == sudoku[c][d - 1]) && (sudoku[c + 1][d] != 0) && (sudoku[c][d - 1] != 0))
+			{
+				sudoku[c][d - 1] = 0;
+				sudoku[c + 1][d] = 0;
+			}
+
+		}
+	}
+	for (int d = 2; d < SIZE; d += 3)
+	{
+		for (int c = 2; c < SIZE; c += 3)
+		{
+			if ((sudoku[c][d - 1] == sudoku[c + 1][d]) && (sudoku[c][d - 1] != 0) && (sudoku[c + 1][d] != 0))
+			{
+				sudoku[c + 1][d] = 0;
+				sudoku[c][d - 1] = 0;
+			}
+			if ((sudoku[c][d - 1] == sudoku[c + 1][d + 1]) && (sudoku[c][d - 1] != 0) && (sudoku[c + 1][d + 1] != 0))
+			{
+				sudoku[c][d - 1] = 0;
+				sudoku[c + 1][d + 1] = 0;
+			}
+			if ((sudoku[c][d - 1] == sudoku[c - 1][d]) && (sudoku[c][d - 1] != 0) && (sudoku[c - 1][d] != 0))
+			{
+				sudoku[c][d - 1] = 0;
+				sudoku[c - 1][d] = 0;
+			}
+			if ((sudoku[c][d - 1] == sudoku[c - 1][d + 1]) && (sudoku[c][d - 1] != 0) && (sudoku[c - 1][d + 1] != 0))
+			{
+				sudoku[c][d - 1] = 0;
+				sudoku[c - 1][d + 1] = 0;
+			}
+		}
+	}
+	for (int d = 2; d < SIZE; d += 3)
+	{
+		for (int c = 2; c < SIZE; c += 3)
+		{
+			if ((sudoku[c][d + 1] == sudoku[c + 1][d]) && (sudoku[c][d + 1] != 0) && (sudoku[c + 1][d] != 0))
+			{
+				sudoku[c + 1][d] = 0;
+				sudoku[c][d + 1] = 0;
+			}
+			if ((sudoku[c][d + 1] == sudoku[c + 1][d - 1]) && (sudoku[c][d + 1] != 0) && (sudoku[c + 1][d - 1] != 0))
+			{
+				sudoku[c + 1][d - 1] = 0;
+				sudoku[c][d + 1] = 0;
+			}
+			if ((sudoku[c][d + 1] == sudoku[c - 1][d - 1]) && (sudoku[c][d + 1] != 0) && (sudoku[c - 1][d - 1] != 0))
+			{
+				sudoku[c - 1][d - 1] = 0;
+				sudoku[c][d + 1] = 0;
+			}
+			if ((sudoku[c][d + 1] == sudoku[c - 1][d]) && (sudoku[c][d + 1] != 0) && (sudoku[c - 1][d] != 0))
+			{
+				sudoku[c - 1][d] = 0;
+				sudoku[c][d + 1] = 0;
+			}
+
+
+		}
+
+	}
+	return sudoku[SIZE][SIZE];
+}
+
+
+
+int Generator()
+{
+	srand(time(0));
+
+	int temp1 = (rand() % 7) + 1;
+
+	for (int i = 1; i <= SIZE; i += temp1)
+	{
+		int temp2 = (rand() % 7) + 1;
+
+		for (int j = 1; j <= SIZE; j += temp2)
+		{
+
+			int temp = (rand() % 9) + 1;
+			sudoku[i][j] = temp;
+
+			for (int p = 1; p <= SIZE - j; p++)
+			{
+				if ((sudoku[i][j] == sudoku[i][j + p]) && (sudoku[i][j + p] != 0) && (sudoku[i][j] != 0))
+				{
+					sudoku[i][j] = 0;
+				}
+			}
+
+			for (int p = 1; p < SIZE; p++)
+			{
+				if ((sudoku[i][j] == sudoku[i][j - p]) && (sudoku[i][j - p] != 0) && (sudoku[i][j] != 0))
+				{
+					sudoku[i][j] = 0;
+
+				}
+			}
+
+			for (int v = 1; v <= SIZE - i; v++)
+			{
+				if ((sudoku[i][j] == sudoku[i + v][j]) && (sudoku[i + v][j] != 0) && (sudoku[i][j] != 0))
+				{
+					sudoku[i][j] = 0;
+
+				}
+
+			}
+
+			for (int v = 1; v < SIZE; v++)
+			{
+				if ((sudoku[i][j] == sudoku[i - v][j]) && (sudoku[i - v][j] != 0) && (sudoku[i][j] != 0))
+				{
+					sudoku[i][j] = 0;
+
+				}
+
+			}
+
+			kubgenerator();
+		}
+		
+	}
+	
+	
+	return sudoku[SIZE][SIZE];
+}
+
+int NUMBER1(int number)
+{
+
+	int  one = 1, two = 2, tree = 3, four = 4, five = 5, six = 6, seven = 7, eight = 8, nine = 9;
+	int *a1 = &one;
+	int *a2 = &two;
+	int *a3 = &tree;
+	int *a4 = &four;
+	int *a5 = &five;
+	int *a6 = &six;
+	int *a7 = &seven;
+	int *a8 = &eight;
+	int *a9 = &nine;
+
+	switch (number)
+	{
+	case 1:
+		sudoku[str - 1][colum - 1] = *a1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				cout << " " << sudoku[i][j];
+			}
+			cout << endl;
+		}
+		break;
+	case 2:
+		sudoku[str - 1][colum - 1] = *a2;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				cout << " " << sudoku[i][j];
+			}
+			cout << endl;
+		}
+		break;
+	case 3:
+		sudoku[str - 1][colum - 1] = *a3;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				cout << " " << sudoku[i][j];
+			}
+			cout << endl;
+		}
+		break;
+	case 4:
+		sudoku[str - 1][colum - 1] = *a4;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				cout << " " << sudoku[i][j];
+			}
+			cout << endl;
+		}
+		break;
+	case 5:
+		sudoku[str - 1][colum - 1] = *a5;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				cout << " " << sudoku[i][j];
+			}
+			cout << endl;
+		}
+		break;
+	case 6:
+		sudoku[str - 1][colum - 1] = *a6;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				cout << " " << sudoku[i][j];
+			}
+			cout << endl;
+		}
+		break;
+	case 7:
+		sudoku[str - 1][colum - 1] = *a7;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				cout << " " << sudoku[i][j];
+			}
+			cout << endl;
+		}
+		break;
+	case 8:
+		sudoku[str - 1][colum - 1] = *a8;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				cout << " " << sudoku[i][j];
+			}
+			cout << endl;
+		}
+		break;
+	case 9:
+		sudoku[str - 1][colum - 1] = *a9;
+		for (int i = 0; i < SIZE; i++)
+		{
+			for (int j = 0; j < SIZE; j++)
+			{
+				cout << " " << sudoku[i][j];
+			}
+			cout << endl;
+		}
+		break;
+	default:
+		cout << "wrong number ";
+		cout << endl;
+		break;
+	}
+	return number;
+};
+
+
+
+int COLUM1(int colum)
+{
+
+	switch (colum)
+	{
+	case 1:
+		cout << "Write number ";
+		cin >> number;
+		NUMBER1(number);
+		break;
+	case 2:
+		cout << "Write number ";
+		cin >> number;
+		NUMBER1(number);
+		break;
+	case 3:
+		cout << "Write number ";
+		cin >> number;
+		NUMBER1(number);
+		break;
+	case 4:
+		cout << "Write number ";
+		cin >> number;
+		NUMBER1(number);
+		break;
+	case 5:
+		cout << "Write number ";
+		cin >> number;
+		NUMBER1(number);
+		break;
+	case 6:
+		cout << "Write number ";
+		cin >> number;
+		NUMBER1(number);
+		break;
+	case 7:
+		cout << "Write number ";
+		cin >> number;
+		NUMBER1(number);
+		break;
+	case 8:
+		cout << "Write number ";
+		cin >> number;
+		NUMBER1(number);
+		break;
+	case 9:
+		cout << "Write number ";
+		cin >> number;
+		NUMBER1(number);
+		break;
+	default:
+		cout << "wrong colum ";
+		cout << endl;
+		break;
+	}
+	return colum;
+
+};
+
+
+int STR1(int str)
+{
+
+	switch (str)
+	{
+	case 1:
+		cout << "Write colum ";
+		cin >> colum;
+		COLUM1(colum);
+		break;
+	case 2:
+		cout << "Write colum ";
+		cin >> colum;
+		COLUM1(colum);
+		break;
+	case 3:
+		cout << "Write colum ";
+		cin >> colum;
+		COLUM1(colum);
+		break;
+	case 4:
+		cout << "Write colum ";
+		cin >> colum;
+		COLUM1(colum);
+		break;
+	case 5:
+		cout << "Write colum ";
+		cin >> colum;
+		COLUM1(colum);
+		break;
+	case 6:
+		cout << "Write colum ";
+		cin >> colum;
+		COLUM1(colum);
+		break;
+	case 7:
+		cout << "Write colum ";
+		cin >> colum;
+		COLUM1(colum);
+		break;
+	case 8:
+		cout << "Write colum ";
+		cin >> colum;
+		COLUM1(colum);
+		break;
+	case 9:
+		cout << "Write colum ";
+		cin >> colum;
+		COLUM1(colum);
+		break;
+	default:
+		cout << "wrong str ";
+		cout << endl;
+		break;
+	}
+	return sudoku[str][colum];
+};
+
+
+int main()
+{
+	char chec;
+	cout << "	Rules " << endl;
+	cout << " The Classic Sudoku is a number placing puzzle based on a 9x9 grid with several given numbers. " << endl;
+	cout << " The object is to place the numbers 1 to 9 " << endl;
+	cout << "in the empty squares so that each row, each column and each 3x3 box contains the same number only once. " << endl;
+	cout << " You shold replase all 0 to numbers by the rules ";
+	cout << endl;
+	cout << "Write number of str,colum and number what you want to inscribe ";
+	cout << endl;
+	Generator();
+	for (int u = 0; u < SIZE; u++)
+	{
+		for (int o = 0; o < SIZE; o++)
+		{
+			cout << " " << sudoku[u][o];
+		}
+		cout << endl;
+	}
+	
+	for (int k = 0; k <= SIZE * SIZE * SIZE; k++)
+	{
+
+		cout << endl;
+		cout << "Write str ";
+		cin >> str;
+		STR1(str);
+		cout << endl;
+		cout << "If you want to chec your sudoku press c or if you want red rules press r ";
+		cout << endl;
+		cin >> chec;
+
+		if ((chec == 'c') || (chec == 'C'))
+		{
+
+			int flag = 0;
+			for (int i = 1; i < SIZE; i++)
+			{
+				for (int j = 1; j < SIZE; j++)
+				{
+					for (int p = 1; p < SIZE - j; p++)
+					{
+						if ((sudoku[i][j] != sudoku[i][j + p]) && (sudoku[i][j + p] != 0) &&( sudoku[i][j] != 0))
+						{
+							flag = flag + 1;
+
+						}
+						else
+						{
+							flag = flag - 1;
+
+						}
+					}
+				}
+			}
+			for (int b = 1; b <= SIZE; b++)
+			{
+
+				for (int a = 1; a <= SIZE; a++)
+				{
+					for (int v = 1; v < SIZE - a; v++)
+					{
+						if( (sudoku[a][b] != sudoku[a + v][b]) && (sudoku[a + v][b] != 0 )&& (sudoku[a][b] != 0))
+						{
+							flag = flag + 1;
+
+						}
+						else
+						{
+							flag = flag - 1;
+
+						}
+					}
+				}
+			}
+			for (int d = 2; d <= SIZE; d = d + 3)
+			{
+				for (int c = 2; c <= SIZE; c = c + 3)
+				{
+					if (sudoku[c][d] != sudoku[c - 1][d - 1])
+					{
+						flag = flag + 1;
+
+					}
+					else
+					{
+						flag = flag - 1;
+
+					}
+					if (sudoku[c][d] != sudoku[c - 1][d + 1])
+					{
+						flag = flag + 1;
+
+					}
+					else
+					{
+						flag = flag - 1;
+
+					}
+					if (sudoku[c][d] != sudoku[c + 1][d - 1])
+					{
+						flag = flag + 1;
+
+					}
+					else
+					{
+						flag = flag - 1;
+
+					}
+					if (sudoku[c][d] != sudoku[c + 1][d + 1])
+					{
+						flag = flag + 1;
+
+					}
+					else
+					{
+						flag = flag - 1;
+
+					}
+				}
+			}
+			for (int d = 2; d <= SIZE; d = d + 3)
+			{
+					for (int c = 2; c <= SIZE; c = c + 3)
+					{
+						if (sudoku[c - 1][d - 1] != sudoku[c][d + 1])
+						{
+							flag = flag + 1;
+
+
+						}
+						else
+						{
+							flag = flag - 1;
+
+
+						}
+						if (sudoku[c - 1][d - 1] != sudoku[c + 1][d])
+						{
+							flag = flag + 1;
+								
+						}
+						else
+						{
+							flag = flag - 1;
+								
+						}
+						
+					}
+			}
+			for (int d = 2; d <= SIZE; d = d + 3)
+			{
+					for (int c = 2; c <= SIZE; c = c + 3)
+					{
+						if (sudoku[c + 1][d - 1] != sudoku[c][d + 1])
+						{
+							flag = flag + 1;
+								
+						}
+						else
+						{
+							flag = flag - 1;
+								
+						}
+						if (sudoku[c + 1][d - 1] != sudoku[c - 1][d])
+						{
+							flag = flag + 1;
+
+						}
+						else
+						{
+							flag = flag - 1;
+
+						}
+						if (sudoku[c + 1][d - 1] != sudoku[c - 1][d + 1])
+						{
+							flag = flag + 1;
+
+						}
+						else
+						{
+							flag = flag - 1;
+
+						}
+					}
+			}
+			for (int d = 2; d <= SIZE; d = d + 3)
+			{
+					for (int c = 2; c <= SIZE; c = c + 3)
+					{
+						if (sudoku[c + 1][d + 1] != sudoku[c - 1][d])
+						{
+							flag = flag + 1;
+
+						}
+						else
+						{
+							flag = flag - 1;
+
+						}
+						if (sudoku[c + 1][d + 1] != sudoku[c][d - 1])
+						{
+							flag = flag + 1;
+
+						}
+						else
+						{
+							flag = flag - 1;
+
+						}
+						if (sudoku[c + 1][d + 1] != sudoku[c - 1][d-1])
+						{
+							flag = flag + 1;
+
+						}
+						else
+						{
+							flag = flag - 1;
+
+						}
+					}
+			}
+			for (int d = 2; d <= SIZE; d = d + 3)
+			{
+					for (int c = 2; c <= SIZE; c = c + 3)
+					{
+						if (sudoku[c - 1][d + 1] != sudoku[c][d - 1])
+						{
+							flag = flag + 1;
+
+						}
+						else
+						{
+							flag = flag - 1;
+						}
+						if (sudoku[c - 1][d + 1] != sudoku[c + 1][d])
+						{
+							flag = flag + 1;
+						}
+						else
+						{
+							flag = flag - 1;
+						}
+					}
+			}
+			for (int d = 2; d <= SIZE; d = d + 3)
+			{
+				for (int c = 2; c <= SIZE; c = c + 3)
+				{
+					if (sudoku[c - 1][d] != sudoku[c][d + 1])
+					{
+						flag = flag + 1;
+					}
+					else
+					{
+						flag = flag - 1;
+					}
+					if (sudoku[c - 1][d] != sudoku[c][d - 1])
+					{
+						flag = flag + 1;
+						
+					}
+					else
+					{
+						flag = flag - 1;
+						
+					}
+				}
+			}
+			for (int d = 2; d <= SIZE; d = d + 3)
+			{
+				for (int c = 2; c <= SIZE; c = c + 3)
+				{
+
+					if (sudoku[c ][d+1] != sudoku[c+1][d ])
+					{
+						flag = flag + 1;
+						
+					}
+					else
+					{
+						flag = flag - 1;
+					
+					}
+					if (sudoku[c + 1][d] != sudoku[c][d - 1])
+					{
+						flag = flag + 1;
+						
+					}
+					else
+					{
+						flag = flag - 1;
+						
+					}
+				}
+			}
+			if (flag == 592)
+			{
+				cout << "You win ";
+				cout << endl;
+			}
+			else
+			if (flag < 592)
+			{
+				cout << "You have a mistake ";
+				cout << endl;
+			}
+
+		}
+		else
+		if ((chec == 'r') || (chec == 'R'))
+		{
+			cout << "	Rules " << endl;
+			cout << " The Classic Sudoku is a number placing puzzle based on a 9x9 grid with several given numbers. " << endl;
+			cout << " The object is to place the numbers 1 to 9 " << endl;
+			cout << "in the empty squares so that each row, each column and each 3x3 box contains the same number only once. " << endl;
+			cout << " You shold replase all 0 to numbers by the rules ";
+
+		}
+	}
+	system("pause");
+	return 0;
+}
