@@ -62,9 +62,6 @@ using namespace  std;
 board_t board;
 
 
-//row - строка
-//col (column) - колонка
-
 int randomRange(int min, int max)
 {
 	if (min > max || max == min)
@@ -186,20 +183,17 @@ void getPlayerMove()//add check
 
 void getPcMove()
 {
-	cell_t protection = checkProtect();//получили защитную позицию
-	cell_t attack = getAttack();//получили атакующа
+	cell_t protection = checkProtect();
+	cell_t attack = getAttack();
 
-	//проверка на выигрышный ход или защитный ход
+	
 	if (attack.win)
 		board[attack.row][attack.col] = O;
 	else if (protection.col != -1)
 		board[protection.row][protection.col] = O;
 	else
 		board[attack.row][attack.col] = O;
-
 }
-
-//получаем клетки по определенном типу (все пробелы все крестики или все нолики)
 cell_row_t getCellsByType(char type)
 {
 	int count = 0;
@@ -218,8 +212,6 @@ cell_row_t getCellsByType(char type)
 	result.count = count;
 	return result;
 }
-
-//чтобы выиграть след ходом или поставить на рандом
 cell_t getAttack()
 {
 	cell_row_t free = getCellsByType(SPACE);
@@ -241,7 +233,6 @@ cell_t getAttack()
 	return result;
 }
 
-//чтобы противник не выйграл след ходом
 cell_t checkProtect()
 {
 	cell_t result = { -1, -1 };
@@ -287,19 +278,12 @@ int main()
 
 	while (winType == NOTHING)
 	{
-		//отрисовка доски
 		display();
-
-		//получаем ход игрока
 		getPlayerMove();
-
-		//получаем ход пк
 		getPcMove();
 
-		//смотрим кто победил
 		winType = smthWin();
 
-		//если нет свободных клеток то просто выходим из цикла)
 		if (!hasFreeCells())
 			break;
 	}
