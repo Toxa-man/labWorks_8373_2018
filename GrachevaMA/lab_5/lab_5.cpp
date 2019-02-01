@@ -7,7 +7,7 @@ using namespace  std;
 typedef struct { int** raw; unsigned cols; unsigned rows; } matrix_t;
 
 
-//Инициализация матриы (переменная в которую вернется кол-во колонок, переменная в которую пернется кол-во стобцов)
+//Инициализация матриы 
 int** initMatrix(unsigned& cols, unsigned& rows)
 {
 	cols = rows = 0;
@@ -53,17 +53,17 @@ void clr(int** &matrix, unsigned rows)
 //Умножение матриц 
 int** muilt(const matrix_t a, const matrix_t b)
 {
-	//Проверки на размерности и тд
+	
 	if (a.cols != b.rows)
 		return nullptr;
 
-	//Подготовка результирующей матрицы
+	
 	int** result = new int*[a.rows];
 	for (unsigned i = 0; i < a.rows; i++)
 		result[i] = new int[b.cols];
 
 	
-	//Перемножение матриц
+	
 	for (unsigned i = 0; i < a.rows; i++)
 		for (unsigned j = 0; j < b.cols; j++)
 		{
