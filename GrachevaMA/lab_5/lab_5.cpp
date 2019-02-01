@@ -4,8 +4,6 @@
 #include  <conio.h>
 
 using namespace  std;
-
-//структура матрицы (двумерный массив, который является по сути матрицей, кол-во колонок, кол-во столбцов)
 typedef struct { int** raw; unsigned cols; unsigned rows; } matrix_t;
 
 
@@ -23,7 +21,6 @@ int** initMatrix(unsigned& cols, unsigned& rows)
 	//Выделение памяти под N строк
 	int** result = new int*[rows];
 	
-	//Под каждую строку выделяем R колонок
 	for (unsigned i = 0; i < rows; i++)
 		result[i] = new int[cols];
 
@@ -35,7 +32,6 @@ int** initMatrix(unsigned& cols, unsigned& rows)
 	return result;
 }
 
-//Типы действия с матрицей
 enum Types : unsigned
 {
 	MULT = 1,
@@ -48,19 +44,13 @@ void clr(int** &matrix, unsigned rows)
 {
 	if (matrix == nullptr)
 		return;
-
-	//Сначала удаляем все колонки
 	for (unsigned i = 0; i < rows; i++)
 		delete[] matrix[i];
-
-	//Потом удаляем все строки
 	delete[] matrix;
-
-	//Для красоты просто
 	matrix = nullptr;
 }
 
-//Умножение матриц (первая матрица, вторая матрица)
+//Умножение матриц 
 int** muilt(const matrix_t a, const matrix_t b)
 {
 	//Проверки на размерности и тд
@@ -85,19 +75,16 @@ int** muilt(const matrix_t a, const matrix_t b)
 	return result;
 }
 
-//Сложенение матриц (первая матрица, вторая матрица)
+//Сложенение матриц 
 int** sum(matrix_t a, matrix_t b)
 {
-	//Проверка матриц
 	if (a.cols != b.cols || a.rows != b.rows)
 		return nullptr;
-
-	//Подготовка
+	
 	int** result = new int*[a.rows];
 	for (unsigned i = 0; i < a.rows; i++)
 		result[i] = new int[a.cols];
 
-	//Сложение
 	for (unsigned i = 0; i < a.rows; i++)
 		for (unsigned j = 0; j < a.cols; j++)
 			result[i][j] = (a.raw[i][j] + b.raw[i][j]);
@@ -109,16 +96,13 @@ int** sum(matrix_t a, matrix_t b)
 //Вычитание матриц
 int** sub(matrix_t a, matrix_t b)
 {
-	//Проверка
 	if (a.cols != b.cols || a.rows != b.rows)
 		return nullptr;
 
-	//Подготовка
 	int** result = new int*[a.rows];
 	for (unsigned i = 0; i < a.rows; i++)
 		result[i] = new int[a.cols];
-
-	//Вычитание
+	
 	for (unsigned i = 0; i < a.rows; i++)
 		for (unsigned j = 0; j < a.cols; j++)
 			result[i][j] = (a.raw[i][j] - b.raw[i][j]);
