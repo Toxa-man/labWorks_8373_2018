@@ -1,227 +1,152 @@
-#include <iostream>
-#include  <cstdlib>
 
-#include  <conio.h>
-
-using namespace  std;
-
-typedef struct { int** raw; unsigned cols; unsigned rows; } matrix_t;
-
-
-int** initMatrix(unsigned& cols, unsigned& rows)
+void Subtract(int* Firstmatrix, int* SecondMtrx, int* AnswerMtrx)
 {
-	cols = rows = 0;
-
-	cout << "Cols->";
-	cin >> cols;
-
-	cout << "Rows->";
-	cin >> rows;
-
-	int** result = new int*[rows];
-	for (unsigned i = 0; i < rows; i++)
-		result[i] = new int[cols];
-
-	for (unsigned i = 0; i < rows; i++)
-		for (unsigned j = 0; j < cols; j++)
-			cin >> result[i][j];
-	return result;
-}
-
-enum Types : unsigned
-{
-	MULT = 1,
-	SUM,
-	SUB,
-};
-
-void clr(int** &matrix, unsigned rows)
-{
-	if (matrix == nullptr)
-		return;
-
-	for (unsigned i = 0; i < rows; i++)
-		delete[] matrix[i];
-
-	delete[] matrix;
-
-	matrix = nullptr;
-}
-
-int** muilt(const matrix_t a, const matrix_t b)
-{
-	if (a.cols != b.rows)
-		return nullptr;
-
-	int** result = new int*[a.rows];
-	for (unsigned i = 0; i < a.rows; i++)
-		result[i] = new int[b.cols];
-
-	for (unsigned i = 0; i < a.rows; i++)
-		for (unsigned j = 0; j < b.cols; j++)
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = 0; j < SIZE; j++)
 		{
-			result[i][j] = 0;
-			for (unsigned k = 0; k < a.cols; k++)
-				result[i][j] += a.raw[i][k] * b.raw[k][j];
+			*(AnswerMtrx + i * SIZE + j) = *(Firstmatrix + i * SIZE + j) - *(SecondMtrx + i * SIZE + j);
 		}
-
-	return result;
-}
-
-int** sum(matrix_t a, matrix_t b)
-{
-	if (a.cols != b.cols || a.rows != b.rows)
-		return nullptr;
-
-	int** result = new int*[a.rows];
-	for (unsigned i = 0; i < a.rows; i++)
-		result[i] = new int[a.cols];
-
-	for (unsigned i = 0; i < a.rows; i++)
-		for (unsigned j = 0; j < a.cols; j++)
-			result[i][j] = (a.raw[i][j] + b.raw[i][j]);
-
-	return  result;
-}
-
-int** sub(matrix_t a, matrix_t b)
-{
-	if (a.cols != b.cols || a.rows != b.rows)
-		return nullptr;
-
-	int** result = new int*[a.rows];
-	for (unsigned i = 0; i < a.rows; i++)
-		result[i] = new int[a.cols];
-
-	for (unsigned i = 0; i < a.rows; i++)
-		for (unsigned j = 0; j < a.cols; j++)
-			result[i][j] = (a.raw[i][j] - b.raw[i][j]);
-
-	return  result;
-}
-
-void multab(int** m1, unsigned c1, unsigned r1, int** m2, unsigned c2, unsigned r2)
-{
-	int** mult = muilt({ m1, c1, r1 }, { m2, c2, r2 });
-
-	if (mult == nullptr)
-	{
-		cout << "check matrix dimensions!" << endl;
-		return;
 	}
+}
 
-	for (unsigned i = 0; i < r1; i++)
+void Sum(int* FirstMtrx, int* SecondMtrx, int* AnswerMtrx)
+{
+	for (int i = 0; i < SIZE; i++)
 	{
-		for (unsigned j = 0; j < c2; j++)
-			cout << mult[i][j] << " ";
-
+		for (int j = 0; j < SIZE; j++)
+		{
+			*(AnswerMtrx + i * SIZE + j) = *(FirstMtrx + i * SIZE + j) + *(SecondMtrx + i * SIZE + j);
+		}
+	}
+}
+void Show(int* matrix, int row, int column)
+{
+	cout << endl << "Result matrix is: " << endl << endl;
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < column; j++)
+		{
+			cout << *(matrix + i * SIZE + j) << " ";
+		}
 		cout << endl;
 	}
-
-	clr(mult, r1);
 }
-
-void sumab(int** m1, unsigned c1, unsigned r1, int** m2, unsigned c2, unsigned r2)
+void Multiplication(int* Firstmatrix, int* SecondMtrx, int* AnswerMtrx, int column)
 {
-	int** mult = sum({ m1, c1, r1 }, { m2, c2, r2 });
 
-	if (mult == nullptr)
+	for (int i = 0; i < SIZE; i++)
 	{
-		cout << "check matrix dimensions!" << endl;
-		return;
+		for (int j = 0; j < SIZE; j++)
+		{
+			*(AnswerMtrx + i * SIZE + j) = 0;
+			for (int p = 0; p < column; p++)
+			{
+				*(AnswerMtrx + i * SIZE + j) += (*(Firstmatrix + i * SIZE + p) * *(SecondMtrx + p * SIZE + j));
+			}
+		}
 	}
-
-	for (unsigned i = 0; i < r1; i++)
-	{
-		for (unsigned j = 0; j < c1; j++)
-			cout << mult[i][j] << " ";
-
-		cout << endl;
-	}
-
-	clr(mult, r1);
-}
-
-void subab(int** m1, unsigned c1, unsigned r1, int** m2, unsigned c2, unsigned r2)
-{
-	int** mult = sub({ m1, c1, r1 }, { m2, c2, r2 });
-
-	if (mult == nullptr)
-	{
-		cout << "check matrix dimensions!" << endl;
-		return;
-	}
-
-	for (unsigned i = 0; i < r1; i++)
-	{
-		for (unsigned j = 0; j < c1; j++)
-			cout << mult[i][j] << " ";
-
-		cout << endl;
-	}
-
-	clr(mult, r1);
 }
 
 
 int main()
 {
-
-	while (1)
+	char exit;
+	do
 	{
-		unsigned c1 = 0;
-		unsigned r1 = 0;
-
-		unsigned c2 = 0;
-		unsigned r2 = 0;
-		unsigned type = 0;
-
-		int** m1 = initMatrix(c1, r1);
-
-		if (m1 == nullptr)
-		{
-			cout << "lul, ty again" << endl;
-			system("pause");
-			exit(~0);
-		}
-
-
-		int** m2 = initMatrix(c2, r2);
-
-		if (m2 == nullptr)
-		{
-			cout << "lul, ty again" << endl;
-			system("pause");
-			exit(~0);
-		}
-
-		cout << "atcion" << endl;
-		cout << "1 - multiplication" << endl;
-		cout << "2 - summation" << endl;
-		cout << "3 - subtraction" << endl;
-		cout << "->";
-		cin >> type;
-		switch (type)
-		{
-		case SUB:
-			subab(m1, c1, r1, m2, c2, r2);
-			break;
-		case SUM:
-			sumab(m1, c1, r1, m2, c2, r2);
-			break;
-		case MULT:
-			multab(m1, c1, r1, m2, c2, r2);
-			break;
-		default:
-			cout << "invalid type!" << endl;
-			break;
-		}
-		clr(m1, r1);
-		clr(m2, r2);
-		cout << "press <esc> to exit" << endl;
-		if (_getch() == 27)
-			break;
-
 		system("cls");
-	}
+		int row1, column1, row2, column2, Firstmatrix[SIZE][SIZE], SecondMtrx[SIZE][SIZE], AnswerMtrx[SIZE][SIZE];
+
+		cout << "Enter the number of rows and columns of first matrix: " << endl
+			<< "Rows: ";
+		cin >> row1;
+		cout << "Columns: ";
+		cin >> column1;
+		cout << endl;
+
+		cout << "Write a matrix number 1: " << endl << endl;
+		for (int i = 0; i < row1; i++)
+		{
+			for (int j = 0; j < column1; j++)
+			{
+				cin >> Firstmatrix[i][j];
+			}
+		}
+		cout << endl;
+
+		cout << "Enter the number of rows and columns of second matrix: " << endl
+			<< "Rows: ";
+		cin >> row2;
+		cout << "Columns: ";
+		cin >> column2;
+		cout << endl;
+
+		cout << "Write a matrix number 2: " << endl << endl;
+		for (int i = 0; i < row2; i++)
+		{
+			for (int j = 0; j < column2; j++)
+			{
+				cin >> SecondMtrx[i][j];
+			}
+		}
+		cout << endl;
+		do
+		{
+			if (column1 == row2 && row1 != column2)
+			{
+				cout << endl << "check matrix dimensions" << endl ;
+				Multiplication(*Firstmatrix, *SecondMtrx, *AnswerMtrx, column1);
+				Show(*AnswerMtrx, row1, column2);
+			}
+			if (row1 == row2 && column1 == column2)
+			{
+				int sign;
+				cout << "atcion" << endl;
+				cout << "1 - multiplication" << endl;
+				cout << "2 - summation" << endl;
+				cout << "3 - subtraction" << endl;
+				cout << "->";
+				cin >> sign;
+
+				while (!(sign == 1 || sign == 2 || sign == 3))
+				{
+					cout << "I don't know this. Please enter correct sign" << endl
+						<< "Sign: ";
+					cin >> sign;
+				}
+				switch (sign)
+				{
+				case 1:
+					Multiplication(*Firstmatrix, *SecondMtrx, *AnswerMtrx, column1);
+					Show(*AnswerMtrx, row1, column2);
+					break;
+				case 2:
+					Sum(*Firstmatrix, *SecondMtrx, *AnswerMtrx);
+					Show(*AnswerMtrx, row1, column1);
+					break;
+				case 3:
+					Subtract(*Firstmatrix, *SecondMtrx, *AnswerMtrx);
+					Show(*AnswerMtrx, row1, column1);
+					break;
+				}
+			}
+			if (!((column1 == row2 && row1 != column2) || (row1 == row2 && column1 == column2)))
+			{
+				cout << endl << "It's impossible to do something with this matrixes..." << endl << endl
+					<< "Press the 'ESC' to exit this program," << endl
+					<< "or other button to enter the new matrixes." << endl << endl;
+			}
+			else
+			{
+				cout << endl << "Press the 'ENTER', if you want to do another action with matrixes," << endl
+					<< "'ESC' to exit this program," << endl
+					<< "or other button to enter the new matrixes." << endl << endl;
+			}
+			exit = _getch();
+
+		} while (exit == 13);
+
+	} while (exit != 27);
+
+	return 0;
 }
